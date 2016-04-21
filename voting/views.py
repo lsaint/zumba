@@ -14,7 +14,7 @@ from django.core.files.base import ContentFile
 from requests.utils import quote
 
 from .forms import TopicForm
-from .models import Topic
+from .models import Topic, Poll
 
 
 
@@ -73,16 +73,6 @@ def get_sorted_list(kind, offset=0, limit=9):
     if kind == "new":
         order_key = "-ctime"
     topic_list = Topic.objects.all().order_by(order_key)[int(offset):int(limit) + int(offset)]
-    # uids = [x.uid for x in topic_list]
-    # users = User.objects.filter(id__in=uids).in_bulk(uids)
-    # urls, topic_list = [], list(topic_list)
-    # for topic in topic_list[:]:
-        # u = users.get(topic.uid)
-        # if not u:
-            # topic_list.remove(topic)
-        # else:
-            # urls.append(u.email)
-    # topic_list = list(zip(topic_list, urls))
     return topic_list
 
 
