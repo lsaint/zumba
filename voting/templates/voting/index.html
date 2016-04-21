@@ -1,0 +1,414 @@
+
+{% extends "voting/base.html" %}
+
+{% load staticfiles %}
+
+{% block head %}
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+    <script src="{% static "js/lrz.mobile.min.js" %}"></script>
+    <style>
+        a, button, input, textarea {
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+        html {
+            font-size: 62.5%;
+            background-color: #fbfae6;
+            text-align: center;
+            font-weight: bolder;
+            font-family: "微软雅黑",STHeitiSC-Light;
+            /*font-family: fzcuyuan-m03sregular;*/
+        }
+        body {
+            width: 100%;
+            position: relative;
+        }
+        header img {
+            width: 100%;
+            height: auto;
+        }
+        #photoFrame {
+            position: relative;
+            width: 96.13333333333333%;
+            height: auto;
+            margin-left: 3.33333333333333%;
+            margin-top: 3.8142620232172%;
+        }
+            #photoFrame img:first-child {
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+        #photoShow {
+            width: 54.36893203883495%;
+            height: 56.24103299856528%;
+            position: absolute;
+            display: block;
+            left: 21.22052704576976%;
+            top: 26.54232424677188%;
+        }
+        #choicePhoto {
+           
+            font-size: 1.4rem;
+            line-height: 2.6rem;
+            word-break: keep-all;
+            width: 29.95839112343967%;
+            /*height: 7.46054519368723%;*/
+            height: 2.4rem;
+            background-color: transparent;
+            border: 2px solid #ea9413;
+            position: absolute;
+            overflow: hidden;
+            text-align: center;
+            vertical-align: middle;
+            text-decoration: none;
+            color: #ea9413;
+            border-radius: 40px;
+            bottom: 6.31276901004304%;
+            left: 33.42579750346741%;
+        }
+            #choicePhoto input {
+                position: absolute;
+                right: 0;
+                top: 0;
+                opacity: 0;
+                filter: alpha(opacity=0);
+            }
+        #message {
+            width: 94.66666666666667%;
+            height: 5.15rem;
+            margin: 0 auto;
+            margin-top: 1.1rem;
+            position: relative;
+        }
+            #message input {
+                width: 48.45070422535211%;
+                border: 1px solid #dcd8d7;
+                text-indent: 1rem;
+                font-size: 1.3rem;
+                color: #b9b9b9;
+                font-weight: normal;
+                padding-top: 1.975rem;
+                padding-bottom: 1.975rem;
+                box-shadow: none;
+                -webkit-appearance: none;
+                outline: none;
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+        #message input:first-child {
+            float: left;
+        }
+        #message input:last-child {
+            float: right;
+        }
+        aside {
+            text-align: left;
+            width: 94.66666666666667%;
+            height: auto;
+            margin-left: 2.8169014084507%;
+            margin-top: 0.9rem;
+            font-size: 1rem;
+            color: #1e95d4;
+        }
+            aside em {
+                font-style: normal;
+            }
+        button {
+            margin-top: 3.2rem;
+            /*margin-top: 5.30679933665008%;*/
+            width: 36.8%;
+            min-width: 127px;
+            height: 3.7rem;
+            line-height: 3.4rem;
+            font-size: 1.3rem;
+            border: 2px solid #ea9413;
+            border-radius: 40px;
+            word-break: keep-all;
+            text-align: center;
+            vertical-align: middle;
+            margin-bottom: 2rem;
+        }
+            button[type='button'] {
+                background-color: transparent;
+                color: #ea9413;
+                margin-left: 9.73333333333333%;
+                float: left;
+            }
+            button[type='submit'] {
+                
+                float: right;
+                margin-right: 9.73333333333333%;
+            }
+        .hasphoto{
+            background-color: #ea9413;
+            color: #ffffff;
+            border: 2px solid #ea9413;
+        }
+        .nophoto {
+            color: #8b8b8b;
+            background-color: #f3f3f3;
+            border: 2px solid #f3f3f3;
+        }
+           /*遮罩层*/
+        #overlay {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow-y : auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        /*警告*/
+        #warn {
+            width: 72.66666666666667%;
+            height: 26.78275290215589%;
+            border-radius: 18px;
+            position: absolute;
+            background-color: #ffffff;
+            top: 32.08955223880597%;
+            left: 13.73333333333333%;
+            display: none;
+        }
+            #warn b {
+                display: block;
+                color: #d2122b;
+                font-size: 2.8rem;
+                margin: 0 auto;
+                margin-top: 11.14551083591331%;
+                font-weight: bold;
+                position: relative;
+            }
+            #warn input[type=button] {
+                width: 50.45871559633028%;
+                height: 24.14860681114551%;
+                margin: 0 auto;
+                display: block;
+                color: #ffffff;
+                font-size: 1.4rem;
+                border-radius: 40px;
+                border: none;
+                position: relative;
+                margin-top: 12.69349845201238%;
+                background-color: #eb9413;
+            }
+        /*游戏简介*/
+        #intro {
+            width: 72%;
+            height: auto;
+            border-radius: 18px;
+            position: relative;
+            background-color: #ffffff;
+            padding: 1.775rem 1.6rem;
+            font-size: 1.2rem;
+            line-height: 2.15rem;
+            color: #757570;
+            text-align: left;
+            top: 27.88605697151424%;
+            margin: 0 auto;
+
+        }
+            #intro em {
+                color: #d2122b;
+            }
+            #intro img {
+                position: absolute;
+                right: -1rem;
+                top: -1rem;
+                width:2.6rem;
+                height: 2.6rem;
+            }
+        /*活动规则*/
+        #rule {
+            width: 79.46666666666667%;
+            height: auto;
+            border-radius: 18px;
+            position: relative;
+            background-color: #ffffff;
+            padding: 1.9rem 1.6rem 2.25rem 1.6rem;
+            font-size: 1.2rem;
+            line-height: 2.15rem;
+            text-align: left;
+            top: 7.71144278606965%;
+            margin: 0 auto;
+            display:none;
+
+        }
+            #rule table {
+                color: #8b8b8b;
+            }
+                #rule table caption {
+                    font-size: 1.8rem;
+                }
+                #rule table td button {
+                    width:46.30872483221477%;
+                    display:block;
+                   margin:3.75rem auto 0 auto;
+                   background-color:#ea9413;
+                   color:#ffffff;
+                   border:none;
+                   font-size:1.4rem;
+                }
+    </style>
+    <script>
+        function previewImage(file) {
+            var filepath = $("#photofile").val();
+            if (filepath != '') {
+                $("button[type='submit']").removeClass("nophoto").addClass("hasphoto");
+            }
+            //判断图片格式
+            var extStart = filepath.lastIndexOf(".");
+            var ext = filepath.substring(extStart, filepath.length).toUpperCase();
+            if (ext != ".PNG" && ext != ".JPG" && ext != ".JPEG") {
+                $("#photo").val("");
+                alert("图片限于png,jpeg,jpg格式");
+                return false;
+            }
+            ////判断图片大小
+            //var byteSize = file.files[0].size;
+            //if (byteSize / 1024 > 500) {
+            //    $("#headIcon").val("");
+            //    alert("图片不能大于500K");
+            //    return false;
+            //}
+            //预览图片
+
+            if (file.files && file.files[0]) {
+                var img = document.getElementById('photoShow');
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    img.src = evt.target.result;
+                }
+                reader.readAsDataURL(file.files[0]);
+                lrz(file.files[0], { width: 750 }, function (results) {
+                    // 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
+                    $("#photo").val(results.base64.substring(results.base64.indexOf(',') + 1));
+                });
+            }
+        }
+        var shouldFoucus = "";
+                //隐藏弹出层及其子元素
+        function hideOverlay() {
+            $("#overlay").hide();
+            if (shouldFoucus!="") {
+                $(shouldFoucus).focus();
+            }
+        }
+        //显示弹出层及其相应子元素
+        function showOverlay(divType)
+        {
+            if (divType=="warn") {
+                $("#warn").show();
+                $("#intro").hide();
+                $("#rule").hide();
+            }
+            else if (divType == "intro") {
+                $("#warn").hide();
+                $("#intro").show();
+                $("#rule").hide();
+            }
+            else if (divType == "rule") {
+                $("#warn").hide();
+                $("#intro").hide();
+                $("#rule").show();
+            }
+            $("#overlay").show();
+        }
+        //同意规则，弹出文件选择框
+        function agreeClick() {
+            hideOverlay();
+            $("#photofile").click();
+        }
+        function beforeSubmit() {
+            var ispass = true;
+            var $photofile = $("#photofile");
+            var $id_wid = $("#id_wid");
+            var $id_name = $("#id_name");
+            var reg = /^[4]\d{7}$/ig;
+
+            if ($photofile.val()== "") {
+                ispass = false;
+                $("#warn>b").text("请上传图片");
+                $("#warn>input").val("返回上传");
+                showOverlay("warn");
+                shouldFoucus = "#choicePhoto";
+            }
+            else if ($id_wid.val().trim() == "" || !reg.test($id_wid.val().trim())) {
+                ispass = false;
+                $("#warn>b").text("您的资料无效");
+                $("#warn>input").val("返回输入");
+                showOverlay("warn");
+                shouldFoucus = "#id_wid";
+            }
+            else if ($id_name.val().trim()=="") {
+                ispass = false;
+                $("#warn>b").text("您的资料无效");
+                $("#warn>input").val("返回输入");
+                showOverlay("warn");
+                shouldFoucus = "#id_name";
+            }
+            return ispass;
+        }
+    </script>
+{% endblock %}
+
+
+
+{% block content %}
+
+    <form action="" enctype="multipart/form-data" method="post" onsubmit="return beforeSubmit()">
+        {% csrf_token %}
+        <header>
+            <img src="{% static "img/logo.png" %}"/>
+        </header>
+        <div id="photoFrame">
+            <img src="{% static "img/bodybackground.png" %}" />
+            <img id="photoShow" onclick="showOverlay('rule')"  src="{% static "img/defaultphoto.png" %}" />
+            <a   id="choicePhoto" onclick="showOverlay('rule')" href="#">选择照片</a>
+        </div>
+        <div id="message">
+            <input id="id_wid" name="wid" type="text" maxlength=8 placeholder="请输入员工号" />
+            <input id="id_name" name="name" type="text" placeholder="请输入中文姓名" />
+        </div>
+        <aside>
+            <em>仅限参与了CSR竞赛的屈臣氏在职员工参加。</em><br />
+            <em>请填写您的员工号及真实中文姓名，谢谢合作!</em>
+        </aside>
+        <button type="button" onclick="window.location='{% url 'leaderboard' kind='hot' %}';">围观照片墙</button>
+        <button class="nophoto" type="submit">选好了,我要发布</button>
+        <input type="hidden" name="photo" id="photo" />
+    </form>
+  <div id="overlay">
+        <div id="warn">
+            <b>您的资料无效</b>
+            <input onclick="hideOverlay()" type="button" value="返回输入" />
+        </div>
+        <div id="intro">
+            即日起至<em>11月20日</em>，参与了2015屈臣氏全球义工日CSR竞赛的屈臣氏中国区在职员工可将活动现场的照片上传至互动投票平台，并分享至朋友圈邀请亲朋好友为自己点赞。活动时间结束后，获得点赞数最多的<em>30</em>位屈臣氏员工将获评“人气王”，获得<em>300元屈臣氏现金券</em>和<em>吾皇猫抱枕</em>一个。 
+            <img  src="{% static "img/closed.png" %}"  onclick="hideOverlay()" />
+        </div>
+        <div id="rule">
+            <table>
+                <caption>活动细则</caption>
+                <tr>
+                    <td>
+            1.人气评比活动仅限参与了CSR竞赛的屈臣氏中国区在职员工凭员工号参加，参赛者提交照片时，须如实填写该员工的员工号、姓名，每位员工仅能用一个微信账号参与本次活动且仅能上传一张活动照片；</br>
+            2.上传照片要求：照片要求有参赛者本人入镜，且为在活动当日现场所拍摄，此外须清楚体现出本次全球义工日的元素（活动T-SHIRT/横幅/胸章/口号任一即可）；</br>
+            3.参赛者上传照片后可按提示分享至朋友圈邀请亲朋好友为自己点赞，每个微信用户只能对同一张照片点赞一次；</br>
+            4.对于点赞数最高的30位员工，公司将于活动时间截止后进行员工信息及照片审核，如参赛者提供的员工资料有误或照片不符合第2点要求的，将会被取消获奖资格，并顺延至按点赞数排序的下一位参赛者获得；</br>
+            5.若合资格获奖者出现点赞数相同的情况，公司将在2015年11月27日前在点赞数相同的员工中通过系统随机抽奖决定最终获奖名单；</br>
+            6.获奖名单将在2015年12月10日通过公司内部邮件公布；</br>
+            7.现金券的使用方式及期限详见券上印刷说明；</br>
+            8.上传照片至本互动投票平台即视为已阅读并同意本活动细则。
+                    </td>
+                </tr>
+                <tr><td><button onclick="agreeClick()" >我已阅读并同意</button></td></tr>
+            </table>
+        </div>
+        <input hidden="hidden"  id="photofile" onchange="previewImage(this)" required  type="file" accept="image/*" />
+    </div>
+
+{% endblock %}

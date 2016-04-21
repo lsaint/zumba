@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+{% load staticfiles %}
+
+<head>
+
+    {% block title %}
+        <title>屈臣氏CSR竞赛</title>
+    {% endblock %}
+
+    <meta charset="utf-8">
+    <link href="{% static "css/normalize.css" %}" rel="stylesheet" />
+    <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <a href="{% url 'index' %}">首页</a> |
+    <a href="{% url 'leaderboard' kind="hot" %}">积分榜</a> |
+    <a href="{% url 'leaderboard' kind="new" %}">新鲜榜</a></br>
+    {% endblock %}
+
+</head>
+
+
+<body>
+    
+    <div style="display:none"> 
+        {% block thumbnail %}
+        <img src="{% static "img/logo.jpg" %}" />
+        {% endblock %}
+    </div>
+    <input type="hidden" id="nickname" value="{{ request.user.last_name }}" />
+
+{% block content %}
+
+{% endblock %}
+</body>
+
+</html>

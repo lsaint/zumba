@@ -1,0 +1,117 @@
+html {
+    height: 100%;
+    background: #fff;
+}
+
+body {
+    height: 100%;
+    background: #fff;
+    font-family: "微软雅黑,宋体";
+    font-size: 14px;
+}
+
+
+header{
+    float: left;
+    width: 40%;
+    border: 1px solid red;
+
+}
+header img{
+    width: 100%;
+    padding: 8px;
+}
+
+nav
+{
+    float: right;
+    width: 50%;
+
+    border: 1px solid red;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display:inline;
+    background-color: red;
+}
+nav ul li{
+    background-color: orangered;
+    color: white;
+    float: left;
+    margin: 3px;
+    border-radius: 5px;
+    padding-top: 1.5px;
+    padding-bottom: 1.5px;
+    padding-left: 3px;
+    padding-right:3px;
+    font-size: 12px;
+}
+
+.file{
+    visibility: hidden;
+}
+.fileup_ui{
+    background-color: silver;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+    width: 60px;
+}
+#choicePhoto{
+     display: inline-block;
+     width: 70%;
+     height: 40px;
+     background:gray;
+     position: relative;
+     overflow: hidden;
+     text-align: center;
+     vertical-align: middle;
+     text-decoration: none;
+     color: white;
+     line-height: 40px;
+     border-radius: 5px;
+}
+#choicePhoto input{
+     position: absolute;
+     right: 0;
+     top: 0;
+     font-size: 100px;
+     opacity: 0;
+     filter: alpha(opacity=0);
+}
+
+textarea{
+    overflow: hidden;
+    resize: none;
+    border-radius: 5px;
+    width: 90%;
+    height: 100px;
+}
+#index table{
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid red;
+
+}
+#index table td{
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 15px;
+}
+button{
+   color: white;
+    background-color: gray;
+    box-shadow: none;
+    height: 40px;
+    width: 80%;
+    border: none;
+    border-radius: 5px;
+}
+
+#photoShow{
+    width: 60%;;
+}
