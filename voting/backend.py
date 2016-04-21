@@ -8,13 +8,6 @@ from django.conf import settings
 
 
 
-AppID = "wx0572e52dc3d9139a"
-AppSecret = "a9ca60ddeba44a9117a762ed173ac2ef"
-
-WX_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code"
-UINFO_URL = "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s"
-
-
 class ZumbaBackend(object):
 
     # username  <-> openid

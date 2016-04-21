@@ -89,13 +89,13 @@ def zumbalogin(request):
     openId = request.GET.get("openId")
     state = request.GET.get("state")
 
-    rep = auth_and_longin(request, openId)
+    rep = auth_and_login(request, openId)
     if rep is True:
         return HttpResponseRedirect(reverse('leaderboard', kwargs={"kind": "hot"}))
     return rep
 
 
-def auth_and_longin(request, openId):
+def auth_and_login(request, openId):
     user = authenticate(openId)
     if user is None:
         return HttpResponse("登陆失败")
