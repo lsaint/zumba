@@ -14,7 +14,7 @@ class ZumbaBackend(object):
     # email     <-> headpic
     # last_name <-> nickName
 
-    def authenticate(self, openId):
+    def authenticate(self, openId=None):
         logger.info("ZumbaBackend authenticate %s" % openId)
 
         try:

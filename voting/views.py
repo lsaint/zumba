@@ -96,7 +96,7 @@ def zumbalogin(request):
 
 
 def auth_and_login(request, openId):
-    user = authenticate(openId)
+    user = authenticate(openId=openId)
     if user is None:
         return HttpResponse("登陆失败")
 
