@@ -44,7 +44,7 @@ class ZumbaBackend(object):
             "openId": openId
         }
 
-        rep = requests.post(settings.UINFO_URL, json.dumps(body))
+        rep = requests.post(settings.ZUMBA_UINFO_URL, json.dumps(body))
         if rep.ok:
             rep.encoding = "utf-8"
             info = rep.json()
