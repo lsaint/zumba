@@ -108,16 +108,14 @@
         #OPS >input[type='submit']{
             text-decoration: none;
             font-size: 1.6rem;
-{#            color: #ffffff;#}
-{#            background-color: #ea9413;#}
+            color: #ffffff;
+            background-color: #ea9413;
             width: 80.4%;
             line-height:3.7rem;
             display:block;
             border-radius:40px;
             margin:1.55rem auto 0 auto;
             border:none;
-            color:#8b8b8b;
-            background-color:#f3f3f3;
         }
         #nav {
             width: 80.53333333333333%;
@@ -144,9 +142,6 @@
             }
             button:last-child {
                float:right;
-                color:#8b8b8b;
-               background-color:#f3f3f3;
-               border: 2px solid #f3f3f3;
             }
 
         #bigPhoto {
@@ -209,10 +204,10 @@
                 <img src="{% static "img/xq_line.png" %}" />
                 <div id="good"><i>点赞数</i><br /><b>{{ topic.polls }}</b></div>
             </div>
-            <input type="submit" disabled="disabled" value="我要点赞" />
+            <input type="submit" value="我要点赞" />
             <div id="nav">
                 <button type="button" onclick="window.location='{% url 'leaderboard' kind='hot' %}';">围观照片墙</button>
-                <button type="button" disabled="disabled">我也要玩</button>
+                <button type="button" >我也要玩</button>
             </div>
         </div>
         <div id="bigPhoto"><img  /></div>
