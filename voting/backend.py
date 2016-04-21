@@ -49,7 +49,7 @@ class ZumbaBackend(object):
             rep.encoding = "utf-8"
             info = rep.json()
             err = info.get("error_code")
-            if err == 0:
+            if err == '0':
                 return info.get("user_info")
             else:
                 logger.error("get userinfo err %s" % info)
