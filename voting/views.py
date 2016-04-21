@@ -20,7 +20,7 @@ from .models import Topic
 
 @login_required(redirect_field_name=None)
 def index(request):
-    topic = Topic.objects.filter(uid=request.user.id)
+    topic = Topic.objects.filter(user=request.user)
     if topic.exists():
         return HttpResponseRedirect(reverse('detail', kwargs={"topic_id": "%d" % topic[0].id}))
 
@@ -28,9 +28,9 @@ def index(request):
     if request.method == 'POST':
         if form.is_valid():
             m = form.save(commit=False)
-            m.uid = request.user.id
+            m.user = request.user
             fdata = request.POST.get('photo', "")
-            m.photo.save("%d.jpg" % m.uid, ContentFile(base64.b64decode(fdata)), save=False)
+            m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(fdata)), save=False)
             m.save()
             return HttpResponseRedirect(reverse('leaderboard', kwargs={"kind": "hot"}))
 
@@ -40,24 +40,15 @@ def index(request):
 
 @login_required(redirect_field_name=None)
 def detail(request, topic_id):
-    # code = request.GET.get("code")
-    # state = request.GET.get("state", "")
-    # if code:
-        # rep = auth_and_longin(request, code, state) # redirect from wechat
-        # if rep is not True:
-            # return rep
-    # elif not request.user.is_authenticated():
-        # return HttpResponseRedirect(settings.LOGIN_URL)
-
     topic = get_object_or_404(Topic, pk = topic_id)
-    user = User.objects.get(pk=topic.uid)
+    user = topic.user
     return render(request, 'voting/detail.html', {'topic': topic, "name": user.last_name})
 
 
 @login_required(redirect_field_name=None)
 def vote(request, topic_id):
     topic = get_object_or_404(Topic, pk = topic_id)
-    p, created = Poll.objects.get_or_create(uid=request.user.id, tid = topic_id)
+    p, created = Poll.objects.get_or_create(user=request.user, topic = topic)
     if created:
         topic.polls += 1
         topic.save()
@@ -72,7 +63,7 @@ def leaderboard(request, kind):
 
 @login_required(redirect_field_name=None)
 def uploaded(request):
-    ret = Topic.objects.filter(uid=request.user.id).exists()
+    ret = Topic.objects.filter(user=request.user).exists()
     return JsonResponse(ret, safe=False)
 
 
