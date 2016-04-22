@@ -40,7 +40,7 @@ class ZumbaBackend(object):
     def get_userinfo(self, openId):
         body = {
             "secret": settings.ZUMBA_SECRET,
-            "method": "getUserInfo",
+            "method": "getSnsapiUserInfo",
             "openId": openId
         }
 
