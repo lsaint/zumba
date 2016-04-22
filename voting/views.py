@@ -47,9 +47,9 @@ def detail(request, topic_id):
 
 @login_required(redirect_field_name=None)
 def vote(request, topic_id):
-    topic = get_object_or_404(Topic, pk = topic_id)
-    p, created = Poll.objects.get_or_create(user=request.user, topic = topic)
-    if created:
+    if not Poll.objects.filter(user=request.user).exists():
+        topic = get_object_or_404(Topic, pk = topic_id)
+        Poll.objects.create(user=request.user, topic = topic)
         topic.polls += 1
         topic.save()
     return render(request, 'voting/detail.html', {'topic': topic})
@@ -65,7 +65,6 @@ def leaderboard(request, kind):
 def uploaded(request):
     ret = Topic.objects.filter(user=request.user).exists()
     return JsonResponse(ret, safe=False)
-
 
 
 def get_sorted_list(kind, offset=0, limit=9):
