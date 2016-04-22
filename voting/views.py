@@ -47,8 +47,8 @@ def detail(request, topic_id):
 
 @login_required(redirect_field_name=None)
 def vote(request, topic_id):
+    topic = get_object_or_404(Topic, pk = topic_id)
     if not Poll.objects.filter(user=request.user).exists():
-        topic = get_object_or_404(Topic, pk = topic_id)
         Poll.objects.create(user=request.user, topic = topic)
         topic.polls += 1
         topic.save()
