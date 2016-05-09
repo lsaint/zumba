@@ -70,7 +70,7 @@ def leaderboard(request, kind):
 @login_required(redirect_field_name=None)
 def uploaded(request):
     ret = Topic.objects.filter(user=request.user).exists()
-    return JsonResponse(ret, safe=False)
+    return JsonResponse({"ret": int(ret)}, safe=False)
 
 
 def get_sorted_list(kind, offset=0, limit=9):
