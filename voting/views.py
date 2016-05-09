@@ -42,7 +42,12 @@ def index(request):
 def detail(request, topic_id):
     topic = get_object_or_404(Topic, pk = topic_id)
     user = topic.user
-    return render(request, 'voting/detail.html', {'topic': topic, "name": user.last_name})
+    # return render(request, 'voting/detail.html', {'topic': topic, "name": user.last_name})
+    return JsonResponse({"name": user.last_name,
+                         "url": topic.photo.url,
+                         "id": topic.id,
+                         "ranking": topic.ranking(),
+                         "polls": topic.polls})
 
 
 @login_required(redirect_field_name=None)
@@ -52,7 +57,8 @@ def vote(request, topic_id):
         Poll.objects.create(user=request.user, topic = topic)
         topic.polls += 1
         topic.save()
-    return render(request, 'voting/detail.html', {'topic': topic})
+    # return render(request, 'voting/detail.html', {'topic': topic})
+    return JsonResponse({"ret": 0}, safe=False)
 
 
 @login_required(redirect_field_name=None)
@@ -78,7 +84,11 @@ def get_sorted_list(kind, offset=0, limit=9):
 @login_required(redirect_field_name=None)
 def pullboard(requests, kind, offset, limit):
     topic_list = get_sorted_list(kind, offset, limit)
-    lt = [(topic.id, topic.photo.url, topic.polls, topic.user.email, topic.ranking())\
+    lt = [{"id": topic.id,
+           "url": topic.photo.url,
+            "polls": topic.polls,
+            "headimgurl": topic.user.email,
+            "ranking": topic.ranking()}\
             for topic in topic_list]
     return JsonResponse(lt, safe=False)
 
