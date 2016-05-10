@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import base64
 
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -20,9 +21,16 @@ from .models import Topic, Poll
 
 @login_required(redirect_field_name=None)
 def index(request):
+    #return render(request, 'voting/index.html', context)
+    return HttpResponse("OK")
+
+
+@login_required(redirect_field_name=None)
+@csrf_exempt
+def up(request):
     topic = Topic.objects.filter(user=request.user)
     if topic.exists():
-        return HttpResponseRedirect(reverse('detail', kwargs={"topic_id": "%d" % topic[0].id}))
+        return JsonResponse({"ret": 2})
 
     form = TopicForm(request.POST)
     if request.method == 'POST':
@@ -32,10 +40,8 @@ def index(request):
             fdata = request.POST.get('photo', "")
             m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(fdata)), save=False)
             m.save()
-            return HttpResponseRedirect(reverse('leaderboard', kwargs={"kind": "hot"}))
-
-    context = {"form": form}
-    return render(request, 'voting/index.html', context)
+            return JsonResponse({"ret": 0})
+    return JsonResponse({"ret": 1})
 
 
 @login_required(redirect_field_name=None)

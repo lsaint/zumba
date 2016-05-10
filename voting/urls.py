@@ -6,6 +6,7 @@ import voting.views as views
 
 urlpatterns = [
     url(r'^i/$', views.index, name='index'),
+    url(r'^up/$', views.up, name='up'),
     url(r'^(?P<topic_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^(?P<topic_id>[0-9]+)/vote/$', views.vote, name='vote'),
     url(r'^leaderboard/(?P<kind>\w+)/$', cache_page(5)(views.leaderboard), name='leaderboard'),
