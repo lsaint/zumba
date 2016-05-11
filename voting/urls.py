@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^guide/', TemplateView.as_view(template_name="voting/guide.html"), name='guide'),
     url(r'^guide_inner/', TemplateView.as_view(template_name="voting/guide_inner.html"), name='guide_inner'),
     url(r'^photo_alls/', TemplateView.as_view(template_name="voting/photo_alls.html"), name='photo_alls'),
+    url(r'^photo_up/', TemplateView.as_view(template_name="voting/photo_up.html"), name='photo_up'),
     url(r'^video_go/', TemplateView.as_view(template_name="voting/video_go.html"), name='video_go'),
 ]
