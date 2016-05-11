@@ -35,7 +35,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'vote.urls'
+ROOT_URLCONF = 'zumba.urls'
 
 TEMPLATES = [
     {
@@ -53,7 +53,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'vote.wsgi.application'
+WSGI_APPLICATION = 'zumba.wsgi.application'
 
 
 DATABASES = {
