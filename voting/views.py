@@ -21,8 +21,7 @@ from .models import Topic, Poll
 
 @login_required(redirect_field_name=None)
 def index(request):
-    #return render(request, 'voting/index.html', context)
-    return HttpResponse("OK")
+    return render(request, 'voting/main.html')
 
 
 @login_required(redirect_field_name=None)

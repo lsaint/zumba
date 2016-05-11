@@ -1,0 +1,72 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ws_move.css' %}">
+	<!-- <link rel="stylesheet" type="text/css" href="css/active.css"> -->
+	<style type="text/css">
+		.page .wrap>img{
+			width: 100%;
+			height: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="guide_divs">
+			<div class="page page-1-1 hide" nowname='set'>
+				<div class="wrap">
+                    <img src="{% static 'img/jiangxiang.jpg' %}" alt="">
+				</div>
+			</div>
+			<div class="page page-2-1 hide" nowname='video'>
+				<div class="wrap">
+                    <img src="{% static 'img/video.jpg' %}" alt="">
+				</div>
+			</div>
+			<div class="page page-3-1 hide" nowname='win'>
+				<div class="wrap">
+                    <img src="{% static 'img/video2.jpg' %}" alt="">
+				</div>
+			</div>
+			<div class="page page-4-1 page-current" nowname='mini'>
+				<div class="wrap">
+                    <img src="{% static 'img/video3.jpg' %}" alt="">
+				</div>
+			</div>
+				
+</div>
+
+		<script src="{% static 'js/zepto.min.js' %}"></script>
+		<script src="{% static 'js/touch.js' %}"></script>
+		<script src="{% static 'js/index.js' %}"></script>
+
+		<script type="text/javascript">
+		// window.onload=function(){
+		// 	var nowName=localStorage.getItem( "guide_name" )
+		// // $('.guide_divs .page').removeClass('page-current');
+	
+		// 	console.log(nowName);
+		// 	if(nowName=="set"){
+		// 		$('.page-1-1').addClass('page-current').siblings('').removeClass('page-current');
+		// 		$('.page-1-1').removeClass('hide');
+		// 	}else if(nowName=="video"){
+		// 		$('.page-2-1').addClass('page-current').siblings('').removeClass('page-current');
+		// 		$('.page-2-1').removeClass('hide');
+		// 	}else if(nowName=="win"){
+		// 		$('.page-3-1').addClass('page-current').siblings('').removeClass('page-current');
+		// 		$('.page-3-1').removeClass('hide');
+		// 	}else if(nowName=="mini"){
+		// 		$('.page-4-1').addClass('page-current').siblings('').removeClass('page-current');
+		// 		$('.page-4-1').removeClass('hide');
+		// 	}
+		
+		// }
+		</script>
+</body>
+</html>

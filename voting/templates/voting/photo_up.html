@@ -1,0 +1,115 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+	<!-- 这个是滑动css -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/ws_move.css"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/active.css' %}">
+	<style type="text/css">
+	html{
+		background: #D1D1D1;
+	}
+	.dis_none{
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<div>
+			<div class="ws_act_choose_page1" >
+
+				<div class="all_page_padding">
+					<!-- <div class="icons_two">
+						<img src="img/back.png" alt="">
+						<img src="img/music.png" alt="">
+					</div>
+ -->
+
+					<div class="all_page_padding_inner all_page_padding_photo_up">
+						<div class="all_page_padding_inner_content">
+							<div class="all_page_padding_inner_content_img">
+								<div class="all_page_padding_inner_content_img_inner">
+                                    <img src="{% static 'img/tu_up_icons.png' %}" alt="">
+								</div>
+							</div>
+							<div class="all_page_padding_inner_content_txt">
+								
+								<div class="all_page_padding_inner_content_txt_bd">
+									<div class="all_page_padding_inner_content_txt_bd_left">
+										<div class="all_page_padding_inner_content_txt_bd_left_p">请输入员工号</div>
+										<input class="all_page_padding_inner_content_txt_bd_left_n">
+									</div>
+									<div class="all_page_padding_inner_content_txt_bd_right">
+										<div class="all_page_padding_inner_content_txt_bd_left_p">请输入姓名</div>
+										<input class="all_page_padding_inner_content_txt_bd_left_n">
+									</div>
+								</div>
+							</div>
+
+						
+						</div>
+					</div>
+
+					<div class="all_page_padding_photo_up_txt">
+								仅限参与了尊巴炫舞大赛的屈臣氏在职员工参加。
+								请填写您的员工号和真实中文姓名，谢谢合作！
+					</div>
+
+					<div class="all_page_padding_photo_up_btn">
+                        <div class="all_page_padding_photo_up_btn_left"><img src="{% static 'img/tu_up_01.png' %}" alt=""></div>
+                        <div class="all_page_padding_photo_up_btn_right"><img src="{% static 'img/tu_up_02.png' %}" alt=""></div>
+					</div>
+
+				</div>	
+			</div>
+			
+		</div>
+		
+		<div class="tips_mark dis_none"></div>
+		<!-- 样式已经写好了-->
+		<div id="img_up_tips dis_none" class="allclass">
+			<div class="img_up_tips_hd">请选择图片</div>
+			<div class="img_up_tips_btn">返回上传</div>
+		</div>
+
+		<script src="js/zepto.min.js"></script>
+
+		<script type="text/javascript">
+// 			window.onload=function(){
+//         var range = 10;             //距下边界长度/单位px  
+//         // nowpage=1;      //设置加载最多次数或者页数  
+//         var num = 1;  
+//         var totalheight = 0;   
+//         $(window).scroll(function(event) {
+//            var bodyg=$(window).scrollTop();
+//           // 当页面卷走一屏时，出现返回顶部；
+//           if(bodyg>$(window).height()){
+//             // $(".fixright").css("display","block");
+//           }else{
+//             // $(".fixright").css("display","none");
+//           }
+//           // $('.fixright').click(function(){
+//           //   document.getElementsByTagName('body')[0].scrollTop = 0;
+
+//           // });
+//            var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
+//            totalheight = parseFloat($(window).height()) + parseFloat(srollPos);  //总高度
+//            if(($(document).height()-range)<=totalheight){
+//            	// alert('123')
+//            	// console.log(123)
+            
+               
+           
+//            }
+//         });   
+
+// };
+		</script>
+</body>
+</html>

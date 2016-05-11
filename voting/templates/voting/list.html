@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ws_main.css' %}">
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	
+	<!-- main -->
+	<div class="watson_list">
+		<div class="watson_list_inner">
+			<div class="watson_list_inner_box">
+				<div class="watson_list_inner_box_top">
+                    <a id="list_nav1" href="javascript:void(0)"><img src="{% static 'img/list_nav1.png' %}" alt=""></a>
+				</div>
+				<div class="watson_list_inner_box_bottom">
+                    <a id="list_nav2" href="javascript:void(0)" class="watson_list_inner_box_bottom_left"><img src="{% static 'img/list_nav2.png' %}" alt=""></a>
+                    <a id="list_nav3" href="javascript:void(0))" class="watson_list_inner_box_bottom_right"><img src="{% static 'img/list_nav3.png' %}" alt=""></a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="{% static 'js/zepto.min.js' %}"></script>
+	<script type="text/javascript">
+		$('#list_nav1').click(function(event) {
+                window.location.href="{% url 'active_choose' %}"
+			sessionStorage.setItem("isback", "yes" )
+		});
+		$('#list_nav2').click(function(event) {
+                window.location.href="{% url 'guide' %}"
+			sessionStorage.setItem("isback", "yes" )
+		});
+		$('#list_nav3').click(function(event) {
+                window.location.href="{% url 'video_go' %}"
+			sessionStorage.setItem("isback", "yes" )
+		});
+
+	</script>
+	
+</body>
+</html>
+
+   

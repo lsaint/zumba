@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+	<!-- 这个是滑动css -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/ws_move.css"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/active.css' %}">
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<div>
+			<div class="ws_act_choose_page1" >
+
+				<div class="all_page_padding">
+					<!-- <div class="icons_two">
+						<img src="img/back.png" alt="">
+						<img src="img/music.png" alt="">
+					</div> -->
+					<div class="ws_act_choose_page1_txt">
+						<div class="ws_act_choose_page1_txt_h3">活动简介</div>
+						<div class="ws_act_choose_page1_txt_bd">即日起至6月24日， 参与了屈臣氏中国尊巴炫舞大赛的屈臣氏中国在职员工可将团队跳尊巴，且最能体现活力美一刻的照片上传至互动投票平台，并分享至朋友圈邀请亲友为自己点赞。活动时间结束后，获得点赞数最多的40张照片将获评 “至活力一刻” , 照片上传者每人可获得200元屈臣氏现金券。</div>
+					</div>
+					<div id="go_photo" class="ws_act_choose_page1_btn">
+                        <img src="{% static 'img/down_icons.png' %}" alt="">点击进入照片墙
+					</div>
+				</div>	
+			</div>
+			
+		</div>
+
+		<script src="{% static 'js/zepto.min.js' %}"></script>
+
+		<script type="text/javascript">
+			$('#go_photo').click(function(){
+                    window.location.href="{% url 'photo_alls' %}";
+			})
+		</script>
+</body>
+</html>

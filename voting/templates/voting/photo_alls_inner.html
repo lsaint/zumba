@@ -1,0 +1,125 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/active.css' %}">
+	
+</head>
+<body>
+	<div class="ws_act_choose_page2  ws_act_choose_page1">
+
+		<div class="all_page_padding all_page_padding2">
+				<div class="all_photo_hd">
+                    <img src="{% static 'img/photo_hd.png' %}" alt="">
+				</div>
+				<div class="icons_two">
+                    <img src="{% static 'img/back.png' %}" alt="">
+                    <img src="{% static 'img/music.png' %}" alt="">
+					</div>
+				
+				<div class="all_page_padding_inner_o">
+					<div class="all_page_padding_inner_bg">
+						
+					</div>
+
+					<!-- 2016-05-11 cbq -->
+					<div class="all_page_padding_inner_content_img_big" style="display: none"><img src="img/photo_inner.jpg" alt=""></div>
+					<div class="all_page_padding_inner after">
+						<div class="all_page_padding_inner_content">
+							<div class="all_page_padding_inner_content_img"><img src="img/photo_inner.jpg" alt="" id="img"></div>
+						<!-- 2016-05-11 cbq end-->	
+						
+							<div class="all_page_padding_inner_content_txt">
+								<div class="all_page_padding_inner_content_txt_hd">编号：<span>3001</span></div>
+								<div class="all_page_padding_inner_content_txt_bd">
+									<div class="all_page_padding_inner_content_txt_bd_left">
+										<div class="all_page_padding_inner_content_txt_bd_left_p">排名</div>
+										<div class="all_page_padding_inner_content_txt_bd_left_n">01</div>
+									</div>
+									<div class="all_page_padding_inner_content_txt_bd_right">
+										<div class="all_page_padding_inner_content_txt_bd_left_p">点赞数</div>
+										<div class="all_page_padding_inner_content_txt_bd_left_n">30000</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 2016-05-10 cbq -->
+				<div class="all_page_padding_inner_o_bottom bottom">
+						<!-- <img class="no1" src="img/pho_left_.png" alt=""> -->
+						<a href="" class="no1"></a>
+                        <img class="no2" src="{% static 'img/pho_middle.png' %}" alt="">
+						<a href="" class="no3"></a>
+						<!-- <img class="no3" src="img/pho_right_.png" alt=""> -->
+				</div>
+				
+
+			</div>
+		</div>
+
+<script src="{% static 'js/zepto.min.js' %}"></script>
+<script type="text/javascript">
+	window.onload=function(){
+    var range = 10;             //距下边界长度/单位px  
+    // nowpage=1;      //设置加载最多次数或者页数  
+    var num = 1;  
+    var totalheight = 0;   
+    $(window).scroll(function(event) {
+       var bodyg=$(window).scrollTop();
+      // 当页面卷走一屏时，出现返回顶部；
+      if(bodyg>$(window).height()){
+        // $(".fixright").css("display","block");
+      }else{
+        // $(".fixright").css("display","none");
+      }
+      // $('.fixright').click(function(){
+      //   document.getElementsByTagName('body')[0].scrollTop = 0;
+
+      // });
+       var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
+       totalheight = parseFloat($(window).height()) + parseFloat(srollPos);  //总高度
+       if(($(document).height()-range)<=totalheight){
+       	alert('123')
+       	console.log(123)
+        
+           
+       
+       }
+    }); 
+};
+
+</script>
+
+<!-- 2016-05-11 cbq -->
+<script type="text/javascript">
+	$(".all_page_padding_inner_content_img img").click(function(event) {
+		/* Act on the event */
+		$(".all_page_padding_inner_content_img").css({
+			display: 'none'
+		});
+		$(".all_page_padding_inner_content_img_big").css({
+			display: 'block'
+		});
+		$(".all_page_padding_inner").addClass('after');
+	});
+	$(".all_page_padding_inner_content_img_big img").click(function(event) {
+		/* Act on the event */
+		$(".all_page_padding_inner_content_img_big").css({
+			display: 'none'
+		});
+		$(".all_page_padding_inner_content_img").css({
+			display: 'block'
+		});
+		$(".all_page_padding_inner").removeClass('after');
+	});
+</script>
+<!-- 2016-05-11 cbq end-->
+</body>
+</html>

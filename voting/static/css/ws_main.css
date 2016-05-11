@@ -1,0 +1,50 @@
+.watson_ad{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			background:url(../img/ad.jpg) no-repeat top center;
+			background-size: 100% auto;
+		} 
+
+
+
+/*目录页面*/
+.watson_list{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background:url(../img/list_bg.jpg) no-repeat top center;
+	background-size: 100% auto;
+}
+.watson_list_inner{
+	position: fixed;
+	width: 75%;
+	left: 50%;
+	transform:translateX(-50%);
+	-webkit-transform:translateX(-50%);
+	bottom: 1.1em;
+}
+.watson_list_inner .watson_list_inner_box .watson_list_inner_box_top>a{
+	display: block;
+	width: 85%;
+	margin: 0 auto;
+}
+.watson_list_inner .watson_list_inner_box .watson_list_inner_box_bottom{
+	overflow: hidden;
+}
+.watson_list_inner .watson_list_inner_box .watson_list_inner_box_bottom>a{
+	float: left;
+	width: 45%;
+}
+.watson_list_inner .watson_list_inner_box .watson_list_inner_box_bottom>a.watson_list_inner_box_bottom_right{
+	float: right;
+}
+.watson_list_inner .watson_list_inner_box .watson_list_inner_box_bottom>a>img{
+	width: 100%;
+	height: auto;
+}
+.watson_list_inner .watson_list_inner_box .watson_list_inner_box_top>a>img{
+	width: 100%;
+	height: auto;
+}
+

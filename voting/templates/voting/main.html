@@ -1,0 +1,205 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<style type="text/css">
+	iframe{
+		border: 0;
+	}
+		#all{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+
+		}
+.music_icon{
+
+	    position: fixed;
+	    top: 15px;
+	    right: 15px;
+	    width: 25px;
+	    height: 25px;
+        background: url({% static 'img/music_icon.png' %}) 0 0 no-repeat;
+	    z-index: 99999;
+	    background-size: cover;
+} 
+
+.music_icon_move{
+    -webkit-animation:rotate 2s linear 0s infinite;
+    -moz-animation:rotate 2s linear 0s infinite;
+    -ms-animation:rotate 2s linear 0s infinite;
+    animation:rotate 2s linear 0s infinite;        
+}
+
+
+		/*动画*/
+
+@-webkit-keyframes rotate {
+    0% {  
+        -webkit-transform:rotate(0deg);
+    }
+    100% {  
+        -webkit-transform:rotate(360deg);
+    }
+}
+@-moz-keyframes rotate {
+    0% {  
+        -moz-transform:rotate(0deg);
+    }
+    100% {  
+        -moz-transform:rotate(360deg);
+    }
+}
+@-ms-keyframes rotate {
+    0% {  
+        -ms-transform:rotate(0deg);
+    }
+    100% {  
+        -ms-transform:rotate(360deg);
+    }
+}
+@-o-keyframes rotate {
+    0% {  
+        -o-transform:rotate(0deg);
+    }
+    100% {  
+        -o-transform:rotate(360deg);
+    }
+}
+@keyframes rotate {
+    0% {  
+        transform:rotate(0deg);
+    }
+    100% {  
+        transform:rotate(360deg);
+    }
+}
+.all_music_t{
+	position: fixed;
+    top: 10%;
+    right: 15px;
+    width: 100px;
+    height: 30px;
+    z-index: 99999;
+}
+.all_music_t>div{
+	float: right;
+	width: 27px;
+	height: 30px;
+
+}
+.all_music_t>div.all_music_t_back{
+	margin-right: 10px;
+	background: none;
+}
+.all_music_t>div.all_music_t_icon{
+    background: url({% static 'img/music.png' %}) no-repeat center center;
+	background-size: 100% auto;
+}
+
+
+/*首页类*/
+.all_music_mian>div.all_music_t_back{
+	background:none;
+}
+.all_music_mian>div.all_music_t_icon{
+    background: url({% static 'img/music_index.png' %}) no-repeat center center;
+	background-size: 100% auto;
+}
+
+
+/*有返回键类*/
+.have_back>div.all_music_t_back{
+    background: url({% static 'img/back.png' %}) no-repeat center center;
+	background-size: 100% auto;
+}
+
+/*点击音乐后返回的类名*/
+.click_music>div.all_music_t_icon{
+    background: url({% static 'img/music_down.png' %}) no-repeat center center;
+	background-size: 100% auto;
+}
+	</style>
+</head>
+<body style="">
+	<div id="all">
+		<!-- 音乐 -->
+		<!-- class="music_icon music_icon_move" 下面的类-->
+		<div id="musecc" >
+			<div class="music_icon_inner">
+				 <audio id="musicfx" loop="loop" autoplay="autoplay">
+                 <source src="{% static 'img/music.mp3' %}" type="audio/mpeg">
+	            </audio>
+			</div>
+		</div>
+
+		<div id = "muisc_all" class="all_music_t all_music_mian">
+			<div id="muisc_icon" class="all_music_t_icon"></div>
+			<div id="back_icons" class="all_music_t_back"></div>
+		</div>
+        <iframe id="main_ifra" src="{% url 'index' %}" width="100%" height="100%"> 
+			您的浏览器不支持框架
+		</iframe> 
+	</div>
+	
+	<script type="text/javascript" src="{% static 'js/zepto.min.js' %}"></script>
+	<script type="text/javascript">
+		// 三秒跳转
+		setTimeout(function(){
+			$("#muisc_all").removeClass('all_music_mian');
+			$("#muisc_all").addClass('no_back')
+		},3000)
+	
+	
+	var music=document.getElementById('musicfx');
+
+	// 点击音乐键
+	$("#muisc_icon").click(function(){
+		if(music.paused){
+			music.play();
+			$('#muisc_all').removeClass('click_music');
+			// $("#musecc").removeClass("pause").addClass("play");
+		}else{
+			music.pause();
+			var isindex=$('#all').find('.all_music_mian');
+			if(isindex.length==1){
+				// 这个是更换第一个页面的音乐背景图
+				$('#muisc_all').addClass('click_music');
+			}else{
+				$('#muisc_all').addClass('click_music');
+			}
+			
+		}});
+	// 返回键
+	$('#back_icons').click(function(event) {
+		history.go(-1)
+	});
+
+
+
+	// 跳转页面显隐返回键
+	var times=setInterval(hasBack,100);
+
+	function hasBack(){
+		// 保存session
+		 var isback=sessionStorage.getItem( "isback" );
+		 if(isback=='yes'){
+		 	console.log("yes bacl")
+		 	$('#muisc_all').addClass('have_back')
+		 	// 发现back session后后直接清除定时器
+		 	clearInterval(times);
+		 }
+		 console.log('no back')
+
+	}
+	</script>
+</body>
+</html>
+
+   

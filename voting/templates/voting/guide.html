@@ -1,0 +1,66 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+	<!-- 这个是滑动css -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/ws_move.css"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/active.css' %}">
+	<style type="text/css">
+	html{
+		background: #D1D1D1;
+	}
+	</style>
+</head>
+<body>
+	<div>
+		<div class="ws_act_choose_page1" >
+
+				<div class="all_page_padding ws_guide">
+					<div class="icons_two">
+                        <img src="{% static 'img/back.png' %}" alt="">
+                        <img src="{% static 'img/music.png' %}" alt="">
+					</div>
+					<div class="ws_guide_hd">
+                        <img src="{% static 'img/guide_txt.png' %}" alt="">
+					</div>
+					<div class="ws_guide_bd">
+						<ul>
+							<li name='set'>
+                            <img src="{% static 'img/guide1.png' %}" alt="">
+							</li>
+							<li name="video">
+                            <img src="{% static 'img/guide2.png' %}" alt="">
+							</li>
+							<li name='win'>
+                            <img src="{% static 'img/guide3.png' %}" alt="">
+							</li>
+							<li name="mini">
+                            <img src="{% static 'img/guide4.png' %}" alt="">
+							</li>
+						</ul>
+					</div>
+				</div>	
+			</div>
+			
+		</div>
+
+		<script src="js/zepto.min.js"></script>
+
+		<script type="text/javascript">
+		$('.ws_guide_bd>ul>li').on('click',function(){
+			var name=$(this).attr('name');
+			console.log(name)
+			localStorage.setItem( "guide_name", name ); 
+
+            window.location.href='{% url "guide_inner" %}'
+		})	
+			
+		</script>
+</body>
+</html>

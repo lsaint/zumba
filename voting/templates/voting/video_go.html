@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+	<!-- 这个是滑动css -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/ws_move.css"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/active.css' %}">
+	<style type="text/css">
+	html{
+		background: #D1D1D1;
+	}
+	</style>
+</head>
+<body>
+	<div>
+			<div class="ws_act_choose_page1 ws_video" >
+				<div class="all_page_padding">
+					<div class="icons_two">
+                        <img src="{% static 'img/back.png' %}" alt="">
+                        <img src="{% static 'img/music.png' %}" alt="">
+					</div>
+					<div class="ws_video_img">
+						<div class="ws_video_img1">
+                            <img src="{% static 'img/video_url1.png' %}" alt="">
+						</div>
+						<div class="ws_video_imgall">
+							<ul>
+                                <li class="ws_video_img2"><img src="{% static 'img/video_url2.png' %}" alt=""></li>
+								<li class="ws_video_img2"><img src="{% static 'img/video_url3.png' %}" alt=""></li>
+								<li class="ws_video_img2"><img src="{% static 'img/video_url4.png' %}" alt=""></li>
+								<li class="ws_video_img2"><img src="{% static 'img/video_url5.png' %}" alt=""></li>
+							</ul>
+						</div>
+					</div>
+					
+				</div>	
+			</div>
+			
+		</div>
+
+		<script src="{% static 'js/zepto.min.js' %}"></script>
+
+		<script type="text/javascript">
+		</script>
+</body>
+</html>
