@@ -6,7 +6,7 @@ from django.views.decorators.cache import cache_page
 import voting.views as views
 
 urlpatterns = [
-    url(r'^i/$', views.index, name='index'),
+    url(r'^i/$', views.main, name='main'),
     url(r'^up/$', views.up, name='up'),
     url(r'^(?P<topic_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^(?P<topic_id>[0-9]+)/vote/$', views.vote, name='vote'),

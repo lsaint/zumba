@@ -20,7 +20,7 @@ from .models import Topic, Poll
 
 
 @login_required(redirect_field_name=None)
-def index(request):
+def main(request):
     return render(request, 'voting/main.html')
 
 
@@ -105,7 +105,7 @@ def zumbalogin(request):
 
     rep = auth_and_login(request, openId)
     if rep is True:
-        return HttpResponseRedirect(reverse('leaderboard', kwargs={"kind": "hot"}))
+        return HttpResponseRedirect(reverse('main'))
     return rep
 
 
