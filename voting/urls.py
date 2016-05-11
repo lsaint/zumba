@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^index/', TemplateView.as_view(template_name="voting/index.html"), name='index'),
     url(r'^list/', TemplateView.as_view(template_name="voting/list.html"), name='list'),
     url(r'^active_choose/', TemplateView.as_view(template_name="voting/active_choose.html"), name='active_choose'),
+    url(r'^active_choose2/', TemplateView.as_view(template_name="voting/active_choose2.html"), name='active_choose2'),
     url(r'^guide/', TemplateView.as_view(template_name="voting/guide.html"), name='guide'),
     url(r'^guide_inner/', TemplateView.as_view(template_name="voting/guide_inner.html"), name='guide_inner'),
     url(r'^photo_alls/', TemplateView.as_view(template_name="voting/photo_alls.html"), name='photo_alls'),
