@@ -196,6 +196,14 @@
 			<div class="img_up_tips_hd">上传成功</div>
 			<div class="img_up_tips_btn">确认</div>
 		</div>
+		<div id="img_up_tips" class="allclass erl dis_none" >
+			<div class="img_up_tips_hd">请输入以8开头的8位数</div>
+			<div class="img_up_tips_btn">返回输入</div>
+		</div>
+		<div id="img_up_tips" class="allclass er2 dis_none" >
+			<div class="img_up_tips_hd">请输入中文！</div>
+			<div class="img_up_tips_btn">返回输入</div>
+		</div>
 
 	<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
 	<script src="{% static 'js/lrz.mobile.min.js' %}"></script>
@@ -219,6 +227,9 @@
 					var photo = $("#photo").val();
 					var wid = $("#wid").val();
 					var wname = $("#wname").val();
+					var reg22= /^8\d{7}$/;
+					var reg33=  /[^\u4e00-\u9fa5]/;
+
 					if (photo =="") {
 						$(".tips_mark").removeClass('dis_none');
 						$(".photo").removeClass('dis_none').addClass("up_blue");
@@ -226,6 +237,7 @@
 							$(".tips_mark").addClass('dis_none');
 							$(".photo").removeClass('up_blue').addClass('dis_none');
 						})
+						return
 					}else if (wid == "" || wname == "") {
 						$(".tips_mark").removeClass('dis_none');
 						$(".info").removeClass('dis_none').addClass("up_red");
@@ -233,34 +245,60 @@
 							$(".tips_mark").addClass('dis_none');
 							$(".info").removeClass('up_red').addClass('dis_none');
 						})
-					}else{
+						return
+					}else if(!reg22.test(wid)){
+
 						$(".tips_mark").removeClass('dis_none');
-						$(".success").removeClass('dis_none').addClass("up_blue");
+						$(".erl").removeClass('dis_none').addClass("up_red");
 						$(".img_up_tips_btn").click(function(){
 							$(".tips_mark").addClass('dis_none');
-							$(".success").removeClass('up_blue').addClass('dis_none');
+							$(".erl").removeClass('up_red').addClass('dis_none');
 						})
+						return
+					}else if(reg33.test(wname)){
+						$(".tips_mark").removeClass('dis_none');
+						$(".er2").removeClass('dis_none').addClass("up_red");
+						$(".img_up_tips_btn").click(function(){
+							$(".tips_mark").addClass('dis_none');
+							$(".er2").removeClass('up_red').addClass('dis_none');
+						})
+						return
 					}
-					console.log(photo);
-						$.ajax({
-						url: 'http://test2.huocc.com/voting/up/',
-						type: 'POST',
-						data: {
-								wid:"1111",
-								name:"xzf",
-								photo:photo
-							},
-					})
-					.done(function(data) {
-						console.log("success");
-						console.log(data);
-					})
-					.fail(function() {
-						console.log("error");
-					})
-					.always(function() {
-						console.log("complete");
-					});
+					else{
+						console.log(photo);
+							$.ajax({
+							url: 'http://test2.huocc.com/voting/up/',
+							type: 'POST',
+							data: {
+									wid:"1111",
+									name:"xzf",
+									photo:photo
+								},
+						})
+						.done(function(data) {
+							console.log("success");
+							
+							$(".tips_mark").removeClass('dis_none');
+							$(".success").removeClass('dis_none').addClass("up_blue");
+							$(".img_up_tips_btn").click(function(){
+								$(".tips_mark").addClass('dis_none');
+								$(".success").removeClass('up_blue').addClass('dis_none');
+
+							})
+							setTimeout(function(){
+								window.location.href="{% url 'photo_alls' %}"
+							}, 3000)
+							
+							// console.log(data);
+						})
+						.fail(function() {
+							console.log("error");
+						})
+						.always(function() {
+							console.log("complete");
+						});
+					}
+					
 				})
 
 			

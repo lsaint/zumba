@@ -35,6 +35,14 @@
 			background: url(/zumba/static/img/video3.jpg) no-repeat center top;
 			background-size: 100% 100% ;
 		} */
+		.bot{
+		position: absolute;
+		display: block;
+		bottom:0;
+		right: 0;
+		width: 80%;
+		height: 100px;
+	}
 	</style>
 </head>
 <body>
@@ -44,7 +52,7 @@
                   <img src="{% static 'img/jiangxiang.jpg' %}" alt="">
 				</div>
 			</div>
-			<div class="page page-2-1 page-current" nowname='video'>
+			<div class="page page-2-1 hide" nowname='video'>
 				<div class="wrap bg2">
                     <img src="{% static 'img/video.jpg' %}" alt="">
 				</div>
@@ -57,6 +65,7 @@
 			<div class="page page-4-1 hide" nowname='mini'>
 				<div class="wrap bg4">
                      <img src="{% static 'img/video3.jpg' %}" alt="">
+                     <a class="bot" href='{% url "guide" %}'></a>
 				</div>
 			</div>
 				
@@ -64,28 +73,27 @@
 
 		<script src="{% static 'js/zepto.min.js' %}"></script>
 		<script src="{% static 'js/touch.js' %}"></script>
-		<script src="{% static 'js/index.js' %}"></script>
 
 		<script type="text/javascript">
-		// window.onload=function(){
-		// 	var nowName=localStorage.getItem( "guide_name" )
-		// // $('.guide_divs .page').removeClass('page-current');
+
+			var nowName=localStorage.getItem( "guide_name" )
+		// $('.guide_divs .page').removeClass('page-current');
 	
-		// 	if(nowName=="1"){
-		// 		$('.page-1-1').addClass('page-current').siblings('').removeClass('page-current');
-		// 		$('.page-1-1').removeClass('hide');
-		// 	}else if(nowName=="2"){
-		// 		$('.page-2-1').addClass('page-current').siblings('').removeClass('page-current');
-		// 		$('.page-2-1').removeClass('hide');
-		// 	}else if(nowName=="3"){
-		// 		$('.page-3-1').addClass('page-current').siblings('').removeClass('page-current');
-		// 		$('.page-3-1').removeClass('hide');
-		// 	}else if(nowName=="4"){
-		// 		$('.page-4-1').addClass('page-current').siblings('').removeClass('page-current');
-		// 		$('.page-4-1').removeClass('hide');
-		// 	}
-		
-		// }
+			if(nowName=="1"){
+				$('.page-1-1').addClass('page-current').siblings('').removeClass('page-current');
+				$('.page-1-1').removeClass('hide');
+			}else if(nowName=="2"){
+				$('.page-2-1').addClass('page-current').siblings('').removeClass('page-current');
+				$('.page-2-1').removeClass('hide');
+			}else if(nowName=="3"){
+				$('.page-3-1').addClass('page-current').siblings('').removeClass('page-current');
+				$('.page-3-1').removeClass('hide');
+			}else if(nowName=="4"){
+				$('.page-4-1').addClass('page-current').siblings('').removeClass('page-current');
+				$('.page-4-1').removeClass('hide');
+			}
+	
 		</script>
+		<script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>

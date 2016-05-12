@@ -1,11 +1,10 @@
 (function(){
 
-// var guide_num=localStorage.getItem( 'guide_name' );
+var guide_num=localStorage.getItem( 'guide_name' );
+lastnum=guide_num-1;
 
-// lastnum=guide_num-1;
-
-// 修改这个参数
-var now = { row:1, col:1 }, last = { row:0, col:0};
+// 脨脼赂脛脮芒赂枚虏脦脢媒
+var now = { row:guide_num, col:1 }, last = { row:lastnum, col:0};
 
 console.log(now['row'])
 console.log(last['row'])
@@ -24,14 +23,17 @@ $(document).swipeUp(function(){
 	if (isAnimating) return;
 	last.row = now.row;
 	last.col = now.col;
-	if (last.row != 4) { now.row = last.row+1; now.col = 1; pageMove(towards.up);}	
+	if (last.row != 4) { now.row = parseInt(last.row)+1; now.col = 1; pageMove(towards.up);}	
+	localStorage.removeItem( 'guide_name' )
 })
 
 $(document).swipeDown(function(){
+		
+	localStorage.removeItem( 'guide_name' )
 	if (isAnimating) return;
 	last.row = now.row;
 	last.col = now.col;
-	if (last.row!=1) { now.row = last.row-1; now.col = 1; pageMove(towards.down);}	
+	if (last.row!=1) { now.row =  parseInt(last.row)-1; now.col = 1; pageMove(towards.down);}	
 })
 
 $(document).swipeLeft(function(){
