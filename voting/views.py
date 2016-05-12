@@ -31,16 +31,25 @@ def up(request):
     if topic.exists():
         return JsonResponse({"ret": 2})
 
-    form = TopicForm(request.POST)
     if request.method == 'POST':
-        if form.is_valid():
-            m = form.save(commit=False)
-            m.user = request.user
-            fdata = request.POST.get('photo', "")
-            m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(fdata)), save=False)
-            m.save()
-            return JsonResponse({"ret": 0})
+        jn = json.loads(request.POST)
+        print(jn)
+        m = Topic(user=request.user, public=True, wid=jn["wid"], name=jn["name"])
+        m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(jn["data"])), save=False)
+        m.save()
+        return JsonResponse({"ret": 0})
     return JsonResponse({"ret": 1})
+
+    # form = TopicForm(request.POST)
+    # if request.method == 'POST':
+        # if form.is_valid():
+            # m = form.save(commit=False)
+            # m.user = request.user
+            # fdata = request.POST.get('photo', "")
+            # m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(fdata)), save=False)
+            # m.save()
+            # return JsonResponse({"ret": 0})
+    # return JsonResponse({"ret": 1})
 
 
 @login_required(redirect_field_name=None)
