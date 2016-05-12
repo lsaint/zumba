@@ -184,7 +184,7 @@
 
 		<div class="tips_mark dis_none"></div><!-- dis_none -->
 		<!-- 样式已经写好了-->
-		<div id="img_up_tips" class="allclass dis_none" >
+		<div id="img_up_tips" class="allclass photo dis_none" >
 			<div class="img_up_tips_hd">请选择图片</div>
 			<div class="img_up_tips_btn">返回上传</div>
 		</div>
@@ -192,9 +192,11 @@
 			<div class="img_up_tips_hd">你的资料无效！</div>
 			<div class="img_up_tips_btn">返回输入</div>
 		</div>
+		<div id="img_up_tips" class="allclass success dis_none" >
+			<div class="img_up_tips_hd">上传成功</div>
+			<div class="img_up_tips_btn">确认</div>
+		</div>
 
-		
-		
 	<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
 	<script src="{% static 'js/lrz.mobile.min.js' %}"></script>
 		
@@ -202,24 +204,29 @@
 		<script type="text/javascript">
 
 			$(function(){
+				// 页面跳转
+				 $('#ceshi').click(function(event) {
+				 	window.location.href="{% url 'photo_alls' %}"
+				 });
+
 				$("#trueFile").click(function(){
 						// alert("nimei");
 						$("#photoFile").click();
 						// alert("nimei3333");
 				});
-				
+
 				$("#mysubmit").click(function(){
 					var photo = $("#photo").val();
 					var wid = $("#wid").val();
 					var wname = $("#wname").val();
-					if (wid == "") {
+					if (photo =="") {
 						$(".tips_mark").removeClass('dis_none');
-						$(".info").removeClass('dis_none').addClass("up_red");
+						$(".photo").removeClass('dis_none').addClass("up_blue");
 						$(".img_up_tips_btn").click(function(){
 							$(".tips_mark").addClass('dis_none');
-							$(".info").removeClass('up_red').addClass('dis_none');
+							$(".photo").removeClass('up_blue').addClass('dis_none');
 						})
-					}else if(wname = ""){
+					}else if (wid == "" || wname == "") {
 						$(".tips_mark").removeClass('dis_none');
 						$(".info").removeClass('dis_none').addClass("up_red");
 						$(".img_up_tips_btn").click(function(){
@@ -227,7 +234,12 @@
 							$(".info").removeClass('up_red').addClass('dis_none');
 						})
 					}else{
-
+						$(".tips_mark").removeClass('dis_none');
+						$(".success").removeClass('dis_none').addClass("up_blue");
+						$(".img_up_tips_btn").click(function(){
+							$(".tips_mark").addClass('dis_none');
+							$(".success").removeClass('up_blue').addClass('dis_none');
+						})
 					}
 					console.log(photo);
 						$.ajax({

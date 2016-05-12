@@ -31,23 +31,11 @@
 					<!-- 2016-05-11 cbq -->
 					<div class="all_page_padding_inner_content_img_big" style="display: none"><img src="img/photo_inner.jpg" alt=""></div>
 					<div class="all_page_padding_inner after">
-						<div class="all_page_padding_inner_content">
-							<div class="all_page_padding_inner_content_img"><img src="img/photo_inner.jpg" alt="" id="img"></div>
+						<div class="all_page_padding_inner_content" id="only_photo">
+							
 						<!-- 2016-05-11 cbq end-->	
 						
-							<div class="all_page_padding_inner_content_txt">
-								<div class="all_page_padding_inner_content_txt_hd">编号：<span>3001</span></div>
-								<div class="all_page_padding_inner_content_txt_bd">
-									<div class="all_page_padding_inner_content_txt_bd_left">
-										<div class="all_page_padding_inner_content_txt_bd_left_p">排名</div>
-										<div class="all_page_padding_inner_content_txt_bd_left_n">01</div>
-									</div>
-									<div class="all_page_padding_inner_content_txt_bd_right">
-										<div class="all_page_padding_inner_content_txt_bd_left_p">点赞数</div>
-										<div class="all_page_padding_inner_content_txt_bd_left_n">30000</div>
-									</div>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -55,7 +43,7 @@
 				<div class="all_page_padding_inner_o_bottom bottom">
 						<!-- <img class="no1" src="img/pho_left_.png" alt=""> -->
 						<a href="" class="no1"></a>
-                        <img class="no2" src="{% static 'img/pho_middle.png' %}" alt="">
+                        <img class="no2" id="ws_zan" src="{% static 'img/pho_middle.png' %}" alt="">
 						<a href="" class="no3"></a>
 						<!-- <img class="no3" src="img/pho_right_.png" alt=""> -->
 				</div>
@@ -66,35 +54,76 @@
 
 <script src="{% static 'js/zepto.min.js' %}"></script>
 <script type="text/javascript">
-	window.onload=function(){
-    var range = 10;             //距下边界长度/单位px  
-    // nowpage=1;      //设置加载最多次数或者页数  
-    var num = 1;  
-    var totalheight = 0;   
-    $(window).scroll(function(event) {
-       var bodyg=$(window).scrollTop();
-      // 当页面卷走一屏时，出现返回顶部；
-      if(bodyg>$(window).height()){
-        // $(".fixright").css("display","block");
-      }else{
-        // $(".fixright").css("display","none");
-      }
-      // $('.fixright').click(function(){
-      //   document.getElementsByTagName('body')[0].scrollTop = 0;
+ $(document).ready(function(){
+		var nowid=sessionStorage.getItem( 'cli_uerid' );
+			// console.log(nowid);
+			$.ajax({
+            		url: 'http://test2.huocc.com/voting/'+nowid+'/',
+            		type: 'GET',
+            		dataType: 'json',
+            		success:function(result){
+            			// alert(1111)
+            			// console.log( typeof result);
+            			console.log(result["url"]);
 
-      // });
-       var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)  
-       totalheight = parseFloat($(window).height()) + parseFloat(srollPos);  //总高度
-       if(($(document).height()-range)<=totalheight){
-       	alert('123')
-       	console.log(123)
-        
-           
        
-       }
-    }); 
-};
+            			// var data= eval("("+result+")");
+            			var h='';
+					
+								
+								// console.log(result)
+								h+='<div class="all_page_padding_inner_content_img"><img src='+result['url']+' alt="" id="img"></div>'
+								h+='<div class="all_page_padding_inner_content_txt">'
+								h+='	<div class="all_page_padding_inner_content_txt_hd">编号：<span>'+result['id']+'</span></div>'
+								h+='	<div class="all_page_padding_inner_content_txt_bd">'
+								h+='		<div class="all_page_padding_inner_content_txt_bd_left">'
+								h+='			<div class="all_page_padding_inner_content_txt_bd_left_p">排名</div>'
+								h+='			<div class="all_page_padding_inner_content_txt_bd_left_n">'+result['ranking']+'</div>'
+								h+='		</div>'
+								h+='		<div class="all_page_padding_inner_content_txt_bd_right">'
+								h+='			<div class="all_page_padding_inner_content_txt_bd_left_p">点赞数</div>'
+								h+='			<div class="all_page_padding_inner_content_txt_bd_left_n">'+result['polls']+'</div>'
+								h+='		</div>'
+								h+='	</div>'
+								h+='</div>'
 
+
+						
+						
+            			$('#only_photo').html(h);
+            		},
+            		error:function(){
+
+            		}
+            	});
+
+
+		// 点赞
+
+		$('#ws_zan').click(function(event) {
+			console.log(nowid);
+			$.ajax({
+            		url: 'http://test2.huocc.com/voting/'+nowid+'/vote/',
+            		type: 'POST',
+            		success:function(result){
+            			console.log(result['ret'])
+            			if(result['ret']=='2'){
+            				alert('你已经投过票了')
+            			}
+            		},
+            		error:function(){
+
+            		}
+            	});
+			
+			
+		});
+
+
+
+
+
+		})	
 </script>
 
 <!-- 2016-05-11 cbq -->
