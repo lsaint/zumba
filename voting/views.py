@@ -65,12 +65,6 @@ def vote(request, topic_id):
 
 
 @login_required(redirect_field_name=None)
-def leaderboard(request, kind):
-    topic_list = get_sorted_list(kind)
-    return render(request, 'voting/leaderboard.html', {"topic_list": topic_list})
-
-
-@login_required(redirect_field_name=None)
 def uploaded(request):
     ret = Topic.objects.filter(user=request.user).exists()
     return JsonResponse({"ret": int(ret)}, safe=False)

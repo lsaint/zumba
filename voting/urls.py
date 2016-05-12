@@ -10,10 +10,8 @@ urlpatterns = [
     url(r'^up/$', views.up, name='up'),
     url(r'^(?P<topic_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^(?P<topic_id>[0-9]+)/vote/$', views.vote, name='vote'),
-    url(r'^leaderboard/(?P<kind>\w+)/$', cache_page(5)(views.leaderboard), name='leaderboard'),
     url(r'^zumbalogin/$', views.zumbalogin, name='zumbalogin'),
     url(r'^uploaded/$', views.uploaded, name='uploaded'),
-
     url(r'^pullboard/(?P<kind>\w+)/(?P<offset>[0-9]+)/(?P<limit>[0-9]+)/$',
                                          cache_page(5)(views.pullboard), name='pullboard'),
 
