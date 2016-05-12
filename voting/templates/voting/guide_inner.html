@@ -44,7 +44,7 @@
                   <img src="{% static 'img/jiangxiang.jpg' %}" alt="">
 				</div>
 			</div>
-			<div class="page page-2-1 hide" nowname='video'>
+			<div class="page page-2-1 page-current" nowname='video'>
 				<div class="wrap bg2">
                     <img src="{% static 'img/video.jpg' %}" alt="">
 				</div>
@@ -54,7 +54,7 @@
                      <img src="{% static 'img/video2.jpg' %}" alt="">
 				</div>
 			</div>
-			<div class="page page-4-1 page-current" nowname='mini'>
+			<div class="page page-4-1 hide" nowname='mini'>
 				<div class="wrap bg4">
                      <img src="{% static 'img/video3.jpg' %}" alt="">
 				</div>
@@ -71,17 +71,16 @@
 		// 	var nowName=localStorage.getItem( "guide_name" )
 		// // $('.guide_divs .page').removeClass('page-current');
 	
-		// 	console.log(nowName);
-		// 	if(nowName=="set"){
+		// 	if(nowName=="1"){
 		// 		$('.page-1-1').addClass('page-current').siblings('').removeClass('page-current');
 		// 		$('.page-1-1').removeClass('hide');
-		// 	}else if(nowName=="video"){
+		// 	}else if(nowName=="2"){
 		// 		$('.page-2-1').addClass('page-current').siblings('').removeClass('page-current');
 		// 		$('.page-2-1').removeClass('hide');
-		// 	}else if(nowName=="win"){
+		// 	}else if(nowName=="3"){
 		// 		$('.page-3-1').addClass('page-current').siblings('').removeClass('page-current');
 		// 		$('.page-3-1').removeClass('hide');
-		// 	}else if(nowName=="mini"){
+		// 	}else if(nowName=="4"){
 		// 		$('.page-4-1').addClass('page-current').siblings('').removeClass('page-current');
 		// 		$('.page-4-1').removeClass('hide');
 		// 	}

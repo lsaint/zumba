@@ -1,7 +1,14 @@
 (function(){
 
-// 淇敼杩欎釜鍙傛暟
-var now = { row:4, col:1 }, last = { row:3, col:0};
+// var guide_num=localStorage.getItem( 'guide_name' );
+
+// lastnum=guide_num-1;
+
+// 修改这个参数
+var now = { row:1, col:1 }, last = { row:0, col:0};
+
+console.log(now['row'])
+console.log(last['row'])
 const towards = { up:1, right:2, down:3, left:4};
 var isAnimating = false;
 
