@@ -31,6 +31,102 @@
 		position: relative;
 		z-index: 5;
 	}
+
+	/******2016-05-12 cbq********/
+	.ws_act_choose_page1 {
+	    height: auto;
+	}
+	.all_page_padding_inner {
+	    background: #fff;
+	}
+	.all_page_padding_photo_up {
+	   position: relative;
+	}
+	.all_page_padding_photo_up .all_page_padding_inner_content_img {
+	    display: block;
+	    overflow: hidden;
+	    height:25em;
+	}
+	#photoShow{
+		width: 100%;
+		display: block;
+		height:25em;
+	}
+	.all_page_padding_photo_up .all_page_padding_inner_content_img .all_page_padding_inner_content_img_inner {
+	   left: 0;
+	   right: 0;
+	   display: block;
+	   top: 45%;
+	   bottom: 45%;
+	   width: 100%;
+	}
+	#trueFile {
+	    width: 100%;
+	    height: auto;
+	}
+	.all_page_padding_photo_up .all_page_padding_inner_content_img .all_page_padding_inner_content_img_inner>img {
+	    width: 55%;
+	}
+	@media screen and (max-height: 768px){
+		.all_page_padding_photo_up .all_page_padding_inner_content_img {
+	    	height:21em;
+		}
+		#photoShow{
+			height:21em;
+		}
+	}
+	@media screen and (max-height: 640px){
+		.all_page_padding_photo_up .all_page_padding_inner_content_img {
+	    	height:20em;
+		}
+		#photoShow{
+			height:20em;
+		}
+	}
+	@media screen and (max-height: 580px){
+		.all_page_padding_photo_up .all_page_padding_inner_content_img {
+	    	height:16em;
+		}
+		#photoShow{
+			height:16em;
+		}
+	}
+	@media screen and (max-height: 480px){
+		.all_page_padding_photo_up .all_page_padding_inner_content_img {
+	    	height:15.1em;
+		}
+		#photoShow{
+			height:15.1em;
+		}
+	}
+	.all_page_padding_inner_content_txt{
+		position: relative;
+	}
+	#photofile{
+		text-align: center;
+		margin: 0 auto;
+		position: absolute;
+		left: 0;
+		right: 0;
+		width: 47%;
+		height: 100%;
+		display: inline-block;
+	    overflow: hidden;
+	    text-decoration: none;
+	    text-indent: 0;
+	    line-height: 100%;
+	}
+	#photofile input {
+		position: absolute;
+		font-size: 100px;
+		right: 0;
+		top: 0;
+		opacity: 0;
+	}
+	.all_page_padding_photo_up_btn {
+	    overflow: hidden;
+	    margin-bottom: 10px;
+	}
 	</style>
 </head>
 <body>
@@ -47,10 +143,11 @@
 					<div class="all_page_padding_inner all_page_padding_photo_up">
 						<div class="all_page_padding_inner_content">
 							<div class="all_page_padding_inner_content_img">
-									<img id="photoShow"   src="{% static "img/photo_tu1.jpg" %}" />
+							<img id="photoShow"  src="" />
+									<!-- <img id="photoShow"   src="{% static "img/photo_tu1.jpg" %}" /> -->
 								<div class="all_page_padding_inner_content_img_inner" id="trueFile">
                                     <img src="{% static 'img/tu_up_icons.png' %}" alt="">
-									<input id="photofile" onchange="previewImage(this)" required  type="file" accept="image/*" />
+									<input id="photofile" onchange="previewImage(this)" required  type="file" accept="image/*" style="opacity: 0;" />
 									<input type="hidden" name="photo" id="photo" />
 								</div>
 							</div>
@@ -59,16 +156,15 @@
 								<div class="all_page_padding_inner_content_txt_bd">
 									<div class="all_page_padding_inner_content_txt_bd_left">
 										<div class="all_page_padding_inner_content_txt_bd_left_p">请输入员工号</div>
-										<input class="all_page_padding_inner_content_txt_bd_left_n">
+										<input class="all_page_padding_inner_content_txt_bd_left_n" id="wid">
 									</div>
 									<div class="all_page_padding_inner_content_txt_bd_right">
 										<div class="all_page_padding_inner_content_txt_bd_left_p">请输入姓名</div>
-										<input class="all_page_padding_inner_content_txt_bd_left_n">
+										<input class="all_page_padding_inner_content_txt_bd_left_n" id="wname">
 									</div>
 								</div>
 							</div>
 
-						
 						</div>
 					</div>
 
@@ -81,17 +177,20 @@
                         <div class="all_page_padding_photo_up_btn_left" id="ceshi"><img src="{% static 'img/tu_up_01.png' %}" alt=""></div>
                         <div class="all_page_padding_photo_up_btn_right" id="mysubmit"><img src="{% static 'img/tu_up_02.png' %}" alt=""></div>
 					</div>
-					</div>
-				</div>	
+				</form>
+				</div>
 			</div>
-			
 		</div>
-		
-		<div class="tips_mark dis_none"></div>
+
+		<div class="tips_mark dis_none"></div><!-- dis_none -->
 		<!-- 样式已经写好了-->
-		<div id="img_up_tips dis_none" class="allclass">
+		<div id="img_up_tips" class="allclass dis_none" >
 			<div class="img_up_tips_hd">请选择图片</div>
 			<div class="img_up_tips_btn">返回上传</div>
+		</div>
+		<div id="img_up_tips" class="allclass info dis_none" >
+			<div class="img_up_tips_hd">你的资料无效！</div>
+			<div class="img_up_tips_btn">返回输入</div>
 		</div>
 
 		
@@ -106,12 +205,30 @@
 				$("#trueFile").click(function(){
 						// alert("nimei");
 						$("#photoFile").click();
-						
 						// alert("nimei3333");
 				});
 				
 				$("#mysubmit").click(function(){
 					var photo = $("#photo").val();
+					var wid = $("#wid").val();
+					var wname = $("#wname").val();
+					if (wid == "") {
+						$(".tips_mark").removeClass('dis_none');
+						$(".info").removeClass('dis_none').addClass("up_red");
+						$(".img_up_tips_btn").click(function(){
+							$(".tips_mark").addClass('dis_none');
+							$(".info").removeClass('up_red').addClass('dis_none');
+						})
+					}else if(wname = ""){
+						$(".tips_mark").removeClass('dis_none');
+						$(".info").removeClass('dis_none').addClass("up_red");
+						$(".img_up_tips_btn").click(function(){
+							$(".tips_mark").addClass('dis_none');
+							$(".info").removeClass('up_red').addClass('dis_none');
+						})
+					}else{
+
+					}
 					console.log(photo);
 						$.ajax({
 						url: 'http://test2.huocc.com/voting/up/',
@@ -174,6 +291,14 @@
                 });
             }
         }
+
+        var height = $(window).height();
+        window.onload=function(){
+        	$(".ws_act_choose_page1").css({
+        		'min-height': height,
+        	});
+        }
+
 // 			window.onload=function(){
 //         var range = 10;             //距下边界长度/单位px  
 //         // nowpage=1;      //设置加载最多次数或者页数  
