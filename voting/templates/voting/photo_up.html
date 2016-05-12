@@ -18,6 +18,10 @@
 	.dis_none{
 		display: none;
 	}
+	#trueFile{
+	width:100px;
+	height:100px;
+	}
 	</style>
 </head>
 <body>
@@ -34,8 +38,11 @@
 					<div class="all_page_padding_inner all_page_padding_photo_up">
 						<div class="all_page_padding_inner_content">
 							<div class="all_page_padding_inner_content_img">
-								<div class="all_page_padding_inner_content_img_inner">
+								<div class="all_page_padding_inner_content_img_inner" id="trueFile">
                                     <img src="{% static 'img/tu_up_icons.png' %}" alt="">
+									<input id="photofile" onchange="previewImage(this)" required  type="file" accept="image/*" />
+									<img id="photoShow"   src="{% static "img/photo_tu1.jpg" %}" />
+									<input type="hidden" name="photo" id="photo" />
 								</div>
 							</div>
 							<div class="all_page_padding_inner_content_txt">
@@ -63,7 +70,7 @@
 
 					<div class="all_page_padding_photo_up_btn">
                         <div class="all_page_padding_photo_up_btn_left"><img src="{% static 'img/tu_up_01.png' %}" alt=""></div>
-                        <div class="all_page_padding_photo_up_btn_right"><img src="{% static 'img/tu_up_02.png' %}" alt=""></div>
+                        <div class="all_page_padding_photo_up_btn_right" id="mysubmit"><img src="{% static 'img/tu_up_02.png' %}" alt=""></div>
 					</div>
 
 				</div>	
@@ -78,9 +85,79 @@
 			<div class="img_up_tips_btn">返回上传</div>
 		</div>
 
-		<script src="js/zepto.min.js"></script>
-
+		
+		
+	<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+	<script src="{% static 'js/lrz.mobile.min.js' %}"></script>
+		
+<!-- <script src="{% static 'js/lrz.bundle.js' %}"></script> -->
 		<script type="text/javascript">
+
+			$(function(){
+				$("#trueFile").click(function(){
+						alert("nimei");
+						$("#photoFile").click();
+						
+						alert("nimei3333");
+				});
+				
+				$("#mysubmit").click(function(){
+					var photo = $("#photo").val();
+					console.log(photo);
+						 $.ajax({
+							url: 'http://test2.huocc.com/voting/up/',
+							type: 'post',
+							data:{
+								wid:"123456",
+								name:"xzf",
+								photo:photo
+							},
+							success:function(result){
+								 console.log(typeof result);
+								
+							},
+							error:function(){
+
+							}
+	            	})
+				})
+			}) 
+			
+			function previewImage(file) {
+            var filepath = $("#photofile").val();
+            if (filepath != '') {
+                $("button[type='submit']").removeClass("nophoto").addClass("hasphoto");
+            }
+            //判断图片格式
+            var extStart = filepath.lastIndexOf(".");
+            var ext = filepath.substring(extStart, filepath.length).toUpperCase();
+            if (ext != ".PNG" && ext != ".JPG" && ext != ".JPEG") {
+                $("#photo").val("");
+                alert("图片限于png,jpeg,jpg格式");
+                return false;
+            }
+            ////判断图片大小
+            //var byteSize = file.files[0].size;
+            //if (byteSize / 1024 > 500) {
+            //    $("#headIcon").val("");
+            //    alert("图片不能大于500K");
+            //    return false;
+            //}
+            //预览图片
+
+            if (file.files && file.files[0]) {
+                var img = document.getElementById('photoShow');
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    img.src = evt.target.result;
+                }
+                reader.readAsDataURL(file.files[0]);
+                lrz(file.files[0], { width: 750 }, function (results) {
+                    // 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
+                    $("#photo").val(results.base64.substring(results.base64.indexOf(',') + 1));
+                });
+            }
+        }
 // 			window.onload=function(){
 //         var range = 10;             //距下边界长度/单位px  
 //         // nowpage=1;      //设置加载最多次数或者页数  

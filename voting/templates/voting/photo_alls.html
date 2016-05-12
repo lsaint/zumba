@@ -385,7 +385,7 @@
 						</div>
 				</div>
 				<!-- 2016-05-11 cbq end-->
-				<div id="we_paly" class=" ws_act_choose_page2_btn">
+				<div id="we_paly" class="ws_act_choose_page2_btn">
                     <img src="{% static 'img/photo_place.png' %}" alt="">
 				</div>
 
@@ -402,10 +402,32 @@
         var num = 1;
         var totalheight = 0; 
 
+        $.ajax({
+            		url: 'http://test2.huocc.com/voting/pullboard/hot/1/9/',
+            		type: 'GET',
+            		dataType: 'json',
+            		success:function(result){
+            			// console.log( typeof result);
+            			// console.log(result);
+            			// var data= eval("("+result+")");
+						$.each(result, function(i, item) {
+								console.log(item.id)
+						});
+
+            			
+            		},
+            		error:function(){
+
+            		}
+	            	})
+	            	
+
+
         // 默认值是按名次排名
         var table_type='rank';
         // var main = $("#content");                     //主体元素
         $(window).scroll(function(){
+
             var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)
             // console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
             // console.log("页面的文档高度 ："+$(document).height());
@@ -420,7 +442,7 @@
             	if(table_type=='rank'){
 
             		$.ajax({
-            		url: 'http://test2.huocc.com/voting/pullboard/hot/9/10/',
+            		url: 'http://test2.huocc.com/voting/pullboard/hot/1/9/',
             		type: 'GET',
             		dataType: 'json',
             		success:function(result){
@@ -492,7 +514,7 @@ $(document).on('click',$(".photo_all_bd>ul>li"),function(event) {
 
  // 页面跳转
  $('#we_paly').click(function(event) {
- 	window.location.href='active_choose2.html'
+ 	window.location.href="{% url 'active_choose2' %}"
  });
 
 /* 2016-05-10 cbq */
