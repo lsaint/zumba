@@ -61,7 +61,9 @@ def vote(request, topic_id):
         Poll.objects.create(user=request.user, topic = topic)
         topic.polls += 1
         topic.save()
-    return JsonResponse({"ret": 0}, safe=False)
+        return JsonResponse({"ret": 0})
+    return JsonResponse({"ret": 2})
+
 
 
 @login_required(redirect_field_name=None)
