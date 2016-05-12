@@ -2,5 +2,11 @@
 from django.contrib import admin
 from .models import Topic, Poll
 
-admin.site.register(Topic)
+
+class TopicAdmin(admin.ModelAdmin):
+    raw_id_fields = ("user",)
+    list_display = ("user", "name", "poll", "photo")
+
+
+admin.site.register(Topic, TopicAdmin)
 admin.site.register(Poll)
