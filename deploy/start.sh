@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-../manage.py collectstatic
+#../manage.py collectstatic
 uwsgi --ini uwsgi.ini
