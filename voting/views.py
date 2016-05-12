@@ -27,9 +27,11 @@ def main(request):
 @login_required(redirect_field_name=None)
 @csrf_exempt
 def up(request):
-    topic = Topic.objects.filter(user=request.user)
-    if topic.exists():
-        return JsonResponse({"ret": 2})
+    print("up----------")
+    #topic = Topic.objects.filter(user=request.user)
+    #if topic.exists():
+    #    print("2----------")
+    #    return JsonResponse({"ret": 2})
 
     # if request.method == 'POST':
         # jn = json.loads(request.POST)
@@ -48,7 +50,9 @@ def up(request):
             fdata = request.POST.get('photo', "")
             m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(fdata)), save=False)
             m.save()
+            print("0----------")
             return JsonResponse({"ret": 0})
+    print("1----------")
     return JsonResponse({"ret": 1})
 
 

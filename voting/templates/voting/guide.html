@@ -22,10 +22,10 @@
 		<div class="ws_act_choose_page1" >
 
 				<div class="all_page_padding ws_guide">
-					<div class="icons_two">
-                        <img src="{% static 'img/back.png' %}" alt="">
-                        <img src="{% static 'img/music.png' %}" alt="">
-					</div>
+					<!-- <div class="icons_two">
+					                        <img src="{% static 'img/back.png' %}" alt="">
+					                        <img src="{% static 'img/music.png' %}" alt="">
+					</div> -->
 					<div class="ws_guide_hd">
                         <img src="{% static 'img/guide_txt.png' %}" alt="">
 					</div>
@@ -45,12 +45,12 @@
 							</li>
 						</ul>
 					</div>
-				</div>	
+				</div>
 			</div>
 			
 		</div>
 
-		<script src="js/zepto.min.js"></script>
+		<script src="{% static 'js/zepto.min.js' %}"></script>
 
 		<script type="text/javascript">
 		$('.ws_guide_bd>ul>li').on('click',function(){
@@ -59,7 +59,7 @@
 			localStorage.setItem( "guide_name", name ); 
 
             window.location.href='{% url "guide_inner" %}'
-		})	
+		})
 			
 		</script>
 </body>

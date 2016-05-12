@@ -22,6 +22,15 @@
 	width:100px;
 	height:100px;
 	}
+	#photoShow{
+		position: absolute;
+		width: 100%;
+		height: auto;
+	}
+	.all_page_padding_photo_up .all_page_padding_inner_content_img .all_page_padding_inner_content_img_inner{
+		position: relative;
+		z-index: 5;
+	}
 	</style>
 </head>
 <body>
@@ -34,14 +43,14 @@
 						<img src="img/music.png" alt="">
 					</div>
  -->
-
+				<form  enctype="multipart/form-data"  >
 					<div class="all_page_padding_inner all_page_padding_photo_up">
 						<div class="all_page_padding_inner_content">
 							<div class="all_page_padding_inner_content_img">
+									<img id="photoShow"   src="{% static "img/photo_tu1.jpg" %}" />
 								<div class="all_page_padding_inner_content_img_inner" id="trueFile">
                                     <img src="{% static 'img/tu_up_icons.png' %}" alt="">
 									<input id="photofile" onchange="previewImage(this)" required  type="file" accept="image/*" />
-									<img id="photoShow"   src="{% static "img/photo_tu1.jpg" %}" />
 									<input type="hidden" name="photo" id="photo" />
 								</div>
 							</div>
@@ -69,10 +78,10 @@
 					</div>
 
 					<div class="all_page_padding_photo_up_btn">
-                        <div class="all_page_padding_photo_up_btn_left"><img src="{% static 'img/tu_up_01.png' %}" alt=""></div>
+                        <div class="all_page_padding_photo_up_btn_left" id="ceshi"><img src="{% static 'img/tu_up_01.png' %}" alt=""></div>
                         <div class="all_page_padding_photo_up_btn_right" id="mysubmit"><img src="{% static 'img/tu_up_02.png' %}" alt=""></div>
 					</div>
-
+					</div>
 				</div>	
 			</div>
 			
@@ -95,32 +104,38 @@
 
 			$(function(){
 				$("#trueFile").click(function(){
-						alert("nimei");
+						// alert("nimei");
 						$("#photoFile").click();
 						
-						alert("nimei3333");
+						// alert("nimei3333");
 				});
 				
 				$("#mysubmit").click(function(){
 					var photo = $("#photo").val();
 					console.log(photo);
-						 $.ajax({
-							url: 'http://test2.huocc.com/voting/up/',
-							type: 'post',
-							data:{
-								wid:"123456",
+						$.ajax({
+						url: 'http://test2.huocc.com/voting/up/',
+						type: 'POST',
+						data: {
+								wid:"1111",
 								name:"xzf",
 								photo:photo
 							},
-							success:function(result){
-								 console.log(typeof result);
-								
-							},
-							error:function(){
-
-							}
-	            	})
+					})
+					.done(function(data) {
+						console.log("success");
+						console.log(data);
+					})
+					.fail(function() {
+						console.log("error");
+					})
+					.always(function() {
+						console.log("complete");
+					});
 				})
+
+			
+				
 			}) 
 			
 			function previewImage(file) {
@@ -154,7 +169,8 @@
                 reader.readAsDataURL(file.files[0]);
                 lrz(file.files[0], { width: 750 }, function (results) {
                     // 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
-                    $("#photo").val(results.base64.substring(results.base64.indexOf(',') + 1));
+                    var aaa=$("#photo").val(results.base64.substring(results.base64.indexOf(',') + 1));
+                    console.log(aaa)
                 });
             }
         }

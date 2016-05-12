@@ -9,6 +9,15 @@
 	<meta name="format-detection" content="email=no">
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/active.css' %}">
+    <style>
+		/* 2016-05-12 cbq */
+		.photo_all .photo_all_inner_middle{
+			border-radius: 0 10px 10px 10px;
+		}
+		.only_photo_hd {
+		    padding-bottom: 10px;
+		} 
+    </style>
 </head>
 <body>
 	<div class="ws_act_choose_page2  ws_act_choose_page1 ws_act_photo_all_01">
@@ -381,8 +390,8 @@
 							</ul>
 						</div>
 					</div>
-					<div class="photo_all_bottom">
-						</div>
+					<!-- <div class="photo_all_bottom">
+						</div> -->
 				</div>
 				<!-- 2016-05-11 cbq end-->
 				<div id="we_paly" class="ws_act_choose_page2_btn">
@@ -538,8 +547,9 @@ background: 'url({% static "img/photo_bg_top.png" %}) repeat-y top center',
 			'background-size': '100% 100%'
 		});
 		$(".photo_all .photo_all_inner_middle").css({
-background: 'url({% static 'img/photo_bg_middle.png' %}) repeat-y top center',
-			'background-size': '100% auto'
+background: 'url({% static "img/photo_bg_middle.png" %}) repeat-y top center',
+			'background-size': '100% auto',
+			'border-radius': '0px 10px 10px 10px'
 		});
 		
 	});
@@ -561,7 +571,8 @@ background: 'url({% static 'img/photo_bg_top2.png' %}) repeat-y top center',
 		});
 		$(".photo_all .photo_all_inner_middle").css({
 background: 'url({% static 'img/photo_bg_middle2.png' %}) repeat-y top center',
-			'background-size': '100% auto'
+			'background-size': '100% auto',
+			'border-radius': '10px 0px 10px 10px'
 		});
 		
 	})
