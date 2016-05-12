@@ -27,20 +27,9 @@ def main(request):
 @login_required(redirect_field_name=None)
 @csrf_exempt
 def up(request):
-    print("up----------")
     #topic = Topic.objects.filter(user=request.user)
     #if topic.exists():
-    #    print("2----------")
     #    return JsonResponse({"ret": 2})
-
-    # if request.method == 'POST':
-        # jn = json.loads(request.POST)
-        # print(jn)
-        # m = Topic(user=request.user, public=True, wid=jn["wid"], name=jn["name"])
-        # m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(jn["data"])), save=False)
-        # m.save()
-        # return JsonResponse({"ret": 0})
-    # return JsonResponse({"ret": 1})
 
     form = TopicForm(request.POST)
     if request.method == 'POST':
@@ -50,9 +39,7 @@ def up(request):
             fdata = request.POST.get('photo', "")
             m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(fdata)), save=False)
             m.save()
-            print("0----------")
             return JsonResponse({"ret": 0})
-    print("1----------")
     return JsonResponse({"ret": 1})
 
 
@@ -104,8 +91,8 @@ def pullboard(requests, kind, offset, limit):
            "url": topic.photo.url,
             "polls": topic.polls,
             "headimgurl": topic.user.email,
-            "ranking": topic.ranking()}\
-            for topic in topic_list]
+            "ranking": topic.ranking() if kind=="hot" else idx+1}\
+            for idx, topic in enumerate(topic_list)]
     return JsonResponse(lt, safe=False)
 
 
