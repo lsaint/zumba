@@ -31,32 +31,31 @@ def up(request):
     if topic.exists():
         return JsonResponse({"ret": 2})
 
-    if request.method == 'POST':
-        jn = json.loads(request.POST)
-        print(jn)
-        m = Topic(user=request.user, public=True, wid=jn["wid"], name=jn["name"])
-        m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(jn["data"])), save=False)
-        m.save()
-        return JsonResponse({"ret": 0})
-    return JsonResponse({"ret": 1})
-
-    # form = TopicForm(request.POST)
     # if request.method == 'POST':
-        # if form.is_valid():
-            # m = form.save(commit=False)
-            # m.user = request.user
-            # fdata = request.POST.get('photo', "")
-            # m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(fdata)), save=False)
-            # m.save()
-            # return JsonResponse({"ret": 0})
+        # jn = json.loads(request.POST)
+        # print(jn)
+        # m = Topic(user=request.user, public=True, wid=jn["wid"], name=jn["name"])
+        # m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(jn["data"])), save=False)
+        # m.save()
+        # return JsonResponse({"ret": 0})
     # return JsonResponse({"ret": 1})
+
+    form = TopicForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            m = form.save(commit=False)
+            m.user = request.user
+            fdata = request.POST.get('photo', "")
+            m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(fdata)), save=False)
+            m.save()
+            return JsonResponse({"ret": 0})
+    return JsonResponse({"ret": 1})
 
 
 @login_required(redirect_field_name=None)
 def detail(request, topic_id):
     topic = get_object_or_404(Topic, pk = topic_id)
     user = topic.user
-    # return render(request, 'voting/detail.html', {'topic': topic, "name": user.last_name})
     return JsonResponse({"name": user.last_name,
                          "url": topic.photo.url,
                          "id": topic.id,
@@ -71,7 +70,6 @@ def vote(request, topic_id):
         Poll.objects.create(user=request.user, topic = topic)
         topic.polls += 1
         topic.save()
-    # return render(request, 'voting/detail.html', {'topic': topic})
     return JsonResponse({"ret": 0}, safe=False)
 
 
