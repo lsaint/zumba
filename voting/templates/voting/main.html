@@ -8,6 +8,7 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="format-detection" content="email=no">
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/active.css' %}">
 	<style type="text/css">
 	iframe{
 		border: 0;
@@ -147,6 +148,34 @@
 			height: 100%;
 			position: absolute;
 }
+#ophoto_all{
+	display: none;
+}
+
+/* 2016-05-12 cbq */
+		.photo_all .photo_all_inner_middle{
+			border-radius: 0 10px 10px 10px;
+		}
+		.only_photo_hd {
+		    padding-bottom: 2em;
+		}
+	    .photo_all_bd>ul>li .photo_all_bd_li_inner .photo_all_bd_pic>a {
+		    max-height: 5.25em;
+		}
+		.photo_all_bd>ul>li .photo_all_bd_li_inner .photo_all_bd_pic>a>img {
+		    width: 100%;
+		    height: 5.25em;
+		}
+
+
+.photo_all_bd>ul>li .photo_all_bd_li_inner .photo_all_bd_pic .photo_all_bd_pic_jiao {
+			text-align: center;
+			font-size: .5em;
+		}
+
+#erweima{
+	display: none;
+}
 	</style>
 </head>
 <body style="">
@@ -174,18 +203,124 @@
 			您的浏览器不支持框架
 			</iframe> 
 		</div>
+
+		<div id="newifr"></div>
       
 	</div>
 	
+
+<!--  照片墙页面 -->
+	<div id='ophoto_all' class="ws_act_choose_page2  ws_act_choose_page1 ws_act_photo_all_01">
+
+		<div class="all_page_padding all_page_padding2">
+				<div class="all_photo_hd">
+                    <img src="{% static 'img/photo_hd.png' %}" alt="">
+				</div>
+				<!-- <div class="icons_two">
+						<img src="img/back.png" alt="">
+						<img src="img/music.png" alt="">
+					</div> -->
+
+				<div class="ws_act_choose_page2_search">
+                    <img src="{% static 'img/active_txt.png' %}" alt="">
+					<div class="ws_act_choose_page2_search_inner">
+						<div class="ws_act_choose_page2_search_out">
+						<div class="ws_act_choose_page2_search_out_input">
+							<input id="ws_input_val" type="text" placeholder="请输入搜索编号">
+                            <img id="ws_soso" src="{% static 'img/ss.png' %}" alt="">
+						</div>
+					</div>
+					</div>
+					
+				</div>
+
+				<!-- 2016-05-10 cbq start-->
+				<div class="photo_all">
+					<div class="photo_all_top">
+						<div class="photo_all_hd">
+							<ul>
+								<li class="photo_active select" id="Gradate_Place_li" tabName="hot">按名次排列</li>
+								<li id="Time_Arrangement_li" tabName="new">按时间排列</li>
+							</ul>
+						</div>
+					</div> 
+					<!-- <div class="photo_all_inner photo_all_inner_left"> -->
+						<!-- <div class="photo_all_hd">
+							<ul>
+								<li class="photo_active select" id="Gradate_Place_li">按名次排列</li>
+								<li id="Time_Arrangement_li">按时间排列</li>
+							</ul>
+						</div>  -->
+					<div class="photo_all_inner_middle">
+						<div class="photo_all_bd">
+							<ul id="Gradate_Place">
+								
+
+
+
+								
+							</ul>
+
+							<!-- 按时间排序 -->
+
+							<ul id="Time_Arrangement" style="display:none;">
+								
+							</ul>
+						</div>
+					</div>
+					<!-- <div class="photo_all_bottom">
+						</div> -->
+				</div>
+				<!-- 2016-05-11 cbq end-->
+				<!-- <div id="we_paly" class="ws_act_choose_page2_btn">
+                    <img src="{% static 'img/photo_place.png' %}" alt="">
+				</div> -->
+
+			</div>
+		</div>
+	
+
+
+
+<!-- 二维码页面 -->
+<div id="erweima">
+			<div class="ws_act_choose_page1 ws_video" >
+				<div class="all_page_padding">
+					<!-- <div class="icons_two">
+					                        <img src="{% static 'img/back.png' %}" alt="">
+					                        <img src="{% static 'img/music.png' %}" alt="">
+					</div> -->
+					<div class="ws_video_img">
+						<div class="ws_video_img1 qrcodeWrap">
+                            <img src="{% static 'img/video_url1.png' %}" alt="">
+						</div>
+						<div class="ws_video_imgall">
+							<ul>
+                                <li class="ws_video_img2"><img src="{% static 'img/video_url2.png' %}" alt=""></li>
+								<li class="ws_video_img2"><img src="{% static 'img/video_url3.png' %}" alt=""></li>
+								<li class="ws_video_img2"><img src="{% static 'img/video_url4.png' %}" alt=""></li>
+								<li class="ws_video_img2"><img src="{% static 'img/video_url5.png' %}" alt=""></li>
+							</ul>
+						</div>
+					</div>
+					
+				</div>	
+			</div>
+			
+		</div>
+
+
+
 	<!-- 我也要玩底部导航 -->
 	<div id="we_paly" class="ws_act_choose_page2_btn">
                 <img src="{% static 'img/photo_place.png' %}" alt="">
 			</div>
 	
-	<script type="text/javascript" src="{% static 'js/zepto.min.js' %}"></script>
+	<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/comment.js' %}"></script>
-	<script type="text/javascript"></script>
+
 	<script type="text/javascript">
+
 		// 三秒跳转
 		setTimeout(function(){
 			$("#muisc_all").removeClass('all_music_mian');
@@ -221,6 +356,7 @@
 		}});
 	// 返回键
 	$('#back_icons').click(function(event) {
+
 		history.go(-1)
 	});
 
@@ -244,6 +380,342 @@
 	// var aa=$('#main_ifra').find('#we_paly');
 
 	</script>
+	<script type="text/javascript">
+	
+	 // var UA = navigator.userAgent;
+  //   var forIOS = function(){
+  //       if(!UA.match(/iPad/) && !UA.match(/iPhone/) && !UA.match(/iPod/)){return;}
+  //       if($('#wrapper').length){return;}
+  //       $('body').children().not('script').wrapAll('<div id="wrapper"></div>');
+  //   }();
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var range = 1;             //距下边界长度/单位px
+        var elemt = 500;            //插入元素高度/单位px
+        var maxnum = 20;            //设置加载最多次数
+        var num = 0;       //首次重1开始
+        var get_num=15;		//第一拉去11数据
+        // 默认值是按名次排名
+        var table_type='hot';
+        var totalheight = 0; 
+
+        // 用户编号为
+        var useID;
+      
+         // console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
+         //    console.log("页面的文档高度 ："+$(document).height());
+         //    console.log('浏览器的高度：'+$(window).height());
+        if(table_type=='hot'){
+        $.ajax({
+        			// 如： pullboard/hot/9/10/  表示从热度榜第9个开始，拉取10个数据。
+            		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
+            		type: 'GET',
+            		dataType: 'json',
+            		success:function(result){
+            			// console.log( typeof result);
+            			// console.log(result);
+            			// var data= eval("("+result+")");
+            			var s='';
+						$.each(result, function(i, item) {
+								// console.log(i)
+								// console.log(item)
+								// console.log(result)
+								s+='<li ouserid='+item.id+'>'
+								s+='	<div class="photo_all_bd_li_inner">'
+								s+='		<div class="photo_all_bd_pic">'
+								s+='			<div class="photo_all_bd_pic_jiao">'+item.ranking+'</div>'
+								s+='			<a href="javascript:void(0)"><img src=\"'+item.url+'\" alt=""></a>'
+								s+='		</div>'
+								s+='		<div class="photo_all_bd_pic_txt">'
+								s+='			<div class="photo_all_bd_pic_txt_tt">'
+								s+='				<img src=\"'+item.headimgurl+'\" alt="">'
+								s+='			</div>'
+								s+='			<div class="photo_all_bd_pic_txt_two">'
+								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+item.id+'</span></div>'
+								s+='				<div class="photo_all_bd_pic_txt_two_zan">点赞：<span>'+item.polls+'</span></div>'
+								s+='			</div>'
+								s+='		</div>'
+								s+='	</div>'
+								s+='</li>'
+
+						});
+
+						$('#Gradate_Place').html(s);
+
+
+						// 添加后为所有li添加事件监听
+						// 点击图片显示调到相应的详情页
+
+
+            			
+            		},
+            		error:function(){
+
+            		}
+	            	})
+
+
+}else if(table_type=='new'){
+	 
+}
+
+
+        
+        // var main = $("#content");                     //主体元素
+        $(window).scroll(function(){
+
+            var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)
+            // console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
+            // console.log("页面的文档高度 ："+$(document).height());
+            // console.log('浏览器的高度：'+$(window).height());
+            totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+            if(($(document).height()-range) <= totalheight ) {
+            	console.log(123)
+            	// alert(111)
+
+            	// 到底部后触发ajax
+            	num=num+get_num;
+            	get_num=10;
+
+            	console.log(num)
+            	console.log(get_num)
+            	//首先判断是那个一类型
+            	if(table_type=='hot'){
+
+            		$.ajax({
+            		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
+            		type: 'GET',
+            		dataType: 'json',
+            		success:function(result){
+            			// console.log( typeof result);
+            			// console.log(result);
+            			// var data= eval("("+result+")");
+            			var s='';
+						$.each(result, function(i, item) {
+								// console.log(i)
+								// console.log(item)
+								s+='<li ouserid='+item.id+' >'
+								s+='	<div class="photo_all_bd_li_inner">'
+								s+='		<div class="photo_all_bd_pic">'
+								s+='			<div class="photo_all_bd_pic_jiao">'+item.ranking+'</div>'
+								s+='			<a href="javascript:void(0)"><img src=\"'+item.url+'\" alt=""></a>'
+								s+='		</div>'
+								s+='		<div class="photo_all_bd_pic_txt">'
+								s+='			<div class="photo_all_bd_pic_txt_tt">'
+								s+='				<img src=\"'+item.headimgurl+'\" alt="">'
+								s+='			</div>'
+								s+='			<div class="photo_all_bd_pic_txt_two">'
+								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+item.id+'</span></div>'
+								s+='				<div class="photo_all_bd_pic_txt_two_zan">点赞：<span>'+item.polls+'</span></div>'
+								s+='			</div>'
+								s+='		</div>'
+								s+='	</div>'
+								s+='</li>'
+
+						});
+
+						$('#Gradate_Place').append(s);
+
+            			
+            		},
+            		error:function(){
+
+            		}
+	            	})
+            	}else if(table_type=='new'){
+            		
+            		$.ajax({
+            		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
+            		type: 'GET',
+            		dataType: 'json',
+            		success:function(result){
+            			// console.log( typeof result);
+            			// console.log(result);
+            			// var data= eval("("+result+")");
+            			var s='';
+						$.each(result, function(i, item) {
+								// console.log(i)
+								// console.log(item)
+								s+='<li ouserid='+item.id+' >'
+								s+='	<div class="photo_all_bd_li_inner">'
+								s+='		<div class="photo_all_bd_pic">'
+								s+='			<div class="photo_all_bd_pic_jiao">'+item.ranking+'</div>'
+								s+='			<a href="javascript:void(0)"><img src=\"'+item.url+'\" alt=""></a>'
+								s+='		</div>'
+								s+='		<div class="photo_all_bd_pic_txt">'
+								s+='			<div class="photo_all_bd_pic_txt_tt">'
+								s+='				<img src=\"'+item.headimgurl+'\" alt="">'
+								s+='			</div>'
+								s+='			<div class="photo_all_bd_pic_txt_two">'
+								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+item.id+'</span></div>'
+								s+='				<div class="photo_all_bd_pic_txt_two_zan">点赞：<span>'+item.polls+'</span></div>'
+								s+='			</div>'
+								s+='		</div>'
+								s+='	</div>'
+								s+='</li>'
+
+						});
+
+						$('#Time_Arrangement').append(s);
+
+            			
+            		},
+            		error:function(){
+
+            		}
+	            	})
+            	}
+            	       	
+            	
+                // num++;
+            }
+        });
+
+	            	
+
+
+
+
+
+
+   
+
+
+
+
+
+/* 2016-05-10 cbq */
+// 按排名点击事件
+	$("#Gradate_Place_li").click(function(event) {
+		// 获取当前类型
+		table_type=$("#Gradate_Place_li").attr('tabName');
+		console.log(table_type);
+
+		// 重置获取值
+		num=0;
+		get_num=11;
+
+
+
+
+		/* Act on the event */
+		$(this).addClass('photo_active');
+		$("#Time_Arrangement_li").removeClass('photo_active');
+		$("#Gradate_Place").css({
+			display: 'block'
+		});
+		$("#Time_Arrangement").css({
+			display: 'none'
+		});
+		$(".photo_all .photo_all_top").css({
+background: 'url({% static "img/photo_bg_top.png" %}) repeat-y top center',
+			'background-size': '100% 100%'
+		});
+		$(".photo_all .photo_all_inner_middle").css({
+background: 'url({% static "img/photo_bg_middle.png" %}) repeat-y top center',
+			'background-size': '100% auto',
+			'border-radius': '0px 10px 10px 10px'
+		});
+		
+	});
+
+
+
+	// 按时间排序点击事件
+	$("#Time_Arrangement_li").click(function(event) {
+		table_type=$("#Time_Arrangement_li").attr('tabName');
+		console.log(table_type);
+
+
+		// 重置获取值
+		num=0;
+		get_num=11;
+		$.ajax({
+            		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
+            		type: 'GET',
+            		dataType: 'json',
+            		success:function(result){
+            			// console.log( typeof result);
+            			// console.log(result);
+            			// var data= eval("("+result+")");
+            			var s='';
+						$.each(result, function(i, item) {
+								// console.log(i)
+								// console.log(item)
+								s+='<li ouserid='+item.id+' >'
+								s+='	<div class="photo_all_bd_li_inner">'
+								s+='		<div class="photo_all_bd_pic">'
+								s+='			<div class="photo_all_bd_pic_jiao">'+item.ranking+'</div>'
+								s+='			<a href="javascript:void(0)"><img src=\"'+item.url+'\" alt=""></a>'
+								s+='		</div>'
+								s+='		<div class="photo_all_bd_pic_txt">'
+								s+='			<div class="photo_all_bd_pic_txt_tt">'
+								s+='				<img src=\"'+item.headimgurl+'\" alt="">'
+								s+='			</div>'
+								s+='			<div class="photo_all_bd_pic_txt_two">'
+								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+item.id+'</span></div>'
+								s+='				<div class="photo_all_bd_pic_txt_two_zan">点赞：<span>'+item.polls+'</span></div>'
+								s+='			</div>'
+								s+='		</div>'
+								s+='	</div>'
+								s+='</li>'
+
+						});
+
+						$('#Time_Arrangement').append(s);
+
+            			
+            		},
+            		error:function(){
+
+            		}
+            	});
+
+
+		/* Act on the event */
+		$(this).addClass('photo_active');
+		$("#Gradate_Place_li").removeClass('photo_active');
+		$("#Gradate_Place").css({
+			display:'none'
+		});
+		$("#Time_Arrangement").css({
+			display: 'block'
+		});
+		$(".photo_all .photo_all_top").css({
+background: 'url({% static 'img/photo_bg_top2.png' %}) repeat-y top center',
+			'background-size': '100% 100%'
+		});
+		$(".photo_all .photo_all_inner_middle").css({
+background: 'url({% static 'img/photo_bg_middle2.png' %}) repeat-y top center',
+			'background-size': '100% auto',
+			'border-radius': '10px 0px 10px 10px'
+		});
+		
+	})
+ });  
+
+
+
+</script>
+<script>
+	$(document).on('click','.photo_all_bd>ul>li',function(){
+		var nowID=$(this).attr('ouserid');
+		sessionStorage.setItem('cli_uerid', nowID);
+	
+		// 	var ss="";
+		// ss+='<iframe id="main_ifra" name="main_all" src="{% url "index" %}" width="100%" height="100%"> '
+		// ss+='	您的浏览器不支持框架'
+		// ss+='	</iframe> '
+		 main_all.window.go_all_inner();
+		
+	});
+	$('#ws_soso').click(function(event) {
+		var ss_input=$('#ws_input_val').val();
+		sessionStorage.setItem('cli_uerid', ss_input);
+		window.location.href='{% url 'photo_alls_inner' %}'
+	});
+</script>
 </body>
 </html>
 
