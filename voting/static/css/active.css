@@ -1,11 +1,9 @@
 .ws_act_choose_page1{
 	width: 100%;
-	/* height: 100%; */
+	height: 100%;
 	position: absolute;
 	background:#D1D1D1 url(../img/active_choose_bg2.jpg) no-repeat top center;
-	/* background-size: 100% auto; */
-	height: auto;
-	background-size: 100% 100%;
+	background-size: 100% auto;
 }
 .ws_act_choose_page1_txt{
 	/*padding-top: 24%;*/

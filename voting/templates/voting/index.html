@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/ws_main.css' %}">
 	<style type="text/css">
-		
+		#wrapper{height:500px;-webkit-overflow-scrolling:touch;overflow:auto;}
 	</style>
 </head>
 <body>
@@ -29,10 +29,16 @@
 	</div>
     <script type="text/javascript" src="{% static 'js/zepto.min.js' %}"></script>
 	<script type="text/javascript">
-		// setTimeout(function(){
-  //               window.location.href='{% url "list" %}'
-		// },3000)
-	
+		setTimeout(function(){
+                window.location.href='{% url "list" %}'
+		},3000)
+		
+		 var UA = navigator.userAgent;
+    var forIOS = function(){
+        if(!UA.match(/iPad/) && !UA.match(/iPhone/) && !UA.match(/iPod/)){return;}
+        if($('#wrapper').length){return;}
+        $('body').children().not('script').wrapAll('<div id="wrapper"></div>');
+    }();
 
 	</script>
 </body>
