@@ -41,31 +41,34 @@
 		bottom:0;
 		right: 0;
 		width: 80%;
-		height: 100px;
+		height: 25%;
 	}
+	 <script type="text/javascript">
+    	parent.window.document.getElementById("we_paly").style.display='none';
+    </script>
 	</style>
 </head>
 <body>
 	<div class="guide_divs">
 			<div class="page page-1-1 hide" nowname='set'>
-				<div class="wrap bg1">
+				<div class="wrap">
                   <img src="{% static 'img/jiangxiang.jpg' %}" alt="">
 				</div>
 			</div>
 			<div class="page page-2-1 hide" nowname='video'>
-				<div class="wrap bg2">
+				<div class="wrap">
                     <img src="{% static 'img/video.jpg' %}" alt="">
 				</div>
 			</div>
 			<div class="page page-3-1 hide" nowname='win'>
-				<div class="wrap bg3">
+				<div class="wrap">
                      <img src="{% static 'img/video2.jpg' %}" alt="">
 				</div>
 			</div>
 			<div class="page page-4-1 hide" nowname='mini'>
-				<div class="wrap bg4">
+				<div class="wrap">
                      <img src="{% static 'img/video3.jpg' %}" alt="">
-                     <a class="bot" href='{% url "new_pic" %}'></a>
+                     <div class="bot" onclick="window.open('{% url "new_pic" %}','_self')"></div>
 				</div>
 			</div>
 				

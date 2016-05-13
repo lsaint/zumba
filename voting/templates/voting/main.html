@@ -125,14 +125,38 @@
     background: url({% static 'img/music_down.png' %}) no-repeat center center;
 	background-size: 100% auto;
 }
+
+
+
+/*固定底部我也要玩*/
+.ws_act_choose_page2_btn {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+.ws_act_choose_page2_btn>img {
+    width: 100%;
+    height: auto;
+}
+.ifr_out{
+	-webkit-overflow-scrolling: touch;  
+    overflow-y: scroll; 
+    width: 100%;
+			height: 100%;
+			position: absolute;
+}
 	</style>
 </head>
 <body style="">
 	<!--  -->
 	<div id="all" >
 		<!-- 音乐 -->
+
 		<!-- class="music_icon music_icon_move" 下面的类-->
 		<div id="musecc" >
+
 			<div class="music_icon_inner">
 				 <audio id="musicfx" loop="loop" autoplay="autoplay">
                  <source src="{% static 'img/music.mp3' %}" type="audio/mpeg">
@@ -141,15 +165,26 @@
 		</div>
 
 		<div id = "muisc_all" class="all_music_t all_music_mian">
+			<!-- <div id="parnet"></div> -->
 			<div id="muisc_icon" class="all_music_t_icon"></div>
 			<div id="back_icons" class="all_music_t_back"></div>
 		</div>
-        <iframe id="main_ifra" src="{% url 'index' %}" width="100%" height="100%"> 
+		<div class="ifr_out">
+			  <iframe id="main_ifra" name='main_all' src="{% url 'index' %}" width="100%" height="100%"> 
 			您的浏览器不支持框架
-		</iframe> 
+			</iframe> 
+		</div>
+      
 	</div>
 	
+	<!-- 我也要玩底部导航 -->
+	<div id="we_paly" class="ws_act_choose_page2_btn">
+                <img src="{% static 'img/photo_place.png' %}" alt="">
+			</div>
+	
 	<script type="text/javascript" src="{% static 'js/zepto.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/comment.js' %}"></script>
+	<script type="text/javascript"></script>
 	<script type="text/javascript">
 		// 三秒跳转
 		setTimeout(function(){
@@ -159,6 +194,13 @@
 	
 	
 	var music=document.getElementById('musicfx');
+
+	$("#we_paly").click(function(event) {
+		// alert(111)
+		// 操作子类的方法
+		 main_all.window.go_choose2();
+	});
+	
 
 	// 点击音乐键
 	$("#muisc_icon").click(function(){
@@ -197,6 +239,10 @@
 		 }
 
 	}
+
+
+	// var aa=$('#main_ifra').find('#we_paly');
+
 	</script>
 </body>
 </html>

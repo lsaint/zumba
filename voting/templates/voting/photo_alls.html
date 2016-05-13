@@ -25,17 +25,24 @@
 		    height: 5.25em;
 		}
 
-			#wrapper{
+		/*	#wrapper{
 				-webkit-overflow-scrolling:touch;
 				overflow-scrolling:touch;
 				overflow:auto;
 				    width: 100%;
     position: absolute;
     height: 100%;
-			}
+			}*/
     </style>
+    <script type="text/javascript">
+    	parent.window.document.getElementById("we_paly").style.display='block';
+    	 // 页面跳转
+function go_choose2(){
+ 	window.location.href="{% url 'active_choose2' %}"
+}
+    </script>
 </head>
-<body>
+<body >
 	<div class="ws_act_choose_page2  ws_act_choose_page1 ws_act_photo_all_01">
 
 		<div class="all_page_padding all_page_padding2">
@@ -98,9 +105,9 @@
 						</div> -->
 				</div>
 				<!-- 2016-05-11 cbq end-->
-				<div id="we_paly" class="ws_act_choose_page2_btn">
+				<!-- <div id="we_paly" class="ws_act_choose_page2_btn">
                     <img src="{% static 'img/photo_place.png' %}" alt="">
-				</div>
+				</div> -->
 
 			</div>
 		</div>
@@ -128,7 +135,10 @@
 
         // 用户编号为
         var useID;
-
+      
+         console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
+            console.log("页面的文档高度 ："+$(document).height());
+            console.log('浏览器的高度：'+$(window).height());
         if(table_type=='hot'){
         $.ajax({
         			// 如： pullboard/hot/9/10/  表示从热度榜第9个开始，拉取10个数据。
@@ -143,7 +153,7 @@
 						$.each(result, function(i, item) {
 								// console.log(i)
 								// console.log(item)
-								console.log(result)
+								// console.log(result)
 								s+='<li ouserid='+item.id+'>'
 								s+='	<div class="photo_all_bd_li_inner">'
 								s+='		<div class="photo_all_bd_pic">'
@@ -305,10 +315,8 @@
    
 
 
- // 页面跳转
- $('#we_paly').click(function(event) {
- 	window.location.href="{% url 'active_choose2' %}"
- });
+
+
 
 /* 2016-05-10 cbq */
 // 按排名点击事件

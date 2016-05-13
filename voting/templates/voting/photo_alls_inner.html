@@ -10,21 +10,23 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/active.css' %}">
     <style>
-	.ws_act_choose_page1 {
+    .ws_act_choose_page1 {
 	    height: auto;
 	    background-size: 100% 100%;
 	}
-
+	
 
     </style>
-	
+	 <script type="text/javascript">
+    	parent.window.document.getElementById("we_paly").style.display='none';
+    </script>
 </head>
 <body>
 	<div class="ws_act_choose_page2  ws_act_choose_page1">
 
 		<div class="all_page_padding all_page_padding2">
 				<div class="all_photo_hd">
-				                   <!--  <img src="{% static 'img/photo_hd.png' %}" alt=""> -->
+				    <img src="{% static 'img/photo_hd.png' %}" alt="">
 				</div>
 				<!-- <div class="icons_two">
 				                    <img src="{% static 'img/back.png' %}" alt="">
@@ -141,7 +143,7 @@
             		success:function(result){
             			console.log(result['ret'])
             			if(result['ret']=='1'){
-            				alert(alert('你已经玩过了'))
+            				alert('你已经玩过了')
             			}
             			window.location.href="{% url 'photo_alls' %}"
             		},
