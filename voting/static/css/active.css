@@ -1,9 +1,11 @@
 .ws_act_choose_page1{
 	width: 100%;
-	height: 100%;
+	/* height: 100%; */
 	position: absolute;
 	background:#D1D1D1 url(../img/active_choose_bg2.jpg) no-repeat top center;
-	background-size: 100% auto;
+	/* background-size: 100% auto; */
+	height: auto;
+	background-size: 100% 100%;
 }
 .ws_act_choose_page1_txt{
 	/*padding-top: 24%;*/
@@ -118,8 +120,9 @@
 	/*2016年5月11日14:33:22*/
 	/*overflow: scroll;*/
 }
-.all_page_padding{
-	padding-top: 20%;
+.all_page_padding {
+    padding-top: 20%;
+    /*2016年5月13日11:53:22*/
 }
 .all_page_padding .icons_two{
 	padding: 0 4%;

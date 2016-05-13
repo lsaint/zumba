@@ -197,11 +197,11 @@
 			<div class="img_up_tips_btn">确认</div>
 		</div>
 		<div id="img_up_tips" class="allclass erl dis_none" >
-			<div class="img_up_tips_hd">请输入以8开头的8位数</div>
+			<div class="img_up_tips_hd">你输入的资料有误</div>
 			<div class="img_up_tips_btn">返回输入</div>
 		</div>
 		<div id="img_up_tips" class="allclass er2 dis_none" >
-			<div class="img_up_tips_hd">请输入中文！</div>
+			<div class="img_up_tips_hd">你输入的资料有误</div>
 			<div class="img_up_tips_btn">返回输入</div>
 		</div>
 
@@ -227,7 +227,7 @@
 					var photo = $("#photo").val();
 					var wid = $("#wid").val();
 					var wname = $("#wname").val();
-					var reg22= /^8\d{7}$/;
+					var reg22= /^4\d{7}$/;
 					var reg33=  /[^\u4e00-\u9fa5]/;
 
 					if (photo =="") {
@@ -246,21 +246,13 @@
 							$(".info").removeClass('up_red').addClass('dis_none');
 						})
 						return
-					}else if(!reg22.test(wid)){
+					}else if(!reg22.test(wid) || reg33.test(wname)){
 
 						$(".tips_mark").removeClass('dis_none');
 						$(".erl").removeClass('dis_none').addClass("up_red");
 						$(".img_up_tips_btn").click(function(){
 							$(".tips_mark").addClass('dis_none');
 							$(".erl").removeClass('up_red').addClass('dis_none');
-						})
-						return
-					}else if(reg33.test(wname)){
-						$(".tips_mark").removeClass('dis_none');
-						$(".er2").removeClass('dis_none').addClass("up_red");
-						$(".img_up_tips_btn").click(function(){
-							$(".tips_mark").addClass('dis_none');
-							$(".er2").removeClass('up_red').addClass('dis_none');
 						})
 						return
 					}
