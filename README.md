@@ -31,6 +31,7 @@ NGINX:
 按deploy文件夹内的nginx.conf配置nginx段
 修改server_name中的域名
 log位置按需修改，确保该文件夹存在并有权限即可
+static和media的路径确保和.env内的相同
 启动nginx
 
 
@@ -47,8 +48,9 @@ START:
     sh start.sh
 
 如果是首次启动
-运行下列命令进行数据库初始化操作
+在根目录运行下列命令进行数据库初始化操作
 python manage.py migrate
+python manage.py collectstatic
 
 确认域名+/voting/i/显示正常
 
