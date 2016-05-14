@@ -160,22 +160,27 @@
 		    padding-bottom: 2em;
 		}
 	    .photo_all_bd>ul>li .photo_all_bd_li_inner .photo_all_bd_pic>a {
-		    max-height: 5.25em;
+		    height: 5.25em;
+		    overflow: hidden;
 		}
 		.photo_all_bd>ul>li .photo_all_bd_li_inner .photo_all_bd_pic>a>img {
 		    width: 100%;
-		    height: 5.25em;
+		    height: auto;
 		}
 
 
 .photo_all_bd>ul>li .photo_all_bd_li_inner .photo_all_bd_pic .photo_all_bd_pic_jiao {
-			text-align: center;
+			text-align: left;
+			padding-left:.7em;
 			font-size: .5em;
 		}
 
 #erweima{
 	display: none;
 }
+.photo_all_bd_pic_txt .photo_all_bd_pic_txt_two{
+	padding-left: .7em;
+	}
 	</style>
 </head>
 <body style="">
@@ -309,8 +314,6 @@
 			
 		</div>
 
-
-
 	<!-- 我也要玩底部导航 -->
 	<div id="we_paly" class="ws_act_choose_page2_btn">
                 <img src="{% static 'img/photo_place.png' %}" alt="">
@@ -333,7 +336,25 @@
 	$("#we_paly").click(function(event) {
 		// alert(111)
 		// 操作子类的方法
-		 main_all.window.go_choose2();
+
+		$.ajax({
+            		url: 'http://test2.huocc.com/voting/uploaded/',
+            		type: 'GET',
+            		success:function(result){
+            			console.log(result['ret'])
+            			if(result['ret']=='1'){
+            				alert('你已经玩过了')
+            			}else{
+            				main_all.window.go_choose2();
+            			}
+            			
+            		},
+            		error:function(){
+
+            		}
+            	});
+
+		 // 
 	});
 	
 
@@ -713,7 +734,8 @@ background: 'url({% static 'img/photo_bg_middle2.png' %}) repeat-y top center',
 	$('#ws_soso').click(function(event) {
 		var ss_input=$('#ws_input_val').val();
 		sessionStorage.setItem('cli_uerid', ss_input);
-		window.location.href='{% url 'photo_alls_inner' %}'
+		// 次方法在他所在的页面
+		main_all.window.go_all_inner();
 	});
 </script>
 </body>
