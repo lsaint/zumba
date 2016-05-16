@@ -40,7 +40,7 @@ def up(request):
             fdata = request.POST.get('photo', "")
             m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(fdata)), save=False)
             m.save()
-            return JsonResponse({"ret": 0})
+            return JsonResponse({"ret": 0, "id": m.id})
     return JsonResponse({"ret": 1})
 
 
