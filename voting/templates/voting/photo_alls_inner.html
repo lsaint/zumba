@@ -14,11 +14,18 @@
 	    height: auto;
 	    background-size: 100% 100%;
 	}
-	
-
+	.all_page_padding_inner_content .all_page_padding_inner_content_img{
+		height: 15.1em;
+		overflow: hidden;
+	}
     </style>
 	 <script type="text/javascript">
     	parent.window.document.getElementById("we_paly").style.display='none';
+    	parent.window.document.getElementById("ophoto_all").style.display='none';
+    	parent.window.document.getElementById("erweima").style.display='none';
+    	function sofs(){
+    		window.location.href="{% url 'photo_alls_inner' %}"
+    	}
     </script>
 </head>
 <body>
@@ -35,7 +42,6 @@
 				
 				<div class="all_page_padding_inner_o">
 					<div class="all_page_padding_inner_bg">
-						
 					</div>
 
 					<!-- 2016-05-11 cbq -->
@@ -43,9 +49,8 @@
 					<div class="all_page_padding_inner after">
 						<div class="all_page_padding_inner_content" id="only_photo">
 							
-						<!-- 2016-05-11 cbq end-->	
-						
-							
+						<!-- 2016-05-11 cbq end-->
+
 						</div>
 					</div>
 				</div>

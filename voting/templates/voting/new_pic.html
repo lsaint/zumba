@@ -17,6 +17,8 @@
 		position: absolute;
 		left: 0;
 		top: 0;
+		background: url({% static 'img/123456.jpg' %}) no-repeat top center;
+		background-size: 100% auto;
 	}
 	.new_pic img{
 		width: 100%;
@@ -25,11 +27,13 @@
 	</style>
 	 <script type="text/javascript">
     	parent.window.document.getElementById("we_paly").style.display='none';
+    	parent.window.document.getElementById("ophoto_all").style.display='none';
+    	parent.window.document.getElementById("erweima").style.display='none';
     </script>
 </head>
 <body>
 	<div class="new_pic">
-		<img src="{% static 'img/123456.jpg' %}" alt="">
+		<!-- <img src="{% static 'img/123456.jpg' %}" alt=""> -->
 	</div>
 </body>
 </html>

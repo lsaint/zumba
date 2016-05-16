@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=2, user-scalable=no">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="format-detection" content="email=no">
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
@@ -15,38 +15,39 @@
 	html{
 		background: #D1D1D1;
 	}
-	
+	#all{
+		position: static;
+	}
+	.ws_video{
+		z-index: 999999999;
+	}
+	.ws_video_img .ws_video_img1>img{
+		position: relative;
+		z-index: 999999999;
+	}
+	/******2016-05-13 19:18*******/
+	/*  .qrcodeWrap {
+	   position: relative;
+	   background: url({% static 'img/123.png' %}) no-repeat center center;
+	   background-size: contain;
+	   z-index: 9999;
+	   height: 200px;
+		}
+		.ws_video_img .ws_video_img1>img{
+	   position: absolute; 
+	   display: block;
+	   border: none;
+	   visibility:hidden;    opacity:0
+		}  */
 	</style>
 	 <script type="text/javascript">
+	 	parent.window.document.getElementById("erweima").style.display='block';
     	parent.window.document.getElementById("we_paly").style.display='none';
+    	parent.window.document.getElementById("ophoto_all").style.display='none';
     </script>
 </head>
 <body>
-	<div>
-			<div class="ws_act_choose_page1 ws_video" >
-				<div class="all_page_padding">
-					<!-- <div class="icons_two">
-					                        <img src="{% static 'img/back.png' %}" alt="">
-					                        <img src="{% static 'img/music.png' %}" alt="">
-					</div> -->
-					<div class="ws_video_img">
-						<div class="ws_video_img1">
-                            <img src="{% static 'img/video_url1.png' %}" alt="">
-						</div>
-						<div class="ws_video_imgall">
-							<ul>
-                                <li class="ws_video_img2 "><img src="{% static 'img/video_url2.png' %}" alt=""></li>
-								<li class="ws_video_img2"><img src="{% static 'img/video_url3.png' %}" alt=""></li>
-								<li class="ws_video_img2"><img src="{% static 'img/video_url4.png' %}" alt=""></li>
-								<li class="ws_video_img2"><img src="{% static 'img/video_url5.png' %}" alt=""></li>
-							</ul>
-						</div>
-					</div>
-					
-				</div>	
-			</div>
-			
-		</div>
+	
 
 		<script src="{% static 'js/zepto.min.js' %}"></script>
 
