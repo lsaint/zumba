@@ -21,6 +21,6 @@ class Topic(models.Model):
 
 
 class Poll(models.Model):
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User)
     topic = models.ForeignKey(Topic)
 
