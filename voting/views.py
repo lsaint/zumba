@@ -36,6 +36,7 @@ def up(request):
         if form.is_valid():
             m = form.save(commit=False)
             m.user = request.user
+            m.public = True
             fdata = request.POST.get('photo', "")
             m.photo.save("%d.jpg" % m.user.id, ContentFile(base64.b64decode(fdata)), save=False)
             m.save()
@@ -58,7 +59,7 @@ def detail(request, topic_id):
 @csrf_exempt
 def vote(request, topic_id):
     topic = get_object_or_404(Topic, pk = topic_id)
-    if not Poll.objects.filter(user=request.user).exists():
+    if not Poll.objects.filter(user=request.user, topic=topic).exists():
         Poll.objects.create(user=request.user, topic = topic)
         topic.polls += 1
         topic.save()
