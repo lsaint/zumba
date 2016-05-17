@@ -54,7 +54,7 @@ def detail(request, topic_id):
 
 def share(request, topic_id):
     topic = get_object_or_404(Topic, pk = topic_id)
-    user = User.objects.get(pk=topic.uid)
+    user = topic.user
     return render(request, 'voting/share.html', {"name": user.last_name,
                                                  "url": topic.photo.url,
                                                  "id": topic.id,
