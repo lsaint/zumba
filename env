@@ -6,6 +6,7 @@ DATABASE_URL=mysql://name:password@ip:port/database
 LOGIN_URL=http://wxuat.watsonsestore.com.cn/wx-proxy-web/oauth2?appId=wx5d586a76f3bfba0b&scope=snsapi_userinfo&state=Oasis&url=http%3a%2f%2fprefix.domain.com%2fvoting%2fzumbalogin
 UINFO_URL=http://wxuat.watsonsestore.com.cn/clickWap/rest/wx/proxy
 
+ZUMBA_APPID=appid
 ZUMBA_SECRET=watsons-Secret
 
 STATIC_ROOT=/data/zumba/static/

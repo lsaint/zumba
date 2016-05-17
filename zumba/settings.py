@@ -48,6 +48,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'voting.wechat.wechat_ctx',
             ],
         },
     },
@@ -126,5 +127,7 @@ LOGGING = {
     },
 }
 
+ZUMBA_APPID = env("ZUMBA_APPID")
 ZUMBA_SECRET = env("ZUMBA_SECRET")
 ZUMBA_UINFO_URL = env("UINFO_URL")
+

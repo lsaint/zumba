@@ -8,11 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.auth import authenticate, login
-from django.template import RequestContext
 from django.contrib.auth.models import User
-from django.core.cache import cache
 from django.core.files.base import ContentFile
-from requests.utils import quote
 
 from .forms import TopicForm
 from .models import Topic, Poll
