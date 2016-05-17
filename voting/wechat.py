@@ -33,5 +33,5 @@ def wechat_ctx(request):
     return context
 
 
-WB = WechatBasicEx()
+WB = wechat_sdk.basic.WechatBasic()
 
