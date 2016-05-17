@@ -1,5 +1,5 @@
 import requests
-import time, random, string, json
+import time, random, string
 import logging; logger = logging.getLogger(__name__)
 
 import wechat_sdk
@@ -24,13 +24,13 @@ class WechatBasicEx(wechat_sdk.basic.WechatBasic):
     def access_token(self):
         url = "http://wxuat.watsonsestore.com.cn/clickWap/rest/wx/proxy"
         body = {"secret": settings.ZUMBA_SECRET, "method": "getToken"}
-        rep = requests.post(url, data=json.dumps(body))
+        rep = requests.post(url, json=body)
         if not rep.ok:
             logger.error("get access_token err")
             return ""
         info = rep.json()
         if str(info.get("error_code")) != "0":
-            logger.error("get access_token error_code": info.get("error_code"))
+            logger.error("get access_token error_code %s" % info.get("error_code"))
             return ""
         return info.get("access_token")
 
