@@ -9,6 +9,7 @@
 	<meta name="format-detection" content="email=no">
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
       <link rel="stylesheet" type="text/css" href="{% static 'css/active.css' %}">
+     <!--   <link rel="stylesheet" type="text/css" href="{% static 'css/ws_move.css' %}"> -->
 	<style type="text/css">
 	iframe{
 		border: 0;
@@ -155,6 +156,7 @@
 /* 2016-05-12 cbq */
 		.photo_all .photo_all_inner_middle{
 			border-radius: 0 10px 10px 10px;
+			background: #fff;
 		}
 		.only_photo_hd {
 		    padding-bottom: 2em;
@@ -181,6 +183,49 @@
 .photo_all_bd_pic_txt .photo_all_bd_pic_txt_two{
 	padding-left: .7em;
 	}
+
+/*活动简介底部按钮*/
+#i_agree{
+	display: none;
+}
+
+#go_photo{
+	display: none;
+}
+/* .photo_all_bd>ul>li .photo_all_bd_li_inner .photo_all_bd_pic>a {
+    border-radius: 0px;
+} */
+#upimg{
+		width:20px;
+		height: 20px;
+		position: fixed;
+		left: 50%;
+		bottom: 30px;
+		transform:translate3d(-50%,0,0);
+		-webkit-transform:translate3d(-50%,0,0);
+		display: none;
+
+
+}
+#upimg .pt-page-moveIconUp{
+			width: 100%;
+			height: auto;
+		}
+/*向上上下滚动*/
+		.pt-page-moveIconUp {
+		    -webkit-animation: moveIconUp ease 1.5s both infinite;
+		    animation: moveIconUp ease 1.5s both infinite;
+		}
+@-webkit-keyframes moveIconUp {
+	    0% { -webkit-transform: translateY(100%); opacity:0;}
+	    50% { -webkit-transform: translateY(0%); opacity:1;}
+	    100% { -webkit-transform: translateY(-100%); opacity:0;}
+	}
+@keyframes moveIconUp {
+    0% { -webkit-transform: translateY(100%); transform: translateY(100%); opacity:0;}
+    50% { -webkit-transform: translateY(0%); transform: translateY(0%); opacity:1;}
+    100% { -webkit-transform: translateY(-100%); transform: translateY(-100%); opacity:0;}
+}
 	</style>
 </head>
 <body style="">
@@ -198,7 +243,7 @@
 			</div>
 		</div>
 
-		<div id = "muisc_all" class="all_music_t all_music_mian">
+		<div id = "muisc_all" class="all_music_t all_music_mian have_back">
 			<!-- <div id="parnet"></div> -->
 			<div id="muisc_icon" class="all_music_t_icon"></div>
 			<div id="back_icons" class="all_music_t_back"></div>
@@ -313,12 +358,25 @@
 			</div>
 			
 		</div>
-
+	
+	<div id="upimg">
+			<img class="img_3 pt-page-moveIconUp" src="{% static 'img/icon_up.png' %}" />
+	</div>
 	<!-- 我也要玩底部导航 -->
 	<div id="we_paly" class="ws_act_choose_page2_btn">
                 <img src="{% static 'img/photo_place.png' %}" alt="">
-			</div>
+	</div>
+
+	<!-- 活动简介底部按钮 -->
+	<div id='i_agree' class="ws_act_choose_page1_btn">
+						我已阅读并同意
+	</div>
 	
+	
+	<!-- 活动简介底部按钮2-->
+	<div id="go_photo" class="ws_act_choose_page1_btn">
+                        <!-- <img src="{% static 'img/down_icons.png' %}" alt=""> -->点击进入照片墙
+	</div>
 	<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/comment.js' %}"></script>
 
@@ -328,7 +386,7 @@
 		setTimeout(function(){
 			$("#muisc_all").removeClass('all_music_mian');
 			$("#muisc_all").addClass('no_back')
-		},3000)
+		},4000)
 	
 	
 	var music=document.getElementById('musicfx');
@@ -375,27 +433,29 @@
 			}
 			
 		}});
+
+
 	// 返回键
 	$('#back_icons').click(function(event) {
-
-		history.go(-1)
+		main_all.window.go_list()
+		// history.go(-1)
 	});
 
 
 
 	// 跳转页面显隐返回键
-	var times=setInterval(hasBack,100);
+	// var times=setInterval(hasBack,100);
 
-	function hasBack(){
-		// 保存session
-		 var isback=sessionStorage.getItem( "isback" );
-		 if(isback=='yes'){
-		 	$('#muisc_all').addClass('have_back')
-		 	// 发现back session后后直接清除定时器
-		 	clearInterval(times);
-		 }
+	// function hasBack(){
+	// 	// 保存session
+	// 	 var isback=sessionStorage.getItem( "isback" );
+	// 	 if(isback=='yes'){
+	// 	 	$('#muisc_all').addClass('have_back')
+	// 	 	// 发现back session后后直接清除定时器
+	// 	 	clearInterval(times);
+	// 	 }
 
-	}
+	// }
 
 
 	// var aa=$('#main_ifra').find('#we_paly');
@@ -423,6 +483,18 @@
 
         // 用户编号为
         var useID;
+
+
+
+        // 在返回值的前面添加零，位数为四
+			function pad(num, n) {  
+			    var len = num.toString().length;  
+			    while(len < n) {  
+			        num = "0" + num;  
+			        len++; 
+			    }  
+			    return num;  
+			}
       
          // console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
          //    console.log("页面的文档高度 ："+$(document).height());
@@ -442,6 +514,12 @@
 								// console.log(i)
 								// console.log(item)
 								// console.log(result)
+								var str=item.id
+								
+								
+								// console.log(pad(str,4));
+								// 返回纯数字值
+								// str=parseInt(str);
 								s+='<li ouserid='+item.id+'>'
 								s+='	<div class="photo_all_bd_li_inner">'
 								s+='		<div class="photo_all_bd_pic">'
@@ -453,7 +531,7 @@
 								s+='				<img src=\"'+item.headimgurl+'\" alt="">'
 								s+='			</div>'
 								s+='			<div class="photo_all_bd_pic_txt_two">'
-								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+item.id+'</span></div>'
+								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+pad(str,4)+'</span></div>'
 								s+='				<div class="photo_all_bd_pic_txt_two_zan">点赞：<span>'+item.polls+'</span></div>'
 								s+='			</div>'
 								s+='		</div>'
@@ -512,8 +590,10 @@
             			// console.log( typeof result);
             			// console.log(result);
             			// var data= eval("("+result+")");
+            		
             			var s='';
 						$.each(result, function(i, item) {
+								var str=item.id
 								// console.log(i)
 								// console.log(item)
 								s+='<li ouserid='+item.id+' >'
@@ -527,7 +607,7 @@
 								s+='				<img src=\"'+item.headimgurl+'\" alt="">'
 								s+='			</div>'
 								s+='			<div class="photo_all_bd_pic_txt_two">'
-								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+item.id+'</span></div>'
+								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+pad(str,4)+'</span></div>'
 								s+='				<div class="photo_all_bd_pic_txt_two_zan">点赞：<span>'+item.polls+'</span></div>'
 								s+='			</div>'
 								s+='		</div>'
@@ -556,6 +636,7 @@
             			// var data= eval("("+result+")");
             			var s='';
 						$.each(result, function(i, item) {
+							var str=item.id
 								// console.log(i)
 								// console.log(item)
 								s+='<li ouserid='+item.id+' >'
@@ -569,7 +650,7 @@
 								s+='				<img src=\"'+item.headimgurl+'\" alt="">'
 								s+='			</div>'
 								s+='			<div class="photo_all_bd_pic_txt_two">'
-								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+item.id+'</span></div>'
+								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+pad(str,4)+'</span></div>'
 								s+='				<div class="photo_all_bd_pic_txt_two_zan">点赞：<span>'+item.polls+'</span></div>'
 								s+='			</div>'
 								s+='		</div>'
@@ -634,7 +715,7 @@ background: 'url({% static "img/photo_bg_top.png" %}) repeat-y top center',
 			'background-size': '100% 100%'
 		});
 		$(".photo_all .photo_all_inner_middle").css({
-background: 'url({% static "img/photo_bg_middle.png" %}) repeat-y top center',
+/*background: 'url({% static "img/photo_bg_middle.png" %}) repeat-y top center',*/
 			'background-size': '100% auto',
 			'border-radius': '0px 10px 10px 10px'
 		});
@@ -662,6 +743,7 @@ background: 'url({% static "img/photo_bg_middle.png" %}) repeat-y top center',
             			// var data= eval("("+result+")");
             			var s='';
 						$.each(result, function(i, item) {
+							var str=item.id
 								// console.log(i)
 								// console.log(item)
 								s+='<li ouserid='+item.id+' >'
@@ -675,7 +757,7 @@ background: 'url({% static "img/photo_bg_middle.png" %}) repeat-y top center',
 								s+='				<img src=\"'+item.headimgurl+'\" alt="">'
 								s+='			</div>'
 								s+='			<div class="photo_all_bd_pic_txt_two">'
-								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+item.id+'</span></div>'
+								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+pad(str,4)+'</span></div>'
 								s+='				<div class="photo_all_bd_pic_txt_two_zan">点赞：<span>'+item.polls+'</span></div>'
 								s+='			</div>'
 								s+='		</div>'
@@ -708,7 +790,7 @@ background: 'url({% static 'img/photo_bg_top2.png' %}) repeat-y top center',
 			'background-size': '100% 100%'
 		});
 		$(".photo_all .photo_all_inner_middle").css({
-background: 'url({% static 'img/photo_bg_middle2.png' %}) repeat-y top center',
+/*background: 'url({% static 'img/photo_bg_middle2.png' %}) repeat-y top center',*/
 			'background-size': '100% auto',
 			'border-radius': '10px 0px 10px 10px'
 		});
@@ -731,11 +813,24 @@ background: 'url({% static 'img/photo_bg_middle2.png' %}) repeat-y top center',
 		 main_all.window.go_all_inner();
 		
 	});
+	// 搜索按钮
 	$('#ws_soso').click(function(event) {
 		var ss_input=$('#ws_input_val').val();
+		// 把值过滤；如：0001；过滤为1;
+		ss_input=parseInt(ss_input);
 		sessionStorage.setItem('cli_uerid', ss_input);
 		// 次方法在他所在的页面
 		main_all.window.go_all_inner();
+	});
+
+	$("#go_photo").click(function(event) {
+		// 去照片墙页面
+		main_all.window.go_all_phoot()
+	});
+
+	$("#i_agree").click(function(event) {
+		// 去照片墙页面
+		main_all.window.button_i_agree()
 	});
 </script>
 </body>

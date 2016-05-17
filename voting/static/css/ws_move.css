@@ -20,9 +20,45 @@ body{
 		.page-current {
 		  z-index: 1;
 		}
+
+		.page .upimg{
+		width:20px;
+		height: 20px;
+		background: red;
+		position: absolute;
+		left: 50%;
+		bottom: 30px;
+		transform:translate3d(-50%,0,0);
+		-webkit-transform:translate3d(-50%,0,0);
+
+}
+		.page .upimg .pt-page-moveIconUp{
+			width: 100%;
+			height: auto;
+		}
 		.ini_resule_page1{
 			background-color: red;
 		}
+
+		/*向上上下滚动*/
+		.pt-page-moveIconUp {
+		    -webkit-animation: moveIconUp ease 1.5s both infinite;
+		    animation: moveIconUp ease 1.5s both infinite;
+		}
+	
+
+@-webkit-keyframes moveIconUp {
+    0% { -webkit-transform: translateY(100%); opacity:0;}
+    50% { -webkit-transform: translateY(0%); opacity:1;}
+    100% { -webkit-transform: translateY(-100%); opacity:0;}
+}
+@keyframes moveIconUp {
+    0% { -webkit-transform: translateY(100%); transform: translateY(100%); opacity:0;}
+    50% { -webkit-transform: translateY(0%); transform: translateY(0%); opacity:1;}
+    100% { -webkit-transform: translateY(-100%); transform: translateY(-100%); opacity:0;}
+}
+
+
 		/* move from / to  */
 
 		.pt-page-moveToLeft {

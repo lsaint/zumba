@@ -17,6 +17,14 @@
     	parent.window.document.getElementById("ophoto_all").style.display='none';
     	parent.window.document.getElementById("erweima").style.display='none';
 
+    	parent.window.document.getElementById("go_photo").style.display='none';
+    	parent.window.document.getElementById("i_agree").style.display='none';
+
+    	parent.window.document.getElementById("upimg").style.display='none';
+
+    	// 没有返回键
+    	parent.window.document.getElementById("back_icons").style.display='none';
+
     </script>
 </head>
 <body>
@@ -37,7 +45,7 @@
 	<script type="text/javascript">
 		setTimeout(function(){
                 window.location.href='{% url "list" %}'
-		},3000)
+		},4000)
 		
 
 

@@ -67,36 +67,40 @@
 	.all_page_padding_photo_up .all_page_padding_inner_content_img .all_page_padding_inner_content_img_inner>img {
 	    width: 55%;
 	}
-	@media screen and (max-height: 768px){
+	@media screen and (max-width: 768px){
+	}
+	@media screen and (max-width: 640px){
+	}
+	@media screen and (max-width: 480px){
 		.all_page_padding_photo_up .all_page_padding_inner_content_img {
-	    	height:21em;
+	    	height:19.1em;
 		}
 		#photoShow{
-			height:21em;
+			height:19.1em;
 		}
 	}
-	@media screen and (max-height: 640px){
+	@media screen and (max-width: 414px){
 		.all_page_padding_photo_up .all_page_padding_inner_content_img {
-	    	height:20em;
+	    	height:18.1em;
 		}
 		#photoShow{
-			height:20em;
+			height:18.1em;
 		}
 	}
-	@media screen and (max-height: 580px){
-		.all_page_padding_photo_up .all_page_padding_inner_content_img {
-	    	height:16em;
-		}
-		#photoShow{
-			height:16em;
-		}
-	}
-	@media screen and (max-height: 480px){
+	@media screen and (max-width: 375px){
 		.all_page_padding_photo_up .all_page_padding_inner_content_img {
 	    	height:15.1em;
 		}
 		#photoShow{
 			height:15.1em;
+		}
+	}
+	@media screen and (max-width: 320px){
+		.all_page_padding_photo_up .all_page_padding_inner_content_img {
+	    	height:13.7em;
+		}
+		#photoShow{
+			height:13.7em;
 		}
 	}
 	.all_page_padding_inner_content_txt{
@@ -133,11 +137,37 @@
 	.all_photo_hd{
 		padding-bottom: 1em;
 	}
+	/**2016-05-16 17:07 cbq**/
+	.all_page_padding_photo_up_txt {
+	    /* text-align: center; */
+	    font-size: .65em;
+	}
+	.all_page_padding_inner_content_txt_bd>div>.all_page_padding_inner_content_txt_bd_left_n {
+	    padding: 3px 0;
+	    padding-left: 8px;
+	    width: 85%;
+	}
+	input{
+	    -webkit-appearance: none;
+	}
 	</style>
 	 <script type="text/javascript">
     	parent.window.document.getElementById("we_paly").style.display='none';
     	parent.window.document.getElementById("ophoto_all").style.display='none';
     	parent.window.document.getElementById("erweima").style.display='none';
+
+    	parent.window.document.getElementById("go_photo").style.display='none';
+    	parent.window.document.getElementById("i_agree").style.display='none';
+
+    	parent.window.document.getElementById("upimg").style.display='none';
+
+    	// 有返回键
+    	parent.window.document.getElementById("back_icons").style.display='block';
+
+    	// 返回键目录页
+		function go_list(){
+		 	window.location.href="{% url 'list' %}"
+		}
     </script>
 </head>
 <body>
@@ -209,8 +239,8 @@
 			<div class="img_up_tips_btn">返回输入</div>
 		</div>
 		<div id="img_up_tips" class="allclass success dis_none" >
-			<div class="img_up_tips_hd">上传成功</div>
-			<div class="img_up_tips_btn">确认</div>
+			<img src="{% static 'img/upload_success.png' %}" width="100%" height="100%">
+			<div class="img_up_tips_btn" style="position:absolute;bottom:5px;left:0;right: 0">确认</div>
 		</div>
 		<div id="img_up_tips" class="allclass erl dis_none" >
 			<div class="img_up_tips_hd">你输入的资料有误</div>
@@ -242,7 +272,10 @@
 				$("#mysubmit").click(function(){
 					var photo = $("#photo").val();
 					var wid = $("#wid").val();
+
 					var wname = $("#wname").val();
+					console.log(wid)
+					console.log(wname)
 					var reg22= /^4\d{7}$/;
 					var reg33=  /[^\u4e00-\u9fa5]/;
 
@@ -278,8 +311,8 @@
 							url: 'http://test2.huocc.com/voting/up/',
 							type: 'POST',
 							data: {
-									wid:"1111",
-									name:"xzf",
+									wid:wid,
+									name:wname,
 									photo:photo
 								},
 						})
@@ -289,13 +322,22 @@
 							$(".tips_mark").removeClass('dis_none');
 							$(".success").removeClass('dis_none').addClass("up_blue");
 							$(".img_up_tips_btn").click(function(){
+								console.log(data.id)
+
 								$(".tips_mark").addClass('dis_none');
 								$(".success").removeClass('up_blue').addClass('dis_none');
 
+								// 存一个标示 和 id
+								 sessionStorage.setItem( 'my_up', 'lesgo' );
+								 sessionStorage.setItem( 'sucess_up_id', data.id );
+
+								// 这里需要ajax
+								window.location.href="{% url 'photo_alls_inner' %}"
+
 							})
-							setTimeout(function(){
-								window.location.href="{% url 'photo_alls' %}"
-							}, 3000)
+							// setTimeout(function(){
+							// 	window.location.href="{% url 'photo_alls' %}"
+							// }, 3000)
 							
 							// console.log(data);
 						})
@@ -345,7 +387,7 @@
                 lrz(file.files[0], { width: 750 }, function (results) {
                     // 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
                     var aaa=$("#photo").val(results.base64.substring(results.base64.indexOf(',') + 1));
-                    console.log(aaa)
+                    // console.log(aaa)
                 });
             }
         }

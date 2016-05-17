@@ -49,6 +49,17 @@
     	parent.window.document.getElementById("we_paly").style.display='none';
     	parent.window.document.getElementById("ophoto_all").style.display='none';
     	parent.window.document.getElementById("erweima").style.display='none';
+
+    	parent.window.document.getElementById("go_photo").style.display='none';
+    	parent.window.document.getElementById("i_agree").style.display='none';
+
+    	// 有返回键
+    	parent.window.document.getElementById("back_icons").style.display='block';
+
+    	// 返回键目录页
+		function go_list(){
+		 	window.location.href="{% url 'list' %}"
+		}
     </script>
 </head>
 <body>
@@ -57,16 +68,25 @@
 				<div class="wrap">
                   <img src="{% static 'img/jiangxiang.jpg' %}" alt="">
 				</div>
+				<!-- <div class="upimg">
+					<img class="img_3 pt-page-moveIconUp" src="{% static 'img/icon_up.png' %}" />
+				</div> -->
 			</div>
 			<div class="page page-2-1 hide" nowname='video'>
 				<div class="wrap">
                     <img src="{% static 'img/video.jpg' %}" alt="">
 				</div>
+				<!-- <div class="upimg">
+					<img class="img_3 pt-page-moveIconUp" src="{% static 'img/icon_up.png' %}" />
+				</div> -->
 			</div>
 			<div class="page page-3-1 hide" nowname='win'>
 				<div class="wrap">
                      <img src="{% static 'img/video2.jpg' %}" alt="">
 				</div>
+				<!-- <div class="upimg">
+					<img class="img_3 pt-page-moveIconUp" src="{% static 'img/icon_up.png' %}" />
+				</div> -->
 			</div>
 			<div class="page page-4-1 hide" nowname='mini'>
 				<div class="wrap">
@@ -88,15 +108,19 @@
 			if(nowName=="1"){
 				$('.page-1-1').addClass('page-current').siblings('').removeClass('page-current');
 				$('.page-1-1').removeClass('hide');
+				parent.window.document.getElementById("upimg").style.display='block';
 			}else if(nowName=="2"){
 				$('.page-2-1').addClass('page-current').siblings('').removeClass('page-current');
 				$('.page-2-1').removeClass('hide');
+				parent.window.document.getElementById("upimg").style.display='block';
 			}else if(nowName=="3"){
 				$('.page-3-1').addClass('page-current').siblings('').removeClass('page-current');
 				$('.page-3-1').removeClass('hide');
+				parent.window.document.getElementById("upimg").style.display='block';
 			}else if(nowName=="4"){
 				$('.page-4-1').addClass('page-current').siblings('').removeClass('page-current');
 				$('.page-4-1').removeClass('hide');
+				
 			}else{
 				$('.page-1-1').addClass('page-current').siblings('').removeClass('page-current');
 				$('.page-1-1').removeClass('hide');

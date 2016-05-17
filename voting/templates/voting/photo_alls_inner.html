@@ -16,6 +16,7 @@
 	}
 	.all_page_padding_inner_content .all_page_padding_inner_content_img{
 		height: 15.1em;
+
 		overflow: hidden;
 	}
     </style>
@@ -23,9 +24,22 @@
     	parent.window.document.getElementById("we_paly").style.display='none';
     	parent.window.document.getElementById("ophoto_all").style.display='none';
     	parent.window.document.getElementById("erweima").style.display='none';
+
+    	parent.window.document.getElementById("go_photo").style.display='none';
+    	parent.window.document.getElementById("i_agree").style.display='none';
+
+    	parent.window.document.getElementById("upimg").style.display='none';
+
+    	// 有返回键
+    	parent.window.document.getElementById("back_icons").style.display='block';
     	function sofs(){
     		window.location.href="{% url 'photo_alls_inner' %}"
     	}
+
+    	// 返回键目录页
+		function go_list(){
+		 	window.location.href="{% url 'list' %}"
+		}
     </script>
 </head>
 <body>
@@ -46,7 +60,7 @@
 
 					<!-- 2016-05-11 cbq -->
 					<div id='new_tuo' class="all_page_padding_inner_content_img_big" style="display: none"></div>
-					<div class="all_page_padding_inner after">
+					<div class="all_page_padding_inner">
 						<div class="all_page_padding_inner_content" id="only_photo">
 							
 						<!-- 2016-05-11 cbq end-->
@@ -75,13 +89,30 @@
     		'min-height': height,
     	});
 
+
+    	// 在返回值的前面添加零，位数为四
+			function pad(num, n) {  
+			    var len = num.toString().length;  
+			    while(len < n) {  
+			        num = "0" + num;  
+			        len++; 
+			    }  
+			    return num;  
+			}
+
+			// 拿到id
 		var nowid=sessionStorage.getItem( 'cli_uerid' );
+		if( sessionStorage.getItem( 'my_up' )=='lesgo'){
+			nowid=sessionStorage.getItem( 'sucess_up_id' );
+		}
 			// console.log(nowid);
 			$.ajax({
             		url: 'http://test2.huocc.com/voting/'+nowid+'/',
             		type: 'GET',
             		dataType: 'json',
             		success:function(result){
+            			console.log(1111)
+            			console.log(result);
             			// alert(1111)
             			// console.log( typeof result);
             			console.log(result["url"]);
@@ -89,12 +120,12 @@
        
             			// var data= eval("("+result+")");
             			var h='';
-					
+								var str=result['id'];
 								
 								// console.log(result)
 								h+='<div class="all_page_padding_inner_content_img"><img src='+result['url']+' alt="" id="img"></div>'
 								h+='<div class="all_page_padding_inner_content_txt">'
-								h+='	<div class="all_page_padding_inner_content_txt_hd">编号：<span>'+result['id']+'</span></div>'
+								h+='	<div class="all_page_padding_inner_content_txt_hd">编号：<span>'+pad(str,4)+'</span></div>'
 								h+='	<div class="all_page_padding_inner_content_txt_bd">'
 								h+='		<div class="all_page_padding_inner_content_txt_bd_left">'
 								h+='			<div class="all_page_padding_inner_content_txt_bd_left_p">排名</div>'
@@ -112,26 +143,34 @@
 						
 						
             			$('#only_photo').html(h);
+            			sessionStorage.clear( );
             		},
-            		error:function(){
-
+            		error:function(err){
+            			console.log(typeof err.status);
+            			if(err.status=404){
+            				alert("编号不存在")
+            				window.location.href="{% url 'photo_alls' %}"
+            			}
             		}
             	});
 
 
 		// 点赞
-		var nowZAN=$('#omyzan').html()
-		$('#ws_zan').click(function(event) {
-			console.log(nowid);
+		
+		$(document).on('click','#ws_zan',function(){
+			var nowZAN=$('#omyzan').html()
+			// console.log(nowid);
 			$.ajax({
             		url: 'http://test2.huocc.com/voting/'+nowid+'/vote/',
             		type: 'POST',
             		success:function(result){
-            			console.log(result['ret'])
+            			// console.log(result['ret'])
             			if(result['ret']=='2'){
             				alert('你已经投过票了')
             			}else if(result['ret']=='0'){
+            				nowZAN=parseInt(nowZAN);
             				nowZAN=nowZAN+1;
+            				$('#omyzan').html(nowZAN);
             			}
             		},
             		error:function(){
@@ -141,7 +180,8 @@
 
 		});
 
-		$("#i_play").click(function(event) {
+
+		$(document).on('click','#i_play',function(){
 			$.ajax({
             		url: 'http://test2.huocc.com/voting/uploaded/',
             		type: 'GET',

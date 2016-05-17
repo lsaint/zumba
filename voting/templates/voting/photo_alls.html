@@ -24,6 +24,14 @@
     	parent.window.document.getElementById("we_paly").style.display='block';
     	parent.window.document.getElementById("ophoto_all").style.display='block';
     	parent.window.document.getElementById("erweima").style.display='none';
+
+    	parent.window.document.getElementById("go_photo").style.display='none';
+    	parent.window.document.getElementById("i_agree").style.display='none';
+
+    	parent.window.document.getElementById("upimg").style.display='none';
+
+    	// 有返回键
+    	parent.window.document.getElementById("back_icons").style.display='block';
     	 // 页面跳转
 function go_choose2(){
  	window.location.href="{% url 'active_choose2' %}"
@@ -31,6 +39,11 @@ function go_choose2(){
 
 function go_all_inner(){
 		window.location.href="{% url 'photo_alls_inner' %}"
+}
+
+// 返回键目录页
+function go_list(){
+ 	window.location.href="{% url 'list' %}"
 }
     </script>
 </head>

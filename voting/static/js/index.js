@@ -1,6 +1,7 @@
 (function(){
 
 var guide_num=localStorage.getItem( 'guide_name' );
+// guide_num=parseInt(guide_num);
 lastnum=guide_num-1;
 
 // ÐÞ¸ÄÕâ¸ö²ÎÊý
@@ -23,8 +24,15 @@ $(document).swipeUp(function(){
 	if (isAnimating) return;
 	last.row = now.row;
 	last.col = now.col;
-	if (last.row != 4) { now.row = parseInt(last.row)+1; now.col = 1; pageMove(towards.up);}	
+	if (last.row != 4) { now.row = parseInt(last.row)+1; now.col = 1; pageMove(towards.up)}
+	console.log(typeof last.row);
+	if(last.row == "3"){
+		parent.window.document.getElementById("upimg").style.display='none';
+	}else{
+		parent.window.document.getElementById("upimg").style.display='block';
+	}
 	localStorage.removeItem( 'guide_name' )
+	
 })
 
 $(document).swipeDown(function(){
@@ -34,6 +42,10 @@ $(document).swipeDown(function(){
 	last.row = now.row;
 	last.col = now.col;
 	if (last.row!=1) { now.row =  parseInt(last.row)-1; now.col = 1; pageMove(towards.down);}	
+	parent.window.document.getElementById("upimg").style.display='block';
+	// if(last.row == "3"){
+	// 	parent.window.document.getElementById("upimg").style.display='none';
+	// }
 })
 
 $(document).swipeLeft(function(){
