@@ -8,6 +8,7 @@ import voting.views as views
 urlpatterns = [
     url(r'^i/$', views.main, name='main'),
     url(r'^up/$', views.up, name='up'),
+    url(r'^share/(?P<topic_id>[0-9]+)/$', views.share, name='share'),
     url(r'^(?P<topic_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^(?P<topic_id>[0-9]+)/vote/$', views.vote, name='vote'),
     url(r'^zumbalogin/$', views.zumbalogin, name='zumbalogin'),

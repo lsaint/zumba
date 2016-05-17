@@ -52,6 +52,16 @@ def detail(request, topic_id):
                          "polls": topic.polls})
 
 
+def share(request, topic_id):
+    topic = get_object_or_404(Topic, pk = topic_id)
+    user = User.objects.get(pk=topic.uid)
+    return render(request, 'voting/share.html', {"name": user.last_name,
+                                                 "url": topic.photo.url,
+                                                 "id": topic.id,
+                                                 "ranking": topic.ranking(),
+                                                 "polls": topic.polls})
+
+
 @login_required(redirect_field_name=None)
 @csrf_exempt
 def vote(request, topic_id):
