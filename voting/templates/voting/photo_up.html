@@ -150,6 +150,21 @@
 	input{
 	    -webkit-appearance: none;
 	}
+
+	#ws_up_loading{
+		width: 7%;
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		transform:translate3d(-50%,-50%,0);
+		-webkit-transform:translate3d(-50%,-50%,0);
+		text-align: center;
+		z-index: 10000;
+		display: none;
+	}
+	#ws_up_loading img{
+
+	}
 	</style>
 	 <script type="text/javascript">
     	parent.window.document.getElementById("we_paly").style.display='none';
@@ -229,6 +244,8 @@
 		</div>
 
 		<div class="tips_mark dis_none"></div><!-- dis_none -->
+
+		<div id='ws_up_loading'><img src="{% static 'img/load.gif' %}" width="100%" height="auto"></div>
 		<!-- 样式已经写好了-->
 		<div id="img_up_tips" class="allclass photo dis_none" >
 			<div class="img_up_tips_hd">请选择图片</div>
@@ -306,6 +323,8 @@
 						return
 					}
 					else{
+						$(".tips_mark").removeClass('dis_none');
+						$('#ws_up_loading').css('display','block');
 						console.log(photo);
 							$.ajax({
 							url: 'http://test2.huocc.com/voting/up/',
@@ -318,7 +337,9 @@
 						})
 						.done(function(data) {
 							console.log("success");
-							
+							$(".tips_mark").addClass('dis_none');
+							$('#ws_up_loading').css('display','none');
+
 							$(".tips_mark").removeClass('dis_none');
 							$(".success").removeClass('dis_none').addClass("up_blue");
 							$(".img_up_tips_btn").click(function(){

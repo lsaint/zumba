@@ -230,6 +230,17 @@
 .photo_all{
 	padding-bottom: 4em;
 }
+@media screen and (max-width: 375px){
+	.photo_all_bd>ul>li {
+	   height:8.05em;
+	}
+}
+@media screen and (max-width: 320px){
+	.photo_all_bd>ul>li {
+	   height:7.85em;
+	}
+
+}
 .img2{
 	background: url({% static "img/video_url2.png" %}) no-repeat top center;
 	position: relative;
@@ -517,6 +528,7 @@
             			console.log(result['ret'])
             			if(result['ret']==1){
             				alert('你已发布照片')
+            				
             			}else{
             				main_all.window.go_choose2();
             			}

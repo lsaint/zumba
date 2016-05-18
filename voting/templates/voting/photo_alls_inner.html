@@ -90,6 +90,10 @@
 
 <script type="text/javascript">
  $(document).ready(function(){
+ 		// 存下当前页面标示供分享用
+ 		sessionStorage.setItem( 'photo_des', "photo_alls_inner" ); 
+
+
  		var height = $(window).height();
     	$(".ws_act_choose_page1").css({
     		'min-height': height,
@@ -150,7 +154,9 @@
 						
 						
             			$('#only_photo').html(h);
-            			sessionStorage.clear( );
+            			// sessionStorage.clear( );
+            			// 数据拿完后清除
+            			sessionStorage.removeItem( 'cli_uerid' );
             		},
             		error:function(err){
             			console.log(typeof err.status);
@@ -173,7 +179,7 @@
             		success:function(result){
             			// console.log(result['ret'])
             			if(result['ret']=='2'){
-            				alert('你已赞过这张照片，请赞一下其他照片吧！')
+            				alert('你已赞过这照片，请赞一下其他照片吧！')
             			}else if(result['ret']=='0'){
             				nowZAN=parseInt(nowZAN);
             				nowZAN=nowZAN+1;
@@ -204,8 +210,13 @@
                       sessionStorage.setItem( 'dianzan_id_val',$('#omyzan').html() );
             				sessionStorage.setItem( 'dianzan_id',nowid);
 
+            			// 离开页面后删除分享
+ 						sessionStorage.removeItem( 'photo_des' );
+
             			}else if(result['ret']==0){
                         window.location.href="{% url 'active_choose2' %}"
+                        // 离开页面后删除分享
+ 						sessionStorage.removeItem( 'photo_des' );
 
                   }
             		
@@ -222,6 +233,10 @@ $(document).on('click','#okokok',function() {
     		  window.location.href="{% url 'photo_alls' %}";
     		   sessionStorage.setItem( 'dianzan_id_val',$('#omyzan').html() );
             	sessionStorage.setItem( 'dianzan_id',nowid);
+
+
+            	// 离开页面后删除分享
+ 						sessionStorage.removeItem( 'photo_des' );
     		  //setTimeout(function(){
     		  //	parent.window.fnsgo();
     		  //}, 3000)
