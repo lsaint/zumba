@@ -21,6 +21,7 @@
 			}*/
     </style>
     <script type="text/javascript">
+
     	parent.window.document.getElementById("we_paly").style.display='block';
     	parent.window.document.getElementById("ophoto_all").style.display='block';
     	parent.window.document.getElementById("erweima").style.display='none';
@@ -45,6 +46,17 @@ function go_all_inner(){
 function go_list(){
  	window.location.href="{% url 'list' %}"
 }
+
+ 
+ console.log("点赞val"+sessionStorage.getItem( 'dianzan_id_val' ))
+ console.log("点赞id"+ sessionStorage.getItem( 'dianzan_id'))
+// self.opener.location.reload();
+window.onload=function(){
+     parent.window.findbianhao();
+    // parent.window.freshed();
+}
+
+
     </script>
 </head>
 <body >

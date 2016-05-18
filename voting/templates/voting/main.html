@@ -9,6 +9,7 @@
 	<meta name="format-detection" content="email=no">
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
       <link rel="stylesheet" type="text/css" href="{% static 'css/active.css' %}">
+
      <!--   <link rel="stylesheet" type="text/css" href="{% static 'css/ws_move.css' %}"> -->
 	<style type="text/css">
 	iframe{
@@ -226,10 +227,24 @@
     50% { -webkit-transform: translateY(0%); transform: translateY(0%); opacity:1;}
     100% { -webkit-transform: translateY(-100%); transform: translateY(-100%); opacity:0;}
 }
+.photo_all{
+	padding-bottom: 4em;
+}
+.img2{
+	background: url({% static "img/video_url2.png" %}) no-repeat top center;
+	position: relative;
+}
+/* .ws_video_imgall>ul>li>img {
+    width: 70%;
+    height: auto;
+}
+.img2 img{
+	position: absolute;
+}	 */
 	</style>
+
 </head>
 <body style="">
-	<!--  -->
 	<div id="all" >
 		<!-- 音乐 -->
 
@@ -341,15 +356,15 @@
 					                        <img src="{% static 'img/music.png' %}" alt="">
 					</div> -->
 					<div class="ws_video_img">
-						<div class="ws_video_img1 qrcodeWrap">
+						<div class="ws_video_img1 qrcodeWrap"  onclick="javascript:window.location.href='http://v.youku.com/v_show/id_XMTUwODQ0NjcwOA==.html?x'"> 
                             <img src="{% static 'img/video_url1.png' %}" alt="">
 						</div>
 						<div class="ws_video_imgall">
 							<ul>
-                                <li class="ws_video_img2"><img src="{% static 'img/video_url2.png' %}" alt=""></li>
-								<li class="ws_video_img2"><img src="{% static 'img/video_url3.png' %}" alt=""></li>
-								<li class="ws_video_img2"><img src="{% static 'img/video_url4.png' %}" alt=""></li>
-								<li class="ws_video_img2"><img src="{% static 'img/video_url5.png' %}" alt=""></li>
+                                 <li class="ws_video_img2" onclick="javascript:window.location.href='http://v.youku.com/v_show/id_XMTUwODQwNjU2OA==.html'"><img src="{% static 'img/video_url2.png' %}" alt=""></li>
+								<li class="ws_video_img2" onclick="javascript:window.location.href='http://v.youku.com/v_show/id_XMTUwODQxMDY0MA==.html'"><img src="{% static 'img/video_url3.png' %}" alt=""></li>
+								<li class="ws_video_img2" onclick="javascript:window.location.href='http://v.youku.com/v_show/id_XMTUwODQxMDI2MA==.html'"><img src="{% static 'img/video_url4.png' %}" alt=""></li>
+								<li class="ws_video_img2" onclick="javascript:window.location.href='http://v.youku.com/v_show/id_XMTUwODQxMTAyOA==.html'"><img src="{% static 'img/video_url5.png' %}" alt=""></li>
 							</ul>
 						</div>
 					</div>
@@ -379,6 +394,106 @@
 	</div>
 	<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/comment.js' %}"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+// alert('{{appid}}');
+// alert('{{timestamp}}');
+// alert('{{nonceStr}}');
+// alert('{{signature}}');
+	 wx.config({
+    // debug: true,
+    appId: '{{appid}}',
+    timestamp: "{{timestamp}}",
+    nonceStr: '{{nonceStr}}',
+    signature: '{{signature}}',
+    jsApiList: [
+      // 所有要调用的 API 都要加到这个列表中
+      'checkJsApi',
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage',
+      'onMenuShareQQ',
+      'onMenuShareWeibo',
+      'hideMenuItems',
+      'showMenuItems',
+      'hideAllNonBaseMenuItem',
+      'showAllNonBaseMenuItem',
+      'translateVoice',
+      'startRecord',
+      'stopRecord',
+      'onRecordEnd',
+      'playVoice',
+      'pauseVoice',
+      'stopVoice',
+      'uploadVoice',
+      'downloadVoice',
+      'chooseImage',
+      'previewImage',
+      'uploadImage',
+      'downloadImage',
+      'getNetworkType',
+      'openLocation',
+      'getLocation',
+      'hideOptionMenu',
+      'showOptionMenu',
+      'closeWindow',
+      'scanQRCode',
+      'chooseWXPay',
+      'openProductSpecificView',
+      'addCard',
+      'chooseCard',
+      'openCard'
+    ]
+  });
+
+
+// 第一种方法
+ wx.ready(function () {
+   
+    
+        var shareData = {
+      title: '这里是分享标题',
+      desc: '这里是发送给好友的时候的简介',
+      link: 'http://baidu.com',
+      imgUrl: 'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
+      success:function(res){
+         // alert(res.errMsg);
+
+     
+
+  
+    
+        // alert(sendata.shareNum);
+    
+      
+      },
+      cancel:function(res){
+         // alert(res.errMsg)
+    //      if(res.errMsg == 'sendAppMessage:cancel'){
+    //   alert("朋友")
+    // }
+      }
+         
+    };
+
+
+    wx.onMenuShareAppMessage(shareData);
+    wx.onMenuShareTimeline(shareData);
+    wx.onMenuShareQQ(shareData);
+    wx.onMenuShareWeibo(shareData);
+    wx.onMenuShareQZone(shareData);
+
+
+
+
+
+  });
+
+ wx.error(function (res) {
+    // alert("错误了！！")
+    // alert(res.errMsg);
+  });
+
+</script>
 
 	<script type="text/javascript">
 
@@ -400,8 +515,8 @@
             		type: 'GET',
             		success:function(result){
             			console.log(result['ret'])
-            			if(result['ret']=='1'){
-            				alert('你已经玩过了')
+            			if(result['ret']==1){
+            				alert('你已发布照片')
             			}else{
             				main_all.window.go_choose2();
             			}
@@ -471,8 +586,7 @@
   //   }();
 </script>
 <script type="text/javascript">
-    $(document).ready(function(){
-        var range = 1;             //距下边界长度/单位px
+ var range = 1;             //距下边界长度/单位px
         var elemt = 500;            //插入元素高度/单位px
         var maxnum = 20;            //设置加载最多次数
         var num = 0;       //首次重1开始
@@ -483,11 +597,7 @@
 
         // 用户编号为
         var useID;
-
-
-
-        // 在返回值的前面添加零，位数为四
-			function pad(num, n) {  
+        function pad(num, n) {  
 			    var len = num.toString().length;  
 			    while(len < n) {  
 			        num = "0" + num;  
@@ -495,11 +605,65 @@
 			    }  
 			    return num;  
 			}
+function fnsgo(){
+	// alert(111)
+	$.ajax({
+            		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
+            		type: 'GET',
+            		dataType: 'json',
+            		success:function(result){
+            			// console.log( typeof result);
+            			// console.log(result);
+            			// var data= eval("("+result+")");
+            		
+            			var s='';
+						$.each(result, function(i, item) {
+								var str=item.id
+								// console.log(i)
+								// console.log(item)
+								s+='<li ouserid='+item.id+' id='+item.id+' >'
+								s+='	<div class="photo_all_bd_li_inner">'
+								s+='		<div class="photo_all_bd_pic">'
+								s+='			<div class="photo_all_bd_pic_jiao">'+item.ranking+'</div>'
+								s+='			<a href="javascript:void(0)"><img src=\"'+item.url+'\" alt=""></a>'
+								s+='		</div>'
+								s+='		<div class="photo_all_bd_pic_txt">'
+								s+='			<div class="photo_all_bd_pic_txt_tt">'
+								s+='				<img src=\"'+item.headimgurl+'\" alt="">'
+								s+='			</div>'
+								s+='			<div class="photo_all_bd_pic_txt_two">'
+								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+pad(str,4)+'</span></div>'
+								s+='				<div class="photo_all_bd_pic_txt_two_zan">点赞：<span>'+item.polls+'</span></div>'
+								s+='			</div>'
+								s+='		</div>'
+								s+='	</div>'
+								s+='</li>'
+
+						});
+
+						$('#Gradate_Place').html(s);
+
+            			
+            		},
+            		error:function(){
+
+            		}
+	            	})
+}
+
+    $(document).ready(function(){
+       
+
+
+
+        // 在返回值的前面添加零，位数为四
+			
       
          // console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
          //    console.log("页面的文档高度 ："+$(document).height());
          //    console.log('浏览器的高度：'+$(window).height());
-        if(table_type=='hot'){
+        function loadAJAX(){
+        	if(table_type=='hot'){
         $.ajax({
         			// 如： pullboard/hot/9/10/  表示从热度榜第9个开始，拉取10个数据。
             		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
@@ -520,7 +684,7 @@
 								// console.log(pad(str,4));
 								// 返回纯数字值
 								// str=parseInt(str);
-								s+='<li ouserid='+item.id+'>'
+								s+='<li ouserid='+item.id+' id='+item.id+'>'
 								s+='	<div class="photo_all_bd_li_inner">'
 								s+='		<div class="photo_all_bd_pic">'
 								s+='			<div class="photo_all_bd_pic_jiao">'+item.ranking+'</div>'
@@ -559,6 +723,9 @@
 	 
 }
 
+        }
+
+
 
         
         // var main = $("#content");                     //主体元素
@@ -596,7 +763,7 @@
 								var str=item.id
 								// console.log(i)
 								// console.log(item)
-								s+='<li ouserid='+item.id+' >'
+								s+='<li ouserid='+item.id+' id='+item.id+' >'
 								s+='	<div class="photo_all_bd_li_inner">'
 								s+='		<div class="photo_all_bd_pic">'
 								s+='			<div class="photo_all_bd_pic_jiao">'+item.ranking+'</div>'
@@ -639,7 +806,7 @@
 							var str=item.id
 								// console.log(i)
 								// console.log(item)
-								s+='<li ouserid='+item.id+' >'
+								s+='<li ouserid='+item.id+' id='+item.id+' >'
 								s+='	<div class="photo_all_bd_li_inner">'
 								s+='		<div class="photo_all_bd_pic">'
 								s+='			<div class="photo_all_bd_pic_jiao">'+item.ranking+'</div>'
@@ -680,12 +847,14 @@
 
 
 
+setTimeout(function(){
+	$('#Gradate_Place').css('display','block')
+	  $("#Gradate_Place_li").trigger("click")
+}, 100)
 
-   
-
-
-
-
+// $("#cdcd").click(function(event) {
+// 	fnsgo();
+// });
 
 /* 2016-05-10 cbq */
 // 按排名点击事件
@@ -697,9 +866,9 @@
 		// 重置获取值
 		num=0;
 		get_num=11;
+		
 
-
-
+		fnsgo();
 
 		/* Act on the event */
 		$(this).addClass('photo_active');
@@ -746,7 +915,7 @@ background: 'url({% static "img/photo_bg_top.png" %}) repeat-y top center',
 							var str=item.id
 								// console.log(i)
 								// console.log(item)
-								s+='<li ouserid='+item.id+' >'
+								s+='<li ouserid='+item.id+' id='+item.id+' >'
 								s+='	<div class="photo_all_bd_li_inner">'
 								s+='		<div class="photo_all_bd_pic">'
 								s+='			<div class="photo_all_bd_pic_jiao">'+item.ranking+'</div>'
@@ -766,7 +935,7 @@ background: 'url({% static "img/photo_bg_top.png" %}) repeat-y top center',
 
 						});
 
-						$('#Time_Arrangement').append(s);
+						$('#Time_Arrangement').html(s);
 
             			
             		},
@@ -811,6 +980,7 @@ background: 'url({% static 'img/photo_bg_top2.png' %}) repeat-y top center',
 		// ss+='	您的浏览器不支持框架'
 		// ss+='	</iframe> '
 		 main_all.window.go_all_inner();
+		 // $('#Gradate_Place').css('display',"none");
 		
 	});
 	// 搜索按钮
@@ -832,6 +1002,28 @@ background: 'url({% static 'img/photo_bg_top2.png' %}) repeat-y top center',
 		// 去照片墙页面
 		main_all.window.button_i_agree()
 	});
+
+	function findbianhao(){
+	var idval=sessionStorage.getItem( 'dianzan_id_val' );
+
+ 	var dianid=sessionStorage.getItem( 'dianzan_id');
+ 	//alert( idval)
+ 	//alert(dianid)
+	for (var i = 0; i < $('.photo_all_bd>ul>li').length; i++) {
+		var findid=$('.photo_all_bd>ul>li').eq(i).attr('id');
+		
+		if(findid==dianid){
+			var a=$("#"+findid+' .photo_all_bd_pic_txt_two_zan span').html(idval);
+			 console.log(JSON.parse(a))
+			$("#"+findid+' .photo_all_bd_pic_txt_two_zan span').html(idval)
+		}
+		//console.log("findL:"+findid)
+	};
+		
+	}
+	function freshed(){
+		document.frames("main_all").location.reload(true)
+	}
 </script>
 </body>
 </html>

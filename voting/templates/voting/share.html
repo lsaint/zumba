@@ -21,30 +21,25 @@
 	}
     </style>
 	 <script type="text/javascript">
-    	parent.window.document.getElementById("we_paly").style.display='none';
-    	parent.window.document.getElementById("ophoto_all").style.display='none';
-    	parent.window.document.getElementById("erweima").style.display='none';
+  //   	parent.window.document.getElementById("we_paly").style.display='none';
+  //   	parent.window.document.getElementById("ophoto_all").style.display='none';
+  //   	parent.window.document.getElementById("erweima").style.display='none';
 
-    	parent.window.document.getElementById("go_photo").style.display='none';
-    	parent.window.document.getElementById("i_agree").style.display='none';
+  //   	parent.window.document.getElementById("go_photo").style.display='none';
+  //   	parent.window.document.getElementById("i_agree").style.display='none';
 
-    	parent.window.document.getElementById("upimg").style.display='none';
+  //   	parent.window.document.getElementById("upimg").style.display='none';
 
-    	// parent.window.document.getElementById("Gradate_Place").innerHTML='';
-    	// parent.window.document.getElementById("upimg").style.display='none';
+  //   	// 有返回键
+  //   	parent.window.document.getElementById("back_icons").style.display='block';
+  //   	function sofs(){
+  //   		window.location.href="{% url 'photo_alls_inner' %}"
+  //   	}
 
-
-
-    	// 有返回键
-    	parent.window.document.getElementById("back_icons").style.display='block';
-    	function sofs(){
-    		window.location.href="{% url 'photo_alls_inner' %}"
-    	}
-
-    	// 返回键目录页
-		function go_list(){
-		 	window.location.href="{% url 'list' %}"
-		}
+  //   	// 返回键目录页
+		// function go_list(){
+		//  	window.location.href="{% url 'list' %}"
+		// }
     </script>
 </head>
 <body>
@@ -75,8 +70,8 @@
 				</div>
 				<!-- 2016-05-10 cbq -->
 				<div class="all_page_padding_inner_o_bottom bottom">
-						<!-- <img class="no1" src="img/pho_left_.png" alt=""> {% url 'photo_alls' %}-->
-						<a   href="javasript:void(0)" id="okokok" class="no1"></a>
+						<!-- <img class="no1" src="img/pho_left_.png" alt=""> -->
+						<a href="{% url 'photo_alls' %}" class="no1"></a>
                         <img class="no2" id="ws_zan" src="{% static 'img/pho_middle.png' %}" alt="">
 						<a href="javasript:void(0)" id="i_play" class="no3"></a>
 						<!-- <img class="no3" src="img/pho_right_.png" alt=""> -->
@@ -87,7 +82,6 @@
 		</div>
 
 <script src="{% static 'js/zepto.min.js' %}"></script>
-
 <script type="text/javascript">
  $(document).ready(function(){
  		var height = $(window).height();
@@ -95,7 +89,6 @@
     		'min-height': height,
     	});
 
-    	
 
     	// 在返回值的前面添加零，位数为四
 			function pad(num, n) {  
@@ -114,7 +107,7 @@
 		}
 			// console.log(nowid);
 			$.ajax({
-            		url: 'http://test2.huocc.com/voting/'+nowid+'/',
+            		url: 'http://test2.huocc.com/voting/share/86/',
             		type: 'GET',
             		dataType: 'json',
             		success:function(result){
@@ -156,7 +149,7 @@
             			console.log(typeof err.status);
             			if(err.status=404){
             				alert("编号不存在")
-            				window.location.href="{% url 'photo_alls' %}"
+            				// window.location.href="{% url 'photo_alls' %}"
             			}
             		}
             	});
@@ -173,14 +166,11 @@
             		success:function(result){
             			// console.log(result['ret'])
             			if(result['ret']=='2'){
-            				alert('你已赞过这张照片，请赞一下其他照片吧！')
+            				alert('你已经投过票了')
             			}else if(result['ret']=='0'){
             				nowZAN=parseInt(nowZAN);
             				nowZAN=nowZAN+1;
             				$('#omyzan').html(nowZAN);
-
-
-
             			}
             		},
             		error:function(){
@@ -196,19 +186,11 @@
             		url: 'http://test2.huocc.com/voting/uploaded/',
             		type: 'GET',
             		success:function(result){
-            			console.log(typeof result['ret'])
-            			if(result['ret']==1){
-            				alert('你已发布照片！')
-                      window.location.href="{% url 'photo_alls' %}"
-                      //存点赞的数量和当前id的值
-                      sessionStorage.setItem( 'dianzan_id_val',$('#omyzan').html() );
-            				sessionStorage.setItem( 'dianzan_id',nowid);
-
-            			}else if(result['ret']==0){
-                        window.location.href="{% url 'active_choose2' %}"
-
-                  }
-            		
+            			console.log(result['ret'])
+            			if(result['ret']=='1'){
+            				alert('你已经玩过了')
+            			}
+            			window.location.href="{% url 'photo_alls' %}"
             		},
             		error:function(){
 
@@ -216,17 +198,6 @@
             	});
 		});
 
-
-$(document).on('click','#okokok',function() {
-    		// alert(222)
-    		  window.location.href="{% url 'photo_alls' %}";
-    		   sessionStorage.setItem( 'dianzan_id_val',$('#omyzan').html() );
-            	sessionStorage.setItem( 'dianzan_id',nowid);
-    		  //setTimeout(function(){
-    		  //	parent.window.fnsgo();
-    		  //}, 3000)
-    		
-    	});
 		})	
 </script>
 
