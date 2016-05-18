@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^zumbalogin/$', views.zumbalogin, name='zumbalogin'),
     url(r'^uploaded/$', views.uploaded, name='uploaded'),
     url(r'^pullboard/(?P<kind>\w+)/(?P<offset>[0-9]+)/(?P<limit>[0-9]+)/$',
-                                         cache_page(5)(views.pullboard), name='pullboard'),
+                                         cache_page(1)(views.pullboard), name='pullboard'),
 
     url(r'^index/', TemplateView.as_view(template_name="voting/index.html"), name='index'),
     url(r'^list/', TemplateView.as_view(template_name="voting/list.html"), name='list'),
