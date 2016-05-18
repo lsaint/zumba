@@ -24,9 +24,9 @@ def main(request):
 @login_required(redirect_field_name=None)
 @csrf_exempt
 def up(request):
-    #topic = Topic.objects.filter(user=request.user)
-    #if topic.exists():
-    #    return JsonResponse({"ret": 2})
+    topic = Topic.objects.filter(user=request.user)
+    if topic.exists():
+        return JsonResponse({"ret": 2})
 
     form = TopicForm(request.POST)
     if request.method == 'POST':
