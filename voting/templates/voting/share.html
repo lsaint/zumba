@@ -19,30 +19,92 @@
 
 		overflow: hidden;
 	}
+.all_music_t{
+	position: fixed;
+    top: 10%;
+    right: 15px;
+    width: 100px;
+    height: 30px;
+    z-index: 99999;
+}
+.all_music_t>div{
+	float: right;
+	width: 27px;
+	height: 30px;
+
+}
+.all_music_t>div.all_music_t_back{
+	margin-right: 10px;
+	background: none;
+}
+.all_music_t>div.all_music_t_icon{
+    background: url({% static 'img/music.png' %}) no-repeat center center;
+	background-size: 100% auto;
+}
+	/*首页类*/
+.all_music_mian>div.all_music_t_back{
+	background:none;
+}
+.all_music_mian>div.all_music_t_icon{
+    background: url({% static 'img/music_index.png' %}) no-repeat center center;
+	background-size: 100% auto;
+}
+
+
+/*有返回键类*/
+.have_back>div.all_music_t_back{
+    background: url({% static 'img/back.png' %}) no-repeat center center;
+	background-size: 100% auto;
+}
+
+/*点击音乐后返回的类名*/
+.click_music>div.all_music_t_icon{
+    background: url({% static 'img/music_down.png' %}) no-repeat center center;
+	background-size: 100% auto;
+}
+
+.all_page_padding_inner_content_img_big {
+    position: relative;
+    z-index: 10000;
+    width: 100%;
+}
+.all_page_padding_inner_o_bottom{
+	background: none;
+}
+.share_goindex{
+	width: 55%;
+	margin: 0 auto;
+	margin-top: -5px;
+	position: relative;
+	z-index: 200;
+}
+.share_goindex img{
+	width: 100%;
+	height: auto;
+}
     </style>
 	 <script type="text/javascript">
-  //   	parent.window.document.getElementById("we_paly").style.display='none';
-  //   	parent.window.document.getElementById("ophoto_all").style.display='none';
-  //   	parent.window.document.getElementById("erweima").style.display='none';
-
-  //   	parent.window.document.getElementById("go_photo").style.display='none';
-  //   	parent.window.document.getElementById("i_agree").style.display='none';
-
-  //   	parent.window.document.getElementById("upimg").style.display='none';
-
-  //   	// 有返回键
-  //   	parent.window.document.getElementById("back_icons").style.display='block';
-  //   	function sofs(){
-  //   		window.location.href="{% url 'photo_alls_inner' %}"
-  //   	}
-
-  //   	// 返回键目录页
-		// function go_list(){
-		//  	window.location.href="{% url 'list' %}"
-		// }
+ 
     </script>
 </head>
 <body>
+	<!-- 音乐返回按键 -->
+	<div id = "muisc_all" class="all_music_t  have_back">
+			<!-- <div id="parnet"></div> -->
+			<div id="muisc_icon" class="all_music_t_icon"></div>
+			<div id="back_icons" class="all_music_t_back"></div>
+	</div>
+
+	<!-- 音乐文件 -->
+	<div id="musecc" >
+
+			<div class="music_icon_inner">
+				 <audio id="musicfx" loop="loop" autoplay="autoplay">
+                 <source src="{% static 'img/music.mp3' %}" type="audio/mpeg">
+	            </audio>
+			</div>
+	</div>
+
 	<div class="ws_act_choose_page2  ws_act_choose_page1">
 
 		<div class="all_page_padding all_page_padding2">
@@ -59,11 +121,26 @@
 					</div>
 
 					<!-- 2016-05-11 cbq -->
-					<div id='new_tuo' class="all_page_padding_inner_content_img_big" style="display: none"></div>
+					<div id='new_tuo' class="all_page_padding_inner_content_img_big" style="display: none">
+						<img src="{{url}}" alt="">
+					</div>
 					<div class="all_page_padding_inner">
 						<div class="all_page_padding_inner_content" id="only_photo">
 							
-						<!-- 2016-05-11 cbq end-->
+								<div class="all_page_padding_inner_content_img"><img src='{{url}}' alt="" id="img"></div>
+								<div class="all_page_padding_inner_content_txt">
+									<div class="all_page_padding_inner_content_txt_hd">编号：<span id="bianhao">{{id}}</span></div>
+									<div class="all_page_padding_inner_content_txt_bd">
+										<div class="all_page_padding_inner_content_txt_bd_left">
+											<div class="all_page_padding_inner_content_txt_bd_left_p">排名</div>
+											<div class="all_page_padding_inner_content_txt_bd_left_n">{{ranking}}</div>
+										</div>
+										<div class="all_page_padding_inner_content_txt_bd_right">
+											<div class="all_page_padding_inner_content_txt_bd_left_p">点赞数</div>
+											<div class="all_page_padding_inner_content_txt_bd_left_n" id="omyzan">{{polls}}</div>
+										</div>
+									</div>
+								</div>
 
 						</div>
 					</div>
@@ -71,12 +148,14 @@
 				<!-- 2016-05-10 cbq -->
 				<div class="all_page_padding_inner_o_bottom bottom">
 						<!-- <img class="no1" src="img/pho_left_.png" alt=""> -->
-						<a href="{% url 'photo_alls' %}" class="no1"></a>
-                        <img class="no2" id="ws_zan" src="{% static 'img/pho_middle.png' %}" alt="">
-						<a href="javasript:void(0)" id="i_play" class="no3"></a>
+						<!-- <a href="{% url 'photo_alls' %}" class="no1"></a> -->
+                        <img class="no2" id="ws_zan" src="{% static 'img/share_zan.png' %}" alt="">
+						<!-- <a href="javasript:void(0)" id="i_play" class="no3"></a> -->
 						<!-- <img class="no3" src="img/pho_right_.png" alt=""> -->
 				</div>
-				
+				<div class="share_goindex">
+					<img src="{% static 'img/share_gotu.png' %}" alt="">
+				</div>
 
 			</div>
 		</div>
@@ -88,8 +167,8 @@
     	$(".ws_act_choose_page1").css({
     		'min-height': height,
     	});
-
-
+    	var mynum=$('#bianhao').html();
+    		$('#bianhao').html(pad(mynum,4));
     	// 在返回值的前面添加零，位数为四
 			function pad(num, n) {  
 			    var len = num.toString().length;  
@@ -100,62 +179,45 @@
 			    return num;  
 			}
 
-			// 拿到id
-		var nowid=sessionStorage.getItem( 'cli_uerid' );
-		if( sessionStorage.getItem( 'my_up' )=='lesgo'){
-			nowid=sessionStorage.getItem( 'sucess_up_id' );
-		}
-			// console.log(nowid);
-			$.ajax({
-            		url: 'http://test2.huocc.com/voting/share/86/',
-            		type: 'GET',
-            		dataType: 'json',
-            		success:function(result){
-            			console.log(1111)
-            			console.log(result);
-            			// alert(1111)
-            			// console.log( typeof result);
-            			console.log(result["url"]);
 
-       
-            			// var data= eval("("+result+")");
-            			var h='';
-								var str=result['id'];
-								
-								// console.log(result)
-								h+='<div class="all_page_padding_inner_content_img"><img src='+result['url']+' alt="" id="img"></div>'
-								h+='<div class="all_page_padding_inner_content_txt">'
-								h+='	<div class="all_page_padding_inner_content_txt_hd">编号：<span>'+pad(str,4)+'</span></div>'
-								h+='	<div class="all_page_padding_inner_content_txt_bd">'
-								h+='		<div class="all_page_padding_inner_content_txt_bd_left">'
-								h+='			<div class="all_page_padding_inner_content_txt_bd_left_p">排名</div>'
-								h+='			<div class="all_page_padding_inner_content_txt_bd_left_n">'+result['ranking']+'</div>'
-								h+='		</div>'
-								h+='		<div class="all_page_padding_inner_content_txt_bd_right">'
-								h+='			<div class="all_page_padding_inner_content_txt_bd_left_p">点赞数</div>'
-								h+='			<div class="all_page_padding_inner_content_txt_bd_left_n" id="omyzan">'+result['polls']+'</div>'
-								h+='		</div>'
-								h+='	</div>'
-								h+='</div>'
+		// 点击进入活动按钮
+		$('.share_goindex').click(function(){
+			// alert(11)
+			window.location.href="{% url 'main' %}"
+		})
 
-						b='<img src='+result['url']+' alt="" id="img">'
-						$('#new_tuo').html(b);
-						
-						
-            			$('#only_photo').html(h);
-            			sessionStorage.clear( );
-            		},
-            		error:function(err){
-            			console.log(typeof err.status);
-            			if(err.status=404){
-            				alert("编号不存在")
-            				// window.location.href="{% url 'photo_alls' %}"
-            			}
-            		}
-            	});
+		// 点击返回到list页面
+		$('#back_icons').click(function(event) {
+			// alert(111)
+			  localStorage.setItem( 'share_go_url', 'list' );
+			// localStorage.setItem('share_go_url','list');
+			window.location.href="{% url 'main' %}"
+		});
+
+			// 点击音乐键
+		var music=document.getElementById('musicfx');
+			
+		$("#muisc_icon").click(function(){
+			if(music.paused){
+				music.play();
+				$('#muisc_all').removeClass('click_music');
+				// $("#musecc").removeClass("pause").addClass("play");
+			}else{
+				music.pause();
+				var isindex=$('#all').find('.all_music_mian');
+				if(isindex.length==1){
+					// 这个是更换第一个页面的音乐背景图
+					$('#muisc_all').addClass('click_music');
+				}else{
+					$('#muisc_all').addClass('click_music');
+				}
+				
+			}});
 
 
 		// 点赞
+		var nowid=parseInt($('#bianhao').html());
+		// console.log(nowid)
 		
 		$(document).on('click','#ws_zan',function(){
 			var nowZAN=$('#omyzan').html()
@@ -181,45 +243,46 @@
 		});
 
 
-		$(document).on('click','#i_play',function(){
-			$.ajax({
-            		url: 'http://test2.huocc.com/voting/uploaded/',
-            		type: 'GET',
-            		success:function(result){
-            			console.log(result['ret'])
-            			if(result['ret']=='1'){
-            				alert('你已经玩过了')
-            			}
-            			window.location.href="{% url 'photo_alls' %}"
-            		},
-            		error:function(){
+		// $(document).on('click','#i_play',function(){
+		// 	$.ajax({
+  //           		url: 'http://test2.huocc.com/voting/uploaded/',
+  //           		type: 'GET',
+  //           		success:function(result){
+  //           			console.log(result['ret'])
+  //           			if(result['ret']=='1'){
+  //           				alert('你已经玩过了')
+  //           			}
+  //           			window.location.href="{% url 'photo_alls' %}"
+  //           		},
+  //           		error:function(){
 
-            		}
-            	});
-		});
+  //           		}
+  //           	});
+		// });
 
 		})	
 </script>
 
 <!-- 2016-05-11 cbq -->
 <script type="text/javascript">
-	$(document).on('click','.all_page_padding_inner_content_img img',function(event) {
+	$('.all_page_padding_inner_content_img img').click(function(event) {
+		// alert(111)
 		/* Act on the event */
 		$(".all_page_padding_inner_content_img").css({
-			display: 'none'
+			"display": 'none'
 		});
 		$(".all_page_padding_inner_content_img_big").css({
-			display: 'block'
+			"display": 'block'
 		});
 		$(".all_page_padding_inner").addClass('after');
 	});
-	$(document).on('click','.all_page_padding_inner_content_img_big img',function(event) {
+	$('.all_page_padding_inner_content_img_big img').click(function(event) {
 		/* Act on the event */
 		$(".all_page_padding_inner_content_img_big").css({
-			display: 'none'
+			"display": 'none'
 		});
 		$(".all_page_padding_inner_content_img").css({
-			display: 'block'
+			"display": 'block'
 		});
 		$(".all_page_padding_inner").removeClass('after');
 

@@ -275,7 +275,7 @@
 			<div id="back_icons" class="all_music_t_back"></div>
 		</div>
 		<div class="ifr_out">
-			  <iframe id="main_ifra" name='main_all' src="{% url 'index' %}" width="100%" height="100%"> 
+			  <iframe id="main_ifra" name='main_all' src="" width="100%" height="100%"> 
 			您的浏览器不支持框架
 			</iframe> 
 		</div>
@@ -406,6 +406,20 @@
 	<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/comment.js' %}"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript">
+		// 跳的页面
+		var share_go_url=localStorage.getItem('share_go_url');
+		console.log(share_go_url);
+		if(share_go_url=='list'){
+			var now_url="{% url 'list' %}";
+			$('#main_ifra').attr('src',now_url);
+		}else{
+			var now_url="{% url 'index' %}";
+			$('#main_ifra').attr('src',now_url);
+		}
+		localStorage.removeItem( 'share_go_url' )
+
+	</script>
 <script type="text/javascript">
 // alert('{{appid}}');
 // alert('{{timestamp}}');
@@ -457,52 +471,111 @@
   });
 
 
-// 第一种方法
- wx.ready(function () {
+
+
    
-    
-        var shareData = {
-      title: '这里是分享标题',
-      desc: '这里是发送给好友的时候的简介',
-      link: 'http://baidu.com',
-      imgUrl: 'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
-      success:function(res){
-         // alert(res.errMsg);
+    // 分享的时候首先判断是否在照片详情页分享
+    var shareData;
+    var isphoto_des=sessionStorage.getItem('photo_des')
+    if(isphoto_des=="photo_alls_inner"){
+    	   shareData = {
+	      title: '这里是分享标题',
+	      desc: '这里是发送给好友的时候的简介',
+	      link: 'http://baidu.com',
+	      imgUrl: 'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
+	      success:function(res){
+	         // alert(res.errMsg);
+	        // alert(sendata.shareNum);
 
-     
-
+	      },
+	      cancel:function(res){
+	         // alert(res.errMsg)
+	      }
+	         
+	    };
+    }
   
-    
-        // alert(sendata.shareNum);
-    
-      
-      },
-      cancel:function(res){
-         // alert(res.errMsg)
-    //      if(res.errMsg == 'sendAppMessage:cancel'){
+ var shareData 
+
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    // 发送给好友
+    WeixinJSBridge.on('menu:share:appmessage', function(argv){
+     
+        var a=0;
+
+        if(a==1){
+           shareData = {
+              img_url:'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
+              img_width: 400,
+              img_height: 400,
+              link: 'http://baidu.com',
+              desc: '这是等于一的分享啊',
+              title: '这是等于一的分享啊',
+              appid: 1
+          };
+        }else{
+          shareData = {
+              img_url:'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
+              img_width: 200,
+              img_height: 200,
+              link: 'http://baidu.com',
+              desc: '这里是发送给好友的时候的简介2222313',
+              title: '这里是分享标题',
+              appid: 1
+          };
+        }
+
+           shareFriend();
+    });
+    // 分享到朋友圈
+    WeixinJSBridge.on('menu:share:timeline', function(argv){
+        shareTimeline();
+    }); 
+     WeixinJSBridge.on('menu:share:qq', function(argv){
+        shareTimeline();
+    }); 
+}, true);
+
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline', shareData, function(res) {
+      // 以下方法是成功后做什么
+        validateShare(res);
+        _report('timeline', res.err_msg);
+    });
+}
+
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage', shareData, function(res) {
+        validateShare(res);
+        _report('send_msg', res.err_msg);
+         DS.sendRepost("appMessage");
+    });
+}
+
+function shareQQ() {
+    WeixinJSBridge.invoke('shareQQ', shareData, function(res) {
+        validateShare(res);
+        // _report('send_msg', res.err_msg);
+        //  DS.sendRepost("appMessage");
+    });
+}
+
+function validateShare(res) {
+   
+    // if(res.err_msg == 'send_app_msg:ok'){
     //   alert("朋友")
+    // }else if(res.err_msg == 'share_timeline:ok'){
+    //    alert("朋友圈")
+    // }else if(res.err_msg == 'share_qq:ok'){
+    //    alert("qq") //QQ空间和qq状态都是上面的
+    // }else if(res.err_msg == 'share_weibo:ok'){
+    //    alert("微博")
     // }
-      }
-         
-    };
+    alert(res.err_msg)
+}
+  
 
 
-    wx.onMenuShareAppMessage(shareData);
-    wx.onMenuShareTimeline(shareData);
-    wx.onMenuShareQQ(shareData);
-    wx.onMenuShareWeibo(shareData);
-    wx.onMenuShareQZone(shareData);
-
-
-
-
-
-  });
-
- wx.error(function (res) {
-    // alert("错误了！！")
-    // alert(res.errMsg);
-  });
 
 </script>
 
