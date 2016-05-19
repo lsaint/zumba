@@ -20,7 +20,7 @@ ENV:
 把工程根目录内的env文件改名为.env
 并打开作以下修改
 修改DATABASE_URL中数据库的账号，密码，地址,端口以及库名称
-修改LOGIN_URL和UINFO_URL中前半部分的UAT地址
+修改LOGIN_URL和ZUMBA_API_URL中前半部分的UAT地址
 修改LOGIN_URL中最后url=中的回调域名
 修改公众号接口ZUMBA_SECRET的Secret
 创建STATIC_ROOT和MEDIA_ROOT文件夹

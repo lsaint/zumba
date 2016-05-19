@@ -7,9 +7,8 @@ from django.conf import settings
 
 
 def jsapi_ticket():
-    url = "http://wxuat.watsonsestore.com.cn/clickWap/rest/wx/proxy"
     body = {"secret": settings.ZUMBA_SECRET, "method": "getTicket"}
-    rep = requests.post(url, json=body)
+    rep = requests.post(settings.ZUMBA_API_URL, json=body)
     if not rep.ok:
         logger.error("get jsapi_ticket err")
         return ""
