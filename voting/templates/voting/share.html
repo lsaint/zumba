@@ -223,7 +223,7 @@
 			var nowZAN=$('#omyzan').html()
 			// console.log(nowid);
 			$.ajax({
-            		url: 'http://test2.huocc.com/voting/'+nowid+'/vote/',
+            		url: '/voting/'+nowid+'/vote/',
             		type: 'POST',
             		success:function(result){
             			// console.log(result['ret'])
@@ -245,7 +245,7 @@
 
 		// $(document).on('click','#i_play',function(){
 		// 	$.ajax({
-  //           		url: 'http://test2.huocc.com/voting/uploaded/',
+  //           		url: '/voting/uploaded/',
   //           		type: 'GET',
   //           		success:function(result){
   //           			console.log(result['ret'])

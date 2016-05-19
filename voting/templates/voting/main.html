@@ -595,7 +595,7 @@ function validateShare(res) {
 		// 操作子类的方法
 
 		$.ajax({
-            		url: 'http://test2.huocc.com/voting/uploaded/',
+            		url: '/voting/uploaded/',
             		type: 'GET',
             		success:function(result){
             			console.log(result['ret'])
@@ -693,7 +693,7 @@ function validateShare(res) {
 function fnsgo(){
 	// alert(111)
 	$.ajax({
-            		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
+            		url: '/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
             		type: 'GET',
             		dataType: 'json',
             		success:function(result){
@@ -751,7 +751,7 @@ function fnsgo(){
         	if(table_type=='hot'){
         $.ajax({
         			// 如： pullboard/hot/9/10/  表示从热度榜第9个开始，拉取10个数据。
-            		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
+            		url: '/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
             		type: 'GET',
             		dataType: 'json',
             		success:function(result){
@@ -835,7 +835,7 @@ function fnsgo(){
             	if(table_type=='hot'){
 
             		$.ajax({
-            		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
+            		url: '/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
             		type: 'GET',
             		dataType: 'json',
             		success:function(result){
@@ -879,7 +879,7 @@ function fnsgo(){
             	}else if(table_type=='new'){
             		
             		$.ajax({
-            		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
+            		url: '/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
             		type: 'GET',
             		dataType: 'json',
             		success:function(result){
@@ -988,7 +988,7 @@ background: 'url({% static "img/photo_bg_top.png" %}) repeat-y top center',
 		num=0;
 		get_num=11;
 		$.ajax({
-            		url: 'http://test2.huocc.com/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
+            		url: '/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
             		type: 'GET',
             		dataType: 'json',
             		success:function(result){

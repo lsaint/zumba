@@ -121,7 +121,7 @@
 		}
 			// console.log(nowid);
 			$.ajax({
-            		url: 'http://test2.huocc.com/voting/'+nowid+'/',
+            		url: '/voting/'+nowid+'/',
             		type: 'GET',
             		dataType: 'json',
             		success:function(result){
@@ -177,7 +177,7 @@
 			var nowZAN=$('#omyzan').html()
 			// console.log(nowid);
 			$.ajax({
-            		url: 'http://test2.huocc.com/voting/'+nowid+'/vote/',
+            		url: '/voting/'+nowid+'/vote/',
             		type: 'POST',
             		success:function(result){
             			// console.log(result['ret'])
@@ -202,7 +202,7 @@
 
 		$(document).on('click','#i_play',function(){
 			$.ajax({
-            		url: 'http://test2.huocc.com/voting/uploaded/',
+            		url: '/voting/uploaded/',
             		type: 'GET',
             		success:function(result){
             			console.log(typeof result['ret'])
