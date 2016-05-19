@@ -501,7 +501,7 @@
 	    	shareData = {
 		      title: '这里是分享标题',
 		      desc: '这里是发送给好友的时候的 其他 页简介',
-		      link: 'http://zumba.watsonsstore.com/voting/i/,
+		      link: 'http://zumba.watsonsstore.com/voting/i/',
 		      imgUrl: 'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
 		      success:function(res){
 		         alert(res.errMsg);
@@ -700,7 +700,7 @@ function validateShare(res) {
 			    return num;  
 			}
 function fnsgo(){
-	// alert(111)
+	alert('AJAX')
 	$.ajax({
             		url: '/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
             		type: 'GET',
@@ -744,6 +744,22 @@ function fnsgo(){
             		}
 	            	})
 }
+
+
+
+function isshuafn(){
+
+var isshua=sessionStorage.getItem('isshua');
+	if(isshua=='ohyes'){
+		console.log('QIANM可以刷新啊')
+		fnsgo()
+		console.log('HOU可以刷新啊')
+		// clearInterval(nowtime)
+		sessionStorage.removeItem('isshua');
+	}
+}
+
+var nowtime=setInterval(isshuafn,1000);
 
     $(document).ready(function(){
        

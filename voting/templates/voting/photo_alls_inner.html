@@ -219,6 +219,8 @@
  						// 离开页面后清除
  						sessionStorage.removeItem( 'cli_uerid' );
 
+ 						// 可以刷洗标示
+ 						sessionStorage.setItem('isshua','ohyes')
             			}else if(result['ret']==0){
                         window.location.href="{% url 'active_choose2' %}"
                         // 离开页面后删除分享
