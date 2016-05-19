@@ -477,39 +477,41 @@
    
     // 分享的时候首先判断是否在照片详情页分享
     var shareData;
-    var isphoto_des=sessionStorage.getItem('photo_des')
-    // 当前详情页id
-    var photo_id=sessionStorage.getItem( 'cli_uerid' );
+  
     function mysharedata(){
+    	  var isphoto_des=sessionStorage.getItem('photo_des')
+	    // 当前详情页id
+	    var photo_id=sessionStorage.getItem( 'cli_uerid' );
     	if(isphoto_des=="photo_alls_inner"){
+    		// 这个是详情页
 	    	   shareData = {
-		      title: '这里是分享标题',
-		      desc: '这里是发送给好友的时候的 详情页 简介',
+		      title: '屈臣氏尊巴炫舞大赛',
+		      desc: '＃屈臣氏尊巴炫舞大赛＃为活力美一刻点赞！',
 		      link: 'http://zumba.watsonsstore.com/voting/share/'+photo_id+'/',
-		      imgUrl: 'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
+		      imgUrl: "http://zumba.watsonsstore.com//zumba/static/img/wei_share.jpg",
 		      success:function(res){
-		         alert(res.errMsg);
+		         // alert(res.errMsg);
 		        // alert(sendata.shareNum);
 
 		      },
 		      cancel:function(res){
-		         alert(res.errMsg)
+		         // alert(res.errMsg)
 		      }
 		         
 		    };
 	    }else{
 	    	shareData = {
-		      title: '这里是分享标题',
-		      desc: '这里是发送给好友的时候的 其他 页简介',
+		      title: '屈臣氏尊巴炫舞大赛',
+		      desc: '＃屈臣氏尊巴炫舞大赛＃为活力美一刻点赞！',
 		      link: 'http://zumba.watsonsstore.com/voting/i/',
-		      imgUrl: 'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
+		      imgUrl: "http://zumba.watsonsstore.com//zumba/static/img/wei_share.jpg",
 		      success:function(res){
-		         alert(res.errMsg);
+		         // alert(res.errMsg);
 		        // alert(sendata.shareNum);
 
 		      },
 		      cancel:function(res){
-		         alert(res.errMsg)
+		         // alert(res.errMsg)
 		      }
 		         
 		    };
@@ -580,7 +582,7 @@ function shareQZone() {
 
 function validateShare(res) {
    
-    alert(res.err_msg)
+    // alert(res.err_msg)
 }
   
 
@@ -700,7 +702,10 @@ function validateShare(res) {
 			    return num;  
 			}
 function fnsgo(){
-	alert('AJAX')
+
+	console.log('现在的类型：'+table_type);
+	console.log('从多少个数开始：'+num);
+	console.log('拿多少数量：'+get_num);
 	$.ajax({
             		url: '/voting/pullboard/'+table_type+'/'+num+'/'+get_num+'/',
             		type: 'GET',
@@ -745,6 +750,62 @@ function fnsgo(){
 	            	})
 }
 
+function fnsgo2(){
+	console.log('现在的类型：'+table_type);
+	console.log('从多少个数开始：'+num);
+	console.log('拿多少数量：'+get_num);
+	var num2 = 0;       //首次重1开始
+    var get_num2=15;		//第一拉去11数据
+    // 默认值是按名次排名
+    var table_type2='hot';
+
+	$.ajax({
+            		url: '/voting/pullboard/'+table_type2+'/'+num2+'/'+get_num2+'/',
+            		type: 'GET',
+            		dataType: 'json',
+            		success:function(result){
+            			// console.log( typeof result);
+            			// console.log(result);
+            			// var data= eval("("+result+")");
+            		
+            			var s='';
+						$.each(result, function(i, item) {
+								var str=item.id
+								// console.log(i)
+								// console.log(item)
+								s+='<li ouserid='+item.id+' id='+item.id+' >'
+								s+='	<div class="photo_all_bd_li_inner">'
+								s+='		<div class="photo_all_bd_pic">'
+								s+='			<div class="photo_all_bd_pic_jiao">'+item.ranking+'</div>'
+								s+='			<a href="javascript:void(0)"><img src=\"'+item.url+'\" alt=""></a>'
+								s+='		</div>'
+								s+='		<div class="photo_all_bd_pic_txt">'
+								s+='			<div class="photo_all_bd_pic_txt_tt">'
+								s+='				<img src=\"'+item.headimgurl+'\" alt="">'
+								s+='			</div>'
+								s+='			<div class="photo_all_bd_pic_txt_two">'
+								s+='				<div class="photo_all_bd_pic_txt_two_num">编号：<span class="ws_use_id">'+pad(str,4)+'</span></div>'
+								s+='				<div class="photo_all_bd_pic_txt_two_zan">点赞：<span>'+item.polls+'</span></div>'
+								s+='			</div>'
+								s+='		</div>'
+								s+='	</div>'
+								s+='</li>'
+
+						});
+
+						$('#Gradate_Place').html(s);
+
+            			
+            		},
+            		error:function(){
+
+            		}
+	            	})
+
+	num=0;
+	get_num=15
+
+}
 
 
 function isshuafn(){
@@ -752,19 +813,19 @@ function isshuafn(){
 var isshua=sessionStorage.getItem('isshua');
 	if(isshua=='ohyes'){
 		console.log('QIANM可以刷新啊')
-		fnsgo()
+		fnsgo2()
 		console.log('HOU可以刷新啊')
 		// clearInterval(nowtime)
 		sessionStorage.removeItem('isshua');
 	}
 }
 
-var nowtime=setInterval(isshuafn,1000);
+var nowtime=setInterval(isshuafn,500);
 
     $(document).ready(function(){
        
 
-
+    	fnsgo()
 
         // 在返回值的前面添加零，位数为四
 			
@@ -957,10 +1018,10 @@ var nowtime=setInterval(isshuafn,1000);
 
 
 
-setTimeout(function(){
-	$('#Gradate_Place').css('display','block')
-	  $("#Gradate_Place_li").trigger("click")
-}, 100)
+// setTimeout(function(){
+// 	$('#Gradate_Place').css('display','block')
+// 	  $("#Gradate_Place_li").trigger("click")
+// }, 100)
 
 // $("#cdcd").click(function(event) {
 // 	fnsgo();
