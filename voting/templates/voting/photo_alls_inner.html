@@ -159,7 +159,7 @@
             			$('#only_photo').html(h);
             			// sessionStorage.clear( );
             			// 数据拿完后清除
-            			sessionStorage.removeItem( 'cli_uerid' );
+            			// sessionStorage.removeItem( 'cli_uerid' );
             		},
             		error:function(err){
             			console.log(typeof err.status);
@@ -216,10 +216,16 @@
             			// 离开页面后删除分享
  						sessionStorage.removeItem( 'photo_des' );
 
+ 						// 离开页面后清除
+ 						sessionStorage.removeItem( 'cli_uerid' );
+
             			}else if(result['ret']==0){
                         window.location.href="{% url 'active_choose2' %}"
                         // 离开页面后删除分享
  						sessionStorage.removeItem( 'photo_des' );
+
+ 						// 离开页面后清除
+ 						sessionStorage.removeItem( 'cli_uerid' );
 
                   }
             		
@@ -239,7 +245,10 @@ $(document).on('click','#okokok',function() {
 
 
             	// 离开页面后删除分享
- 						sessionStorage.removeItem( 'photo_des' );
+ 				sessionStorage.removeItem( 'photo_des' );
+
+ 				// 离开后清除当前id
+ 				sessionStorage.removeItem( 'cli_uerid' );
     		  //setTimeout(function(){
     		  //	parent.window.fnsgo();
     		  //}, 3000)

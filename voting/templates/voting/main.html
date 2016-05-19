@@ -437,6 +437,7 @@
       'onMenuShareTimeline',
       'onMenuShareAppMessage',
       'onMenuShareQQ',
+       'onMenuShareQZone',
       'onMenuShareWeibo',
       'hideMenuItems',
       'showMenuItems',
@@ -477,68 +478,76 @@
     // 分享的时候首先判断是否在照片详情页分享
     var shareData;
     var isphoto_des=sessionStorage.getItem('photo_des')
-    if(isphoto_des=="photo_alls_inner"){
-    	   shareData = {
-	      title: '这里是分享标题',
-	      desc: '这里是发送给好友的时候的简介',
-	      link: 'http://baidu.com',
-	      imgUrl: 'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
-	      success:function(res){
-	         // alert(res.errMsg);
-	        // alert(sendata.shareNum);
+    // 当前详情页id
+    var photo_id=sessionStorage.getItem( 'cli_uerid' );
+    function mysharedata(){
+    	if(isphoto_des=="photo_alls_inner"){
+	    	   shareData = {
+		      title: '这里是分享标题',
+		      desc: '这里是发送给好友的时候的 详情页 简介',
+		      link: 'http://zumba.watsonsstore.com/voting/share/'+photo_id+'/',
+		      imgUrl: 'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
+		      success:function(res){
+		         alert(res.errMsg);
+		        // alert(sendata.shareNum);
 
-	      },
-	      cancel:function(res){
-	         // alert(res.errMsg)
-	      }
-	         
-	    };
+		      },
+		      cancel:function(res){
+		         alert(res.errMsg)
+		      }
+		         
+		    };
+	    }else{
+	    	shareData = {
+		      title: '这里是分享标题',
+		      desc: '这里是发送给好友的时候的 其他 页简介',
+		      link: 'http://zumba.watsonsstore.com/voting/i/,
+		      imgUrl: 'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
+		      success:function(res){
+		         alert(res.errMsg);
+		        // alert(sendata.shareNum);
+
+		      },
+		      cancel:function(res){
+		         alert(res.errMsg)
+		      }
+		         
+		    };
+	    }
     }
+    
   
- var shareData 
+ var shareData;
 
 document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
     // 发送给好友
-    WeixinJSBridge.on('menu:share:appmessage', function(argv){
+   WeixinJSBridge.on('menu:share:appmessage', function(argv){
      
-        var a=0;
-
-        if(a==1){
-           shareData = {
-              img_url:'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
-              img_width: 400,
-              img_height: 400,
-              link: 'http://baidu.com',
-              desc: '这是等于一的分享啊',
-              title: '这是等于一的分享啊',
-              appid: 1
-          };
-        }else{
-          shareData = {
-              img_url:'http://img.qqbody.com/uploads/allimg/201305/05-193446_633.jpg',
-              img_width: 200,
-              img_height: 200,
-              link: 'http://baidu.com',
-              desc: '这里是发送给好友的时候的简介2222313',
-              title: '这里是分享标题',
-              appid: 1
-          };
-        }
-
+          mysharedata();
+        
            shareFriend();
     });
     // 分享到朋友圈
     WeixinJSBridge.on('menu:share:timeline', function(argv){
+       mysharedata();
         shareTimeline();
     }); 
      WeixinJSBridge.on('menu:share:qq', function(argv){
-        shareTimeline();
+         mysharedata();
+        shareQQ();
+    }); 
+     // qzone
+      WeixinJSBridge.on('menu:share:QZone', function(argv){
+         mysharedata();
+        shareQZone();
     }); 
 }, true);
+
 
 function shareTimeline() {
     WeixinJSBridge.invoke('shareTimeline', shareData, function(res) {
       // 以下方法是成功后做什么
+ 
         validateShare(res);
         _report('timeline', res.err_msg);
     });
@@ -560,17 +569,17 @@ function shareQQ() {
     });
 }
 
+// 
+function shareQZone() {
+    WeixinJSBridge.invoke('shareQZone', shareData, function(res) {
+        validateShare(res);
+        // _report('send_msg', res.err_msg);
+        //  DS.sendRepost("appMessage");
+    });
+}
+
 function validateShare(res) {
    
-    // if(res.err_msg == 'send_app_msg:ok'){
-    //   alert("朋友")
-    // }else if(res.err_msg == 'share_timeline:ok'){
-    //    alert("朋友圈")
-    // }else if(res.err_msg == 'share_qq:ok'){
-    //    alert("qq") //QQ空间和qq状态都是上面的
-    // }else if(res.err_msg == 'share_weibo:ok'){
-    //    alert("微博")
-    // }
     alert(res.err_msg)
 }
   
