@@ -21,6 +21,10 @@
 	}
     </style>
 	 <script type="text/javascript">
+	 // 存下当前页面标示供分享用
+ 		sessionStorage.setItem( 'photo_des', "photo_alls_inner" ); 
+
+	 
     	parent.window.document.getElementById("we_paly").style.display='none';
     	parent.window.document.getElementById("ophoto_all").style.display='none';
     	parent.window.document.getElementById("erweima").style.display='none';
@@ -90,8 +94,7 @@
 
 <script type="text/javascript">
  $(document).ready(function(){
- 		// 存下当前页面标示供分享用
- 		sessionStorage.setItem( 'photo_des', "photo_alls_inner" ); 
+ 		
 
 
  		var height = $(window).height();
