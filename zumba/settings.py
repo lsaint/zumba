@@ -115,7 +115,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        "zumba": {
+        "voting": {
             'handlers':['console'],
             'propagate': True,
             'level':'DEBUG',
