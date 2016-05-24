@@ -53,5 +53,6 @@ class ZumbaBackend(object):
                 return info.get("user_info")
             else:
                 logger.error("get userinfo err %s" % info)
-
+        else:
+            logger.error("get userinfo err not ok")
 
