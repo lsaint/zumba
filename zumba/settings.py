@@ -115,7 +115,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        "zumba": {
+        "voting": {
             'handlers':['console'],
             'propagate': True,
             'level':'DEBUG',
@@ -123,7 +123,12 @@ LOGGING = {
         "django.db.backends": {
             'level': 'INFO',
             'handlers':['console'],
-        }
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
     },
 }
 
